@@ -10,27 +10,42 @@ class SingupPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(0, 255, 255, 255)
+                ],
+                tileMode: TileMode.clamp,
+              ).createShader(bounds),
+              child: Image.asset("assets/images/medico1.png"),
+            ),
             Container(
-                child: Text(
-              "Registrar-se como:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            )),
-            Container(
-                padding:
-                    EdgeInsets.only(top: 50, left: 30, right: 30, bottom: 75),
+                padding: EdgeInsets.all(55),
                 child: Column(
                   children: [
+                    Text(
+                      "Registrar-se como:",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Container(
                       height: 65,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30.0)),
                       child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.red),
+                          ),
                           onPressed: () {},
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +77,7 @@ class SingupPage extends StatelessWidget {
                                 width: 50,
                                 height: 50,
                               ),
-                              Text("Médico")
+                              Text("Paciente")
                             ],
                           )),
                     )
