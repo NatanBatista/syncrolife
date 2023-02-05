@@ -66,6 +66,9 @@ class SingupPage extends StatelessWidget {
                       Container(
                         height: 65,
                         child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromARGB(255, 122, 135, 251))),
                             onPressed: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
