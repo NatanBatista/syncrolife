@@ -23,11 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       body: Container(
         color: Color.fromARGB(255, 122, 135, 251),
-        child: Center(
-            child: Text(
-          "SyncroLife",
-          style: TextStyle(fontSize: 30, fontFamily: 'Montserrat'),
-        )),
+        child: Center(child: Image.asset("assets/images/logo.png")),
       ),
     );
     ;
