@@ -10,22 +10,66 @@ class SingupPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Registrar-se como:"),
-              Container(
-                color: Colors.red,
-                child: ElevatedButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Icon(Icons.medical_information_rounded),
-                        Text("Médico")
-                      ],
-                    )),
-              ),
-            ]),
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                child: Text(
+              "Registrar-se como:",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            )),
+            Container(
+                padding:
+                    EdgeInsets.only(top: 50, left: 30, right: 30, bottom: 75),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 65,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                image: AssetImage('assets/icons/medico1.png'),
+                                width: 50,
+                                height: 50,
+                              ),
+                              Text("Médico")
+                            ],
+                          )),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      height: 65,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                image:
+                                    AssetImage('assets/icons/medicacao1.png'),
+                                width: 50,
+                                height: 50,
+                              ),
+                              Text("Médico")
+                            ],
+                          )),
+                    )
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }
