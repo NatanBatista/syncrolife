@@ -10,24 +10,28 @@ class SingupPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          //Container Pai que alinha todos os filho com spaceAround e ao centro
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ShaderMask(
+                // Widget que contém a imagem e um gradiente
                 shaderCallback: (bounds) => LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 255, 255, 255), //Gradiente
                     Color.fromARGB(0, 255, 255, 255)
                   ],
                   tileMode: TileMode.clamp,
                 ).createShader(bounds),
-                child: Image.asset("assets/images/medico1.png"),
+                child: Image.asset("assets/images/medico1.png"), //Imagem
               ),
               Container(
-                  padding: EdgeInsets.all(55),
+                  // Container que contem o Text e os Dois ElevatedButton
+                  padding: EdgeInsets.all(
+                      55), //Padding em todos os lado de 55 pixels
                   child: Column(
                     children: [
                       Text(
@@ -36,9 +40,11 @@ class SingupPage extends StatelessWidget {
                             fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       SizedBox(
+                        // Espaço entre o texto e o primeiro botão
                         height: 20,
                       ),
                       Container(
+                        // Primero botão
                         height: 65,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30.0)),
@@ -49,18 +55,21 @@ class SingupPage extends StatelessWidget {
                             ),
                             onPressed: () {},
                             child: Row(
+                              // Linha que contém o icone e o nome do botão
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image(
+                                  // Icone
                                   image: AssetImage('assets/icons/medico1.png'),
                                   width: 50,
                                   height: 50,
                                 ),
-                                Text("Médico")
+                                Text("Médico") // Nome
                               ],
                             )),
                       ),
                       SizedBox(
+                        // Espaço entre os botões
                         height: 20,
                       ),
                       Container(
