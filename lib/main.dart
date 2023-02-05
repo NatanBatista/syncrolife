@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/pages/sigup1_page.dart';
 import 'package:syncrolife/pages/singup_page.dart';
 import 'package:syncrolife/pages/splash_page.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // Rotas
         '/splash': (_) => const SplashPage(),
-        '/singup': (_) => const SingupPage()
+        '/signup': (_) => const SingupPage(),
+        'signup1': (_) => const SignUp1(),
       },
     );
   }
