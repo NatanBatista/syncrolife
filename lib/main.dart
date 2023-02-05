@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/pages/sigup1_page.dart';
-import 'package:syncrolife/pages/singup_page.dart';
+import 'package:syncrolife/pages/signup1_page.dart';
+import 'package:syncrolife/pages/signup_page.dart';
 import 'package:syncrolife/pages/splash_page.dart';
 
 void main() {
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       routes: {
         // Rotas
         '/splash': (_) => const SplashPage(),
-        '/signup': (_) => const SingupPage(),
-        'signup1': (_) => const SignUp1(),
+        '/signup': (_) => const SignupPage(),
+        '/signup1': (_) => const SignUp1Page(),
       },
     );
   }
