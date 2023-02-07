@@ -52,7 +52,7 @@ class SignupPage extends StatelessWidget {
                                 MaterialStateProperty.all(Colors.red),
                           ),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/signup1');
+                            Navigator.pushNamed(context, '/signup1');
                           },
                           child: Row(
                             // Linha que contém o icone e o nome do botão
@@ -78,7 +78,9 @@ class SignupPage extends StatelessWidget {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   Color.fromARGB(255, 122, 135, 251))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/signup1');
+                            },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
