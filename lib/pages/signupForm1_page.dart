@@ -15,15 +15,24 @@ class SignUp1Page extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CustomTextField(label: 'Nome', fillColor: Color(0xFFF0E6EF)),
+            const CustomTextField(
+              label: 'Nome',
+              fillColor: Color(0xFFF0E6EF),
+            ),
             SizedBox(
               height: 15,
             ),
-            const CustomTextField(label: 'Nome', fillColor: Color(0xFFF0E6EF)),
+            const CustomTextField(
+              label: 'Sobrenome',
+              fillColor: Color(0xFFF0E6EF),
+            ),
             SizedBox(
               height: 15,
             ),
-            const CustomTextField(label: 'CPF', fillColor: Color(0xFFF0E6EF)),
+            const CustomTextField(
+              label: 'CPF',
+              fillColor: Color(0xFFF0E6EF),
+            ),
             SizedBox(
               height: 15,
             ),
@@ -33,7 +42,7 @@ class SignUp1Page extends StatelessWidget {
               buttonColor: Color(0xFF7A87FB), // Background Color
               textColor: Colors.white,
               onPressed: () {
-                Navigator.pushNamed(context, '/signup');
+                Navigator.pushNamed(context, '/signup2');
               },
               icone: Icon(Icons.navigate_next),
             ),
