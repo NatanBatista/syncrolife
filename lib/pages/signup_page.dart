@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:syncrolife/widgets/cElevatedButtonImage.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -41,58 +42,27 @@ class SignupPage extends StatelessWidget {
                       // Espaço entre o texto e o primeiro botão
                       height: 20,
                     ),
-                    Container(
-                      // Primero botão
-                      height: 65,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.red),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signup1');
-                          },
-                          child: Row(
-                            // Linha que contém o icone e o nome do botão
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image(
-                                // Icone
-                                image: AssetImage('assets/icons/medico1.png'),
-                                width: 50,
-                                height: 50,
-                              ),
-                              Text("Médico") // Nome
-                            ],
-                          )),
+                    CustomButtonImage(
+                      buttonText: 'Médico',
+                      buttonColor: Colors.red,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signup1');
+                      },
+                      assets: 'assets/icons/medico1.png',
                     ),
                     SizedBox(
                       // Espaço entre os botões
                       height: 20,
                     ),
-                    Container(
-                      height: 65,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 122, 135, 251))),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/signup1');
-                            },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image(
-                                image:
-                                    AssetImage('assets/icons/medicacao1.png'),
-                                width: 50,
-                                height: 50,
-                              ),
-                              Text("Paciente")
-                            ],
-                          )),
+                    CustomButtonImage(
+                      buttonText: 'Paciente',
+                      buttonColor: Color.fromARGB(255, 122, 135, 251),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signup1');
+                      },
+                      assets: 'assets/icons/medicacao1.png',
                     )
                   ],
                 ))
