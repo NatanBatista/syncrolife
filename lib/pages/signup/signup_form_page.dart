@@ -18,8 +18,8 @@ class SignupPage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromARGB(255, 255, 255, 255), //Gradiente
-                  Color.fromARGB(0, 255, 255, 255)
+                  Color.fromARGB(255, 255, 255, 255), //Gradiente de branco
+                  Color.fromARGB(0, 255, 255, 255) // Para trasnparente
                 ],
                 tileMode: TileMode.clamp,
               ).createShader(bounds),
