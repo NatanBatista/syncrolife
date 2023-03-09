@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/style.dart';
 import 'package:syncrolife/widgets/signup/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/signup/text_field_form_widget.dart';
 
@@ -31,7 +32,7 @@ class CustomFormPage extends StatelessWidget {
     return Scaffold(
         body: Center(
       child: Container(
-        padding: EdgeInsets.all(55),
+        padding: const EdgeInsets.all(55),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -62,12 +63,12 @@ class CustomFormPage extends StatelessWidget {
             CustomButtonIcon(
               // ElevatedButton customizado
               buttonText: 'Próximo', // Texto do botão
-              buttonColor: Color(0xFF7A87FB), // Background Color
+              buttonColor: cornflowerBlue, // Background Color
               textColor: Colors.white,
               onPressed: () {
                 Navigator.pushNamed(context, rota);
               },
-              icone: Icon(Icons.navigate_next),
+              icone: const Icon(Icons.navigate_next),
             ),
           ],
         ),
