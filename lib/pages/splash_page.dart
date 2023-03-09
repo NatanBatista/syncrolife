@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:syncrolife/style.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -14,7 +13,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(milliseconds: 3000))
+    Future.delayed(const Duration(milliseconds: 3000))
         .then((_) => Navigator.of(context).pushReplacementNamed('/signup'));
   }
 
@@ -22,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 122, 135, 251),
+        color: cornflowerBlue,
         child: Center(child: Image.asset("assets/images/logo.png")),
       ),
     );
