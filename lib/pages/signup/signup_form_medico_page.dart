@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/style.dart';
 import 'package:syncrolife/widgets/signup/signup_form_widget.dart';
 
 class SignUp3MedPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class SignUp3MedPage extends StatelessWidget {
       label1: 'CRM',
       label2: 'Celular',
       label3: 'Especialidade',
-      fillColor: Color(0xFFF0E6EF),
+      fillColor: lavenderBlush,
       rota: '/signup',
     );
   }

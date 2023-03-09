@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/style.dart';
 import 'package:syncrolife/widgets/signup/signup_form_widget.dart';
 
 class SignUp2PacientePage extends StatelessWidget {
@@ -12,7 +13,7 @@ class SignUp2PacientePage extends StatelessWidget {
       label3: 'Repetir Senha',
       obsText2: true,
       obsText3: true,
-      fillColor: Color(0xFFF0E6EF),
+      fillColor: lavenderBlush,
       rota: '/signup',
     );
   }
