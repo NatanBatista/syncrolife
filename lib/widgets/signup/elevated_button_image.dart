@@ -18,8 +18,8 @@ class CustomButtonImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 65,
+    return SizedBox(
+      height: 60,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -36,7 +36,7 @@ class CustomButtonImage extends StatelessWidget {
               width: 50,
               height: 50,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               buttonText,
               style: TextStyle(color: textColor),
