@@ -51,7 +51,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(
                       // Espaço entre os botões
-                      height: 20,
+                      height: 10,
                     ),
                     CustomButtonImage(
                       buttonText: 'Paciente',
