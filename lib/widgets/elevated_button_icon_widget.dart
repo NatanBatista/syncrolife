@@ -19,7 +19,7 @@ class CustomButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60, //Altura do botão
+      height: 70, //Altura do botão
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -33,7 +33,7 @@ class CustomButtonIcon extends StatelessWidget {
           children: [
             Text(buttonText), // Nome
             const SizedBox(
-              height: 10,
+              width: 10,
             ),
             icone,
           ],
