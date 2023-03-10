@@ -35,7 +35,7 @@ class CustomFormPage extends StatelessWidget {
         appBar: AppBar(
           //AppBar branca com o botão de voltar a pagina
           elevation: 0,
-          backgroundColor: Colors.white, //Cor da AppBar
+          backgroundColor: Colors.transparent, //Cor da AppBar
           leading: IconButton(
             //Botão com o icone
             icon: const Icon(
@@ -48,7 +48,6 @@ class CustomFormPage extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            color: Colors.white,
             padding: const EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
