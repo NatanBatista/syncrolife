@@ -11,6 +11,7 @@ class InitialPage extends StatelessWidget {
     return Scaffold(
       body: Column(children: [
         Stack(
+          //Widget para colocar texto em cima da foto do médico
           children: <Widget>[
             ShaderMask(
               // Widget que contém a imagem do medico e um gradiente
@@ -33,15 +34,17 @@ class InitialPage extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Container(
+                    // Linha Vertical Ao lado do texto
                     height: 75, // define a altura da linha
                     width: 1.0, // define a espessura da linha
                     color: Colors.black, // define a cor da linha
                   ),
                   const SizedBox(
+                    //Espaço entre a Linha vertical e o Texto
                     width: 10,
                   ),
                   const Text(
-                    'Faça sua consulta \n online com os melhores \n médicos',
+                    'Faça sua consulta \nonline com os melhores \nmédicos',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 24.0,
@@ -59,14 +62,15 @@ class InitialPage extends StatelessWidget {
               right: 60), //Padding para diminuir as laterais dos botões
           child: Column(
             children: [
+              const SizedBox(
+                height: 35,
+              ),
               CustomButtonIcon(
                   //Botão de fazer login
                   buttonText: 'Fazer Login',
                   buttonColor: cornflowerBlue,
                   textColor: lavenderBlush,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
-                  },
+                  onPressed: () {},
                   icone: const Icon(Icons.navigate_next)),
               const SizedBox(
                 height: 10,
@@ -77,7 +81,26 @@ class InitialPage extends StatelessWidget {
                   buttonColor: lavenderBlush,
                   textColor: lavenderBlush,
                   onPressed: () {},
-                  assets: 'assets/images/google.png')
+                  assets: 'assets/images/google.png'),
+              const SizedBox(
+                //Espaço entro os botões
+                height: 10,
+              ),
+              GestureDetector(
+                //Widget para capturar o gesto do click
+                //e redirecionar para a pagina signup
+                onTap: () => (Navigator.pushNamed(context, '/signup')),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("Não tem conta? "),
+                    Text(
+                      "Registre agora",
+                      style: TextStyle(color: cornflowerBlue),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         )
