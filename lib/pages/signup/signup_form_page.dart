@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/widgets/signup/elevated_button_image.dart';
+import 'package:syncrolife/widgets/elevated_button_image.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
