@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/pages/initial/initial_page.dart';
+import 'package:syncrolife/pages/login/login_page.dart';
 import 'package:syncrolife/pages/splash_page.dart';
 import 'package:syncrolife/pages/signup/signup_form1_paciente_page.dart';
 import 'package:syncrolife/pages/signup/signup_form1_medico_page.dart';
 import 'package:syncrolife/pages/signup/signup_form2_medico_page.dart';
 import 'package:syncrolife/pages/signup/signup_form2_paciente_page.dart';
-import 'package:syncrolife/pages/signup/signup_form_medico_page.dart';
+import 'package:syncrolife/pages/signup/signup_form3_medico_page.dart';
 import 'package:syncrolife/pages/signup/signup_form_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,11 +20,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Color.fromARGB(255, 122, 135, 251)), // Cor primária
+          primaryColor:
+              const Color.fromARGB(255, 122, 135, 251)), // Cor primária
       initialRoute: '/splash',
       routes: {
         // Rotas
         '/splash': (_) => const SplashPage(),
+        '/initial': (_) => const InitialPage(),
+        '/login': (_) => const LoginPage(),
         '/signup': (_) => const SignupPage(),
         '/signupMed1': (_) => const SignUp1MedicoPage(),
         '/signupPaci1': (_) => const SignUp1PacientePage(),
