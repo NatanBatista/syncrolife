@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
     // TODO: implement initState
     super.initState();
     Future.delayed(const Duration(milliseconds: 3000))
-        .then((_) => Navigator.of(context).pushReplacementNamed('/signup'));
+        .then((_) => Navigator.of(context).pushReplacementNamed('/initial'));
   }
 
   @override
