@@ -32,49 +32,65 @@ class CustomFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Container(
-        padding: const EdgeInsets.all(55),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomTextField(
-              label: label1,
-              fillColor: fillColor,
-              obsText: obsText1,
+        appBar: AppBar(
+          //AppBar branca com o botão de voltar a pagina
+          elevation: 0,
+          backgroundColor: Colors.white, //Cor da AppBar
+          leading: IconButton(
+            //Botão com o icone
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            CustomTextField(
-              label: label2,
-              fillColor: fillColor,
-              obsText: obsText2,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            CustomTextField(
-              label: label3,
-              fillColor: fillColor,
-              obsText: obsText3,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            CustomButtonIcon(
-              // ElevatedButton customizado
-              buttonText: textButton, // Texto do botão
-              buttonColor: cornflowerBlue, // Background Color
-              textColor: Colors.white,
-              onPressed: () {
-                Navigator.pushNamed(context, rota);
-              },
-              icone: const Icon(Icons.navigate_next),
-            ),
-          ],
+            onPressed: () => (Navigator.pop(
+                context)), //Função Navigator para voltar para pagina anterior
+          ),
         ),
-      ),
-    ));
+        body: Center(
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(55),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //Widgets de campo de textos personalizados
+                CustomTextField(
+                  label: label1,
+                  fillColor: fillColor,
+                  obsText: obsText1,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                CustomTextField(
+                  label: label2,
+                  fillColor: fillColor,
+                  obsText: obsText2,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                CustomTextField(
+                  label: label3,
+                  fillColor: fillColor,
+                  obsText: obsText3,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                CustomButtonIcon(
+                  // ElevatedButton customizado
+                  buttonText: textButton, // Texto do botão
+                  buttonColor: cornflowerBlue, // Background Color
+                  textColor: Colors.white,
+                  onPressed: () {
+                    Navigator.pushNamed(context, rota);
+                  },
+                  icone: const Icon(Icons.navigate_next),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
