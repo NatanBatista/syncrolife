@@ -70,7 +70,9 @@ class InitialPage extends StatelessWidget {
                   buttonText: 'Fazer Login',
                   buttonColor: cornflowerBlue,
                   textColor: lavenderBlush,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
                   icone: const Icon(Icons.navigate_next)),
               const SizedBox(
                 height: 10,
