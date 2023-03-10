@@ -7,6 +7,7 @@ class CustomFormPage extends StatelessWidget {
   final String label1; //Label do campo 1
   final String label2;
   final String label3;
+  final String textButton;
   final bool obsText1; //Obscure Text para senhas do campo 1
   final bool obsText2;
   final bool obsText3;
@@ -19,6 +20,7 @@ class CustomFormPage extends StatelessWidget {
     required this.label1,
     required this.label2,
     required this.label3,
+    required this.textButton,
     this.obsText1 = false,
     this.obsText2 = false,
     this.obsText3 = false,
@@ -62,7 +64,7 @@ class CustomFormPage extends StatelessWidget {
             ),
             CustomButtonIcon(
               // ElevatedButton customizado
-              buttonText: 'Próximo', // Texto do botão
+              buttonText: textButton, // Texto do botão
               buttonColor: cornflowerBlue, // Background Color
               textColor: Colors.white,
               onPressed: () {

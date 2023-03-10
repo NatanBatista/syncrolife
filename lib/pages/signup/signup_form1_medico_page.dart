@@ -11,6 +11,7 @@ class SignUp1MedicoPage extends StatelessWidget {
       label1: 'Nome',
       label2: 'Sobrenome',
       label3: 'CPF',
+      textButton: "Proximo",
       fillColor: lavenderBlush,
       rota: '/signupMed2',
     );

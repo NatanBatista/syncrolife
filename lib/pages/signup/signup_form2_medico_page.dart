@@ -11,6 +11,7 @@ class SignUp2MedicoPage extends StatelessWidget {
       label1: 'Email',
       label2: 'Senha',
       label3: 'Repetir Senha',
+      textButton: "Proximo",
       obsText2: true,
       obsText3: true,
       fillColor: lavenderBlush,
