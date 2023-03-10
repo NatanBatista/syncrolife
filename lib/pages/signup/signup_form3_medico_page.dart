@@ -11,7 +11,7 @@ class SignUp3MedPage extends StatelessWidget {
       label1: 'CRM',
       label2: 'Celular',
       label3: 'Especialidade',
-      textButton: "Proximo",
+      textButton: "Confirmar",
       fillColor: lavenderBlush,
       rota: '/signup',
     );
