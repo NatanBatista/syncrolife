@@ -1,16 +1,24 @@
-# syncrolife
+# <img align="center" alt="Rafa-Python" height="30" width="100" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"> Syncrolife
+Este projeto foi desenvolvido na disciplina de Engenharia de Software com o objetivo de implementar uma aplicação mobile.
+Para a aplicação foram escolhidos a linguagem dart - framework flutter - e o SGBD firebase.
 
-A new Flutter project.
+# Sobre a plataforma
 
-## Getting Started
+Syncrolife foi criado para ser um serviço online de consultas médicas.
 
-This project is a starting point for a Flutter application.
+# Verções das tecnologias
+## <img align="center" alt="Icone Dart" height="30" width="100" src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
+* 2.19.4
+## <img align="center" alt="Icone Flutter" height="30" width="100" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
+* 3.7.7-stable
+## <img align="center" alt="Icone Firebase" height="30" width="100" src="https://user-images.githubusercontent.com/71360760/224496233-0785131f-8e2b-49c8-8c2f-65cfc021edca.png">
+* Firebase
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Integrantes
+  * [Natan Batista](https://github.com/NatanBatista)
+  * [Lucas](https://github.com/lucasmenezesdev)
+  * [Walmor](https://github.com/wal01)
+  * [Ryan](https://github.com/ryanolv)
+
