@@ -98,7 +98,7 @@ class _ConsultaDetailsPageState extends State<ConsultaDetailsPage> {
                             style: TextStyle(fontSize: 14),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   )
                 ],
