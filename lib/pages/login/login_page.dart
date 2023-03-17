@@ -41,7 +41,9 @@ class LoginPage extends StatelessWidget {
                   buttonText: "Entrar",
                   buttonColor: cornflowerBlue,
                   textColor: lavenderBlush,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/feed');
+                  },
                   icone: const Icon(Icons.login),
                 )
               ],
