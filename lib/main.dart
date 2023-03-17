@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/initial/initial_page.dart';
 import 'package:syncrolife/pages/login/login_page.dart';
 import 'package:syncrolife/pages/splash_page.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/signupMed2': (_) => const SignUp2MedicoPage(),
         '/signupPaci2': (_) => const SignUp2PacientePage(),
         '/signup3Med': (_) => const SignUp3MedPage(),
+        '/feed': (_) => const FeedPage(),
       },
     );
   }
