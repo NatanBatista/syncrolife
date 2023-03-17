@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/style.dart';
-import 'package:syncrolife/widgets/signup/signup_form_widget.dart';
+import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
 
 class SignUp2MedicoPage extends StatelessWidget {
   const SignUp2MedicoPage({super.key});
