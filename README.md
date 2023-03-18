@@ -6,7 +6,7 @@ Para a aplicação foram escolhidos a linguagem dart - framework flutter - e o S
 
 Syncrolife foi criado para ser um serviço online de consultas médicas.
 
-# Verções das tecnologias
+# Versões das tecnologias
 ## <img align="center" alt="Icone Dart" height="30" width="100" src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
 * 2.19.4
 ## <img align="center" alt="Icone Flutter" height="30" width="100" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
