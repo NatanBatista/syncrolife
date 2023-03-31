@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:syncrolife/pages/agenda_page/agenda_page.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/perfil_page/perfil_page.dart';
