@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
 
-class SignUp3MedPage extends StatelessWidget {
-  const SignUp3MedPage({super.key});
+class RegisterDoctorPage2 extends StatelessWidget {
+  const RegisterDoctorPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const CustomFormPage(
-      label1: 'CRM',
-      label2: 'Celular',
-      label3: 'Especialidade',
-      textButton: "Confirmar",
+      label1: 'Email',
+      label2: 'Senha',
+      label3: 'Repetir Senha',
+      textButton: "Proximo",
+      obsText2: true,
+      obsText3: true,
       fillColor: lavenderBlush,
-      rota: '/signup',
+      rota: '/signup3Med',
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
 
-class SignUp2PacientePage extends StatelessWidget {
-  const SignUp2PacientePage({super.key});
+class RegisterPatientPage2 extends StatelessWidget {
+  const RegisterPatientPage2({super.key});
 
   @override
   Widget build(BuildContext context) {

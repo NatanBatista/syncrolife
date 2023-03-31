@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/widgets/elevated_button_image.dart';
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+class RegisterOptionsPage extends StatelessWidget {
+  const RegisterOptionsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

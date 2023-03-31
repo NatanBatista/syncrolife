@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
 
-class SignUp1MedicoPage extends StatelessWidget {
-  const SignUp1MedicoPage({super.key});
+class RegisterDoctorPage3 extends StatelessWidget {
+  const RegisterDoctorPage3({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const CustomFormPage(
-      label1: 'Nome',
-      label2: 'Sobrenome',
-      label3: 'CPF',
-      textButton: "Proximo",
+      label1: 'CRM',
+      label2: 'Celular',
+      label3: 'Especialidade',
+      textButton: "Confirmar",
       fillColor: lavenderBlush,
-      rota: '/signupMed2',
+      rota: '/signup',
     );
   }
 }
