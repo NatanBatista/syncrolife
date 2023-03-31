@@ -20,34 +20,44 @@ class LoginPage extends StatelessWidget {
               ))),
       body: Center(
         child: Container(
-            padding: const EdgeInsets.all(55),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CustomTextField(
-                    label: 'E-mail', fillColor: lavenderBlush),
-                const SizedBox(
-                  height: 10,
+          padding: const EdgeInsets.all(55),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CustomTextField(label: 'E-mail', fillColor: lavenderBlush),
+              const SizedBox(
+                height: 10,
+              ),
+              const CustomTextField(
+                label: 'Senha',
+                fillColor: lavenderBlush,
+                obsText: true,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomButtonIcon(
+                buttonText: "Entrar",
+                buttonColor: cornflowerBlue,
+                textColor: lavenderBlush,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/feed');
+                },
+                icone: const Icon(Icons.login),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/recovery'),
+                child: const Text(
+                  "Esqueceu a senha?",
+                  style: TextStyle(color: cornflowerBlue),
                 ),
-                const CustomTextField(
-                  label: 'Senha',
-                  fillColor: lavenderBlush,
-                  obsText: true,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomButtonIcon(
-                  buttonText: "Entrar",
-                  buttonColor: cornflowerBlue,
-                  textColor: lavenderBlush,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/feed');
-                  },
-                  icone: const Icon(Icons.login),
-                )
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
