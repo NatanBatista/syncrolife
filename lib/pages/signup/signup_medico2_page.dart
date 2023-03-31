@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/style.dart';
+import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
 
 class SignUp2MedicoPage extends StatelessWidget {

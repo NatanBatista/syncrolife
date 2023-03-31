@@ -32,7 +32,7 @@ class SignupPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      "Registrar-se como:",
+                      "Registrar-se como",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
