@@ -16,18 +16,21 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      obscureText: obsText,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: fillColor,
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 25.0),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent),
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 300),
+      child: TextField(
+        controller: controller,
+        obscureText: obsText,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: fillColor,
+          contentPadding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 25.0),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.transparent),
+            borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          ),
+          label: Text(label),
         ),
-        label: Text(label),
       ),
     );
   }
