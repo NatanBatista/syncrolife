@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/style.dart';
+import 'package:syncrolife/styles.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

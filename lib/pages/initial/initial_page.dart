@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/style.dart';
+import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/elevated_button_image.dart';
 

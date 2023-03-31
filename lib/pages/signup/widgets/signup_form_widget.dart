@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/style.dart';
+import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/text_field_form_widget.dart';
 
@@ -36,14 +36,18 @@ class CustomFormPage extends StatelessWidget {
           //AppBar branca com o botão de voltar a pagina
           elevation: 0,
           backgroundColor: Colors.transparent, //Cor da AppBar
-          leading: IconButton(
-            //Botão com o icone
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () => (Navigator.pop(
-                context)), //Função Navigator para voltar para pagina anterior
+          leading: Row(
+            children: [
+              IconButton(
+                //Botão com o icone
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () => (Navigator.pop(
+                    context)), //Função Navigator para voltar para pagina anterior
+              ),
+            ],
           ),
         ),
         body: Center(
