@@ -28,7 +28,8 @@ class RecoveryPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomTextField(label: "Email", fillColor: lavenderBlush),
+                  const CustomTextField(
+                      label: "Email", fillColor: lavenderBlush),
                   const SizedBox(
                     height: 10,
                   ),
