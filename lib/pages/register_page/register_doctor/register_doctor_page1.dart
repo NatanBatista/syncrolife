@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
-import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
+import 'package:syncrolife/pages/register_page/widgets/signup_form_widget.dart';
 
-class RegisterPatientPage1 extends StatelessWidget {
-  const RegisterPatientPage1({super.key});
+class RegisterDoctorPage1 extends StatelessWidget {
+  const RegisterDoctorPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class RegisterPatientPage1 extends StatelessWidget {
       label3: 'CPF',
       textButton: "Proximo",
       fillColor: lavenderBlush,
-      rota: '/signupPaci2',
+      rota: '/signupMed2',
     );
   }
 }

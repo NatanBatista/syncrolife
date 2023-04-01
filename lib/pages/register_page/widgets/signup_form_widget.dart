@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
-import 'package:syncrolife/widgets/text_field_form_widget.dart';
+import 'package:syncrolife/widgets/custom_text_field.dart';
 
 class CustomFormPage extends StatelessWidget {
   final String label1; //Label do campo 1

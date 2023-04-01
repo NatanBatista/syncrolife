@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
-import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
+import 'package:syncrolife/pages/register_page/widgets/signup_form_widget.dart';
 
 class RegisterDoctorPage3 extends StatelessWidget {
   const RegisterDoctorPage3({super.key});

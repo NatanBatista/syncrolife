@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
-import 'package:syncrolife/pages/signup/widgets/signup_form_widget.dart';
+import 'package:syncrolife/pages/register_page/widgets/signup_form_widget.dart';
 
-class RegisterPatientPage2 extends StatelessWidget {
-  const RegisterPatientPage2({super.key});
+class RegisterDoctorPage2 extends StatelessWidget {
+  const RegisterDoctorPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +11,11 @@ class RegisterPatientPage2 extends StatelessWidget {
       label1: 'Email',
       label2: 'Senha',
       label3: 'Repetir Senha',
-      textButton: "Confirmar",
+      textButton: "Proximo",
       obsText2: true,
       obsText3: true,
       fillColor: lavenderBlush,
-      rota: '/signup',
+      rota: '/signup3Med',
     );
   }
 }
