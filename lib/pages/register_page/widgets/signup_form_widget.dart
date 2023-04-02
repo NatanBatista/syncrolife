@@ -12,7 +12,9 @@ class CustomFormPage extends StatelessWidget {
   final bool obsText2;
   final bool obsText3;
   final Color fillColor;
-  final TextEditingController? controller;
+  final TextEditingController? controller1;
+  final TextEditingController? controller2;
+  final TextEditingController? controller3;
   final String rota;
 
   const CustomFormPage({
@@ -26,7 +28,9 @@ class CustomFormPage extends StatelessWidget {
     this.obsText3 = false,
     required this.fillColor,
     required this.rota,
-    this.controller,
+    this.controller1,
+    this.controller2,
+    this.controller3,
   }) : super(key: key);
 
   @override
@@ -61,6 +65,7 @@ class CustomFormPage extends StatelessWidget {
                   label: label1,
                   fillColor: fillColor,
                   obsText: obsText1,
+                  controller: controller1,
                 ),
                 const SizedBox(
                   height: 15,
@@ -69,6 +74,7 @@ class CustomFormPage extends StatelessWidget {
                   label: label2,
                   fillColor: fillColor,
                   obsText: obsText2,
+                  controller: controller2,
                 ),
                 const SizedBox(
                   height: 15,
@@ -77,6 +83,7 @@ class CustomFormPage extends StatelessWidget {
                   label: label3,
                   fillColor: fillColor,
                   obsText: obsText3,
+                  controller: controller3,
                 ),
                 const SizedBox(
                   height: 15,

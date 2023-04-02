@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/config.dart';
 import 'package:syncrolife/routes.dart';
 
-void main() {
+void main() async {
+  await initConfigurations();
   runApp(const MyApp());
 }
 
