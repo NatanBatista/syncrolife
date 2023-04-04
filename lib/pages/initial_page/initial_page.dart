@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
-import 'package:syncrolife/widgets/elevated_button_image.dart';
+import 'package:syncrolife/widgets/custom_button_image.dart';
 
 class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
@@ -79,9 +79,9 @@ class InitialPage extends StatelessWidget {
               ),
               CustomButtonImage(
                   //Botão de fazer login com o google
-                  buttonText: "",
+                  buttonText: "Google",
                   buttonColor: lavenderBlush,
-                  textColor: lavenderBlush,
+                  textColor: Colors.black,
                   onPressed: () {},
                   assets: 'assets/images/google.png'),
               const SizedBox(

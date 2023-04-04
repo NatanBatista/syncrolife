@@ -24,7 +24,7 @@ class CustomButtonIcon extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
+            borderRadius: BorderRadius.circular(15.0),
           ),
           backgroundColor: buttonColor,
         ),
@@ -32,7 +32,10 @@ class CustomButtonIcon extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(buttonText), // Nome
+            Text(
+              buttonText,
+              style: TextStyle(fontSize: 18),
+            ), // Nome
             const SizedBox(
               width: 10,
             ),

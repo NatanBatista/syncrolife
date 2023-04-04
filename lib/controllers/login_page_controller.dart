@@ -6,12 +6,12 @@ import '../services/auth_service.dart';
 class LoginPageController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  var auth = AuthService.get();
+  var auth = AuthService.to;
   RxBool isLoading = false.obs;
 
-  void login(String email, String senha, BuildContext context) async {
+  void login(BuildContext context) async {
     isLoading.value = true;
-    await auth.login(email, senha, context);
+    await auth.login(emailController.text, passwordController.text, context);
     isLoading.value = false;
   }
 }

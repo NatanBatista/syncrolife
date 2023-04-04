@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
           primaryColor:
               const Color.fromARGB(255, 122, 135, 251)), // Cor primária
       initialRoute: '/splash',
+      debugShowCheckedModeBanner: false,
       routes: routes,
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/widgets/elevated_button_image.dart';
+import 'package:syncrolife/widgets/custom_button_image.dart';
 
 class RegisterOptionsPage extends StatelessWidget {
   const RegisterOptionsPage({super.key});

@@ -24,7 +24,7 @@ class CustomButtonImage extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25.0),
+            borderRadius: BorderRadius.circular(15.0),
           ),
           backgroundColor: buttonColor,
         ),
@@ -34,13 +34,12 @@ class CustomButtonImage extends StatelessWidget {
           children: [
             Image(
               image: AssetImage(assets),
-              width: 50,
-              height: 50,
+              height: 30,
             ),
             const SizedBox(width: 10),
             Text(
               buttonText,
-              style: TextStyle(color: textColor),
+              style: TextStyle(color: textColor, fontSize: 18),
             )
           ],
         ),
