@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/config.dart';
 import 'package:syncrolife/routes.dart';
+import 'package:syncrolife/widgets/checkauth.dart';
 
 void main() async {
   await initConfigurations();
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor:
               const Color.fromARGB(255, 122, 135, 251)), // Cor primária
-      initialRoute: '/splash',
+      home: CheckAuth(),
       debugShowCheckedModeBanner: false,
       routes: routes,
     );

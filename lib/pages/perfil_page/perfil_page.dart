@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
 class PerfilPage extends StatefulWidget {
@@ -11,6 +13,7 @@ class PerfilPage extends StatefulWidget {
 }
 
 class _PerfilPageState extends State<PerfilPage> {
+  final auth = AuthService.to;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -41,14 +44,16 @@ class _PerfilPageState extends State<PerfilPage> {
                   top: 15,
                   right: 15,
                   child: InkWell(
-                    child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            color: cornflowerBlue,
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Icon(Icons.menu)),
-                  ),
+                      child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              color: cornflowerBlue,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: Icon(Icons.menu)),
+                      onTap: () {
+                        auth.logout();
+                      }),
                 ),
                 Positioned(
                   top: (size.width) / 2,

@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
                   buttonColor: cornflowerBlue,
                   textColor: lavenderBlush,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/feed');
+                    _.login(context);
                   },
                   icone: const Icon(Icons.login),
                 ),

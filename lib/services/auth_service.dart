@@ -39,7 +39,7 @@ class AuthService extends GetxController {
     } catch (e) {}
   }
 
-  Future<void> register(
+  Future<void> registerDoctor(
       String email,
       String password,
       String name,
@@ -66,9 +66,25 @@ class AuthService extends GetxController {
     } catch (e) {}
   }
 
+  Future<void> registerPatient(String email, String password, String name,
+      String lastName, String cpf, BuildContext context) async {
+    FirebaseFirestore db = await DBFirestore.get();
+
+    try {
+      auth.createUserWithEmailAndPassword(email: email, password: password);
+      db.collection("doctors").doc(auth.currentUser?.uid).set({
+        "id": auth.currentUser?.uid,
+        "email": auth.currentUser?.email,
+        "name": name,
+        "lastName": lastName,
+        "cpf": cpf,
+      });
+    } catch (e) {}
+  }
+
   logout() async {
     try {
-      auth.signOut();
+      await auth.signOut();
     } catch (e) {}
   }
 }
