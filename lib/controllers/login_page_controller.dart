@@ -13,6 +13,5 @@ class LoginPageController extends GetxController {
     isLoading.value = true;
     await auth.login(emailController.text, passwordController.text, context);
     isLoading.value = false;
-    Navigator.pop(context);
   }
 }

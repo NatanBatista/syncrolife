@@ -12,18 +12,27 @@ class RegisterOptionsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ShaderMask(
-              // Widget que contém a imagem e um gradiente
-              shaderCallback: (bounds) => const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 255, 255, 255), //Gradiente de branco
-                  Color.fromARGB(0, 255, 255, 255) // Para trasnparente
-                ],
-                tileMode: TileMode.clamp,
-              ).createShader(bounds),
-              child: Image.asset("assets/images/medico1.png"), //Imagem
+            Stack(
+              children: [
+                ShaderMask(
+                  // Widget que contém a imagem e um gradiente
+                  shaderCallback: (bounds) => const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 255, 255, 255), //Gradiente de branco
+                      Color.fromARGB(0, 255, 255, 255) // Para trasnparente
+                    ],
+                    tileMode: TileMode.clamp,
+                  ).createShader(bounds),
+                  child: Image.asset("assets/images/medico1.png"), //Imagem
+                ),
+                AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  leading: BackButton(color: Colors.black),
+                ),
+              ],
             ),
             Container(
                 // Container que contem o Text e os Dois ElevatedButton
