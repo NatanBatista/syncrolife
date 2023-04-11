@@ -8,17 +8,21 @@ import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
 class PerfilPage extends StatefulWidget {
-  String name;
+  String? name;
   String? lastName;
   String? crm;
   String? speciality;
+  String? rating;
+  String? appointments;
 
   PerfilPage({
     Key? key,
-    required this.name,
+    this.name,
     this.lastName,
     this.crm,
     this.speciality,
+    this.rating,
+    this.appointments,
   }) : super(key: key);
 
   @override
@@ -81,7 +85,7 @@ class _PerfilPageState extends State<PerfilPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            widget.name,
+                            widget.name!,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -92,7 +96,7 @@ class _PerfilPageState extends State<PerfilPage> {
                               ? Column(
                                   children: [
                                     Text(
-                                      'Psiquiatra',
+                                      widget.speciality!,
                                       style: TextStyle(
                                         fontSize: 14,
                                       ),
@@ -101,7 +105,7 @@ class _PerfilPageState extends State<PerfilPage> {
                                       height: 8,
                                     ),
                                     Text(
-                                      'CRM 2694/SE',
+                                      'CRM ${widget.crm}',
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ],
@@ -119,7 +123,7 @@ class _PerfilPageState extends State<PerfilPage> {
                                 color: Colors.amber,
                               ),
                               Text(
-                                '4,9',
+                                widget.rating!,
                                 style: TextStyle(fontSize: 14),
                               ),
                               auth.isDoctor.value
@@ -133,7 +137,7 @@ class _PerfilPageState extends State<PerfilPage> {
                                           color: greenSheen,
                                         ),
                                         Text(
-                                          '568',
+                                          widget.appointments!,
                                           style: TextStyle(fontSize: 14),
                                         ),
                                       ],

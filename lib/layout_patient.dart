@@ -48,6 +48,7 @@ class _LayoutState extends State<LayoutPatient> {
         AgendaPage(),
         PerfilPage(
           name: auth.patient.getName(),
+          rating: auth.patient.getRating(),
         ),
       ]),
     );

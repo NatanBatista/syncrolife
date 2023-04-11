@@ -6,6 +6,7 @@ class DoctorModel {
   late String _phone = '';
   late String _cpf = '';
   late String _rating = '';
+  late String _appointments = '';
   late String _crm = '';
   late String _speciality = '';
   late String _status = '';
@@ -43,6 +44,10 @@ class DoctorModel {
     return _rating;
   }
 
+  String getAppointments() {
+    return _appointments;
+  }
+
   String getStatus() {
     return _status;
   }
@@ -66,11 +71,12 @@ class DoctorModel {
   Future fromJson(Map<String, dynamic> json) async {
     _id = json['id'];
     _name = json['name'];
-    _lastName = json['last-name'];
+    _lastName = json['lastName'];
     _email = json['email'];
-    _phone = json['phone'];
+    _phone = json['phoneNumber'];
     _cpf = json['cpf'];
     _rating = json['rating'];
+    _appointments = json['appointments'];
     _crm = json['crm'];
     _speciality = json['speciality'];
     _status = json['status'];
@@ -86,6 +92,7 @@ class DoctorModel {
     data['phone'] = _phone;
     data['cpf'] = _cpf;
     data['rating'] = _rating;
+    data['rating'] = _appointments;
     data['crm'] = _crm;
     data['speciality'] = _speciality;
     data['status'] = _status;

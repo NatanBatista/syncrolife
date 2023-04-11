@@ -49,6 +49,10 @@ class _LayoutState extends State<LayoutDoctor> {
         AgendaPage(),
         PerfilPage(
           name: auth.doctor.getName(),
+          speciality: auth.doctor.getSpeciality(),
+          rating: auth.doctor.getRating(),
+          appointments: auth.doctor.getAppointments(),
+          crm: auth.doctor.getCrm(),
         ),
       ]),
     );
