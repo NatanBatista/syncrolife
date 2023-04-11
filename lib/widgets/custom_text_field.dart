@@ -4,6 +4,7 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final Color fillColor;
   final TextInputType keyboardtype;
+  final String? Function(String?)? validate;
   final TextEditingController? controller;
   final bool obsText;
 
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.fillColor,
     this.keyboardtype = TextInputType.text,
+    required this.validate,
     this.controller,
     this.obsText = false,
   }) : super(key: key);
@@ -20,10 +22,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 300),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         obscureText: obsText,
         keyboardType: keyboardtype,
+        validator: validate,
         decoration: InputDecoration(
           filled: true,
           fillColor: fillColor,
