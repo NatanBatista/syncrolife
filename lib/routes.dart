@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/layout.dart';
+import 'package:syncrolife/layout_doctor.dart';
+import 'package:syncrolife/layout_patient.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/initial_page/initial_page.dart';
 import 'package:syncrolife/pages/login_page/login_page.dart';
@@ -28,5 +29,6 @@ final Map<String, WidgetBuilder> routes = {
   '/signupMed2': (_) => const RegisterDoctorPage2(),
   '/signupPaci2': (_) => RegisterPatientPage2(),
   '/signup3Med': (_) => RegisterDoctorPage3(),
-  '/layout': (_) => const Layout(),
+  '/layoutPatient': (_) => const LayoutPatient(),
+  '/layoutDoctor': (_) => const LayoutDoctor(),
 };

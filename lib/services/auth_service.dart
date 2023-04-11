@@ -11,7 +11,8 @@ class AuthService extends GetxController {
   late Rx<User?> _firebaseUser;
   var userIsAuthenticated = false.obs;
   var isDoctor = false.obs;
-  static late var user;
+  DoctorModel doctor = DoctorModel.get();
+  PatientModel patient = PatientModel.get();
 
   static AuthService get to => Get.find<AuthService>();
 
@@ -21,13 +22,19 @@ class AuthService extends GetxController {
     final snapshot = await docCustomer.get();
 
     if (snapshot.exists) {
-      final isDoctor = await snapshot.data()!['isDoctor'];
-      if (isDoctor.equal('true')) {
-        user = DoctorModel.get();
-        await user.fromJson(snapshot.data()!);
-      } else if (isDoctor.equal('false')) {
-        user = PatientModel.get();
-        await user.fromJson(snapshot.data()!);
+      final verification = await snapshot.data()!['isDoctor'];
+      if (verification.compareTo('true') == 0) {
+        isDoctor.value = true;
+      } else if (verification.compareTo('false') == 0) {
+        isDoctor.value = false;
+      }
+
+      if (isDoctor.value) {
+        await doctor.fromJson(snapshot.data()!);
+      } else {
+        await patient.fromJson(snapshot.data()!);
+        print(patient.getName());
+        print('depois');
       }
       print('existe');
     } else
@@ -83,7 +90,9 @@ class AuthService extends GetxController {
         "cpf": cpf,
         "crm": crm,
         "phoneNumber": phoneNumber,
-        "speciality": speciality
+        "speciality": speciality,
+        "rating": "N/A",
+        "status": "active"
       });
       //Remove as 4 telas de registro de médico que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
@@ -107,6 +116,9 @@ class AuthService extends GetxController {
         "name": name,
         "lastName": lastName,
         "cpf": cpf,
+        "rating": "N/A",
+        "status": "active",
+        "imageUrl": "N/A"
       });
       //Remove as 3 telas de registro de paciente que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
