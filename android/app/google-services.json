@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "762147501452",
+    "project_id": "syncrolife-med",
+    "storage_bucket": "syncrolife-med.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762147501452:android:b948a550048fcdb5f892a9",
+        "android_client_info": {
+          "package_name": "com.example.syncrolife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762147501452-80b8t37da8pg1csvv8krfpq3usps4104.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeXcgl6Hezkbxt2XBmlLrrb-LVv8nwmmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762147501452-80b8t37da8pg1csvv8krfpq3usps4104.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
