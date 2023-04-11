@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/pages/agenda_page/agenda_page.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/perfil_page/perfil_page.dart';
+import 'package:syncrolife/pages/query_dashboard_page/query_dashboard_page.dart';
 
-class Layout extends StatefulWidget {
-  const Layout({super.key});
+import 'models/doctor_model.dart';
+import 'services/auth_service.dart';
+
+class LayoutDoctor extends StatefulWidget {
+  const LayoutDoctor({super.key});
 
   @override
-  State<Layout> createState() => _LayoutState();
+  State<LayoutDoctor> createState() => _LayoutState();
 }
 
-class _LayoutState extends State<Layout> {
+class _LayoutState extends State<LayoutDoctor> {
   PageController _pageController = PageController();
   int itemIndex = 0;
 
@@ -22,6 +26,9 @@ class _LayoutState extends State<Layout> {
 
   @override
   Widget build(BuildContext context) {
+    var doctor = DoctorModel.get();
+    var auth = AuthService.to;
+
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: itemIndex,
@@ -38,9 +45,15 @@ class _LayoutState extends State<Layout> {
                 icon: Icon(Icons.account_circle), label: 'Perfil'),
           ]),
       body: PageView(controller: _pageController, children: [
-        FeedPage(),
+        QueryPage(),
         AgendaPage(),
-        PerfilPage(),
+        PerfilPage(
+          name: auth.doctor.getName(),
+          speciality: auth.doctor.getSpeciality(),
+          rating: auth.doctor.getRating(),
+          appointments: auth.doctor.getAppointments(),
+          crm: auth.doctor.getCrm(),
+        ),
       ]),
     );
   }

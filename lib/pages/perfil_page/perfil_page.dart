@@ -1,12 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+
 import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
 class PerfilPage extends StatefulWidget {
-  const PerfilPage({super.key});
+  String? name;
+  String? lastName;
+  String? crm;
+  String? speciality;
+  String? rating;
+  String? appointments;
+
+  PerfilPage({
+    Key? key,
+    this.name,
+    this.lastName,
+    this.crm,
+    this.speciality,
+    this.rating,
+    this.appointments,
+  }) : super(key: key);
 
   @override
   State<PerfilPage> createState() => _PerfilPageState();
@@ -68,26 +85,32 @@ class _PerfilPageState extends State<PerfilPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Hugo Oliveira',
+                            widget.name!,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 8,
                           ),
-                          Text(
-                            'Psiquiatra',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            'CRM 2694/SE',
-                            style: TextStyle(fontSize: 14),
-                          ),
+                          auth.isDoctor.value
+                              ? Column(
+                                  children: [
+                                    Text(
+                                      widget.speciality!,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      'CRM ${widget.crm}',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                )
+                              : SizedBox(),
                           SizedBox(
                             height: 8,
                           ),
@@ -100,20 +123,26 @@ class _PerfilPageState extends State<PerfilPage> {
                                 color: Colors.amber,
                               ),
                               Text(
-                                '4,9',
+                                widget.rating!,
                                 style: TextStyle(fontSize: 14),
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Icon(
-                                Icons.comment,
-                                color: greenSheen,
-                              ),
-                              Text(
-                                '568',
-                                style: TextStyle(fontSize: 14),
-                              ),
+                              auth.isDoctor.value
+                                  ? Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Icon(
+                                          Icons.comment,
+                                          color: greenSheen,
+                                        ),
+                                        Text(
+                                          widget.appointments!,
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox()
                             ],
                           ),
                         ],

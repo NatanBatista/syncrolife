@@ -1,14 +1,12 @@
 class PatientModel {
-  String? _name;
-  String? _lastName;
-  String? _email;
-  String? _phone;
-  String? _cpf;
-  String? _password;
-  String? _date;
-  int? _rating;
-  String? _historic;
-  String? _status;
+  late String _id = '';
+  late String _name = '';
+  late String _lastName = '';
+  late String _email = '';
+  late String _cpf = '';
+  late String _rating = '';
+  late String _status = '';
+  late String _imageUrl = '';
 
   PatientModel._();
 
@@ -18,31 +16,59 @@ class PatientModel {
     return _instance;
   }
 
-  PatientModel.fromJson(Map<String, dynamic> json) {
+  String getId() {
+    return _id;
+  }
+
+  String getName() {
+    return _name;
+  }
+
+  String getLastName() {
+    return _lastName;
+  }
+
+  String getEmail() {
+    return _email;
+  }
+
+  String getCpf() {
+    return _cpf;
+  }
+
+  String getRating() {
+    return _rating;
+  }
+
+  String getStatus() {
+    return _status;
+  }
+
+  String getImage() {
+    return _imageUrl;
+  }
+
+  Future fromJson(Map<String, dynamic> json) async {
+    _id = json['id'];
     _name = json['name'];
-    _lastName = json['last-name'];
+    _lastName = json['lastName'];
     _email = json['email'];
-    _phone = json['phone'];
     _cpf = json['cpf'];
-    _password = json['password'];
-    _date = json['date'];
     _rating = json['rating'];
-    _historic = json['historic'];
     _status = json['status'];
+    _imageUrl = json['imageUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = _id;
     data['name'] = _name;
-    data['last-name'] = _lastName;
+    data['lastName'] = _lastName;
     data['email'] = _email;
-    data['phone'] = _phone;
     data['cpf'] = _cpf;
-    data['password'] = _password;
-    data['date'] = _date;
     data['rating'] = _rating;
-    data['historic'] = _historic;
     data['status'] = _status;
+    data['imageUrl'] = _imageUrl;
     return data;
   }
 }
