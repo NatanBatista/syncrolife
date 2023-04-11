@@ -12,6 +12,9 @@ class CustomFormWidget extends StatelessWidget {
   final bool obsText2;
   final bool obsText3;
   final Color fillColor;
+  final TextInputType type1;
+  final TextInputType type2;
+  final TextInputType type3;
   final TextEditingController? controller1;
   final TextEditingController? controller2;
   final TextEditingController? controller3;
@@ -27,6 +30,9 @@ class CustomFormWidget extends StatelessWidget {
     this.obsText2 = false,
     this.obsText3 = false,
     required this.fillColor,
+    this.type1 = TextInputType.text,
+    this.type2 = TextInputType.text,
+    this.type3 = TextInputType.text,
     required this.onPressed,
     this.controller1,
     this.controller2,
@@ -65,6 +71,7 @@ class CustomFormWidget extends StatelessWidget {
                   label: label1,
                   fillColor: fillColor,
                   obsText: obsText1,
+                  keyboardtype: type1,
                   controller: controller1,
                 ),
                 const SizedBox(
@@ -74,6 +81,7 @@ class CustomFormWidget extends StatelessWidget {
                   label: label2,
                   fillColor: fillColor,
                   obsText: obsText2,
+                  keyboardtype: type2,
                   controller: controller2,
                 ),
                 const SizedBox(
@@ -83,6 +91,7 @@ class CustomFormWidget extends StatelessWidget {
                   label: label3,
                   fillColor: fillColor,
                   obsText: obsText3,
+                  keyboardtype: type3,
                   controller: controller3,
                 ),
                 const SizedBox(
