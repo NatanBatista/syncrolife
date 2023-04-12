@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/pages/agenda_page/agenda_page.dart';
+import 'package:syncrolife/pages/schedule_page/schedule_page.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
-import 'package:syncrolife/pages/perfil_page/perfil_page.dart';
+import 'package:syncrolife/pages/profile_page/profile_page.dart';
 import 'package:syncrolife/pages/query_dashboard_page/query_dashboard_page.dart';
 
 import 'models/doctor_model.dart';
@@ -46,8 +46,8 @@ class _LayoutState extends State<LayoutDoctor> {
           ]),
       body: PageView(controller: _pageController, children: [
         QueryPage(),
-        AgendaPage(),
-        PerfilPage(
+        SchedulePage(),
+        ProfilePage(
           name: auth.doctor.getName(),
           speciality: auth.doctor.getSpeciality(),
           rating: auth.doctor.getRating(),

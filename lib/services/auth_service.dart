@@ -92,9 +92,10 @@ class AuthService extends GetxController {
         "phoneNumber": phoneNumber,
         "speciality": speciality,
         "rating": "N/A",
-        "appointments": "N/A",
+        "appointments": "0",
         "status": "active",
-        "imageUrl": "N/A"
+        "imageUrl": "",
+        "coverUrl": ""
       });
       //Remove as 4 telas de registro de médico que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
@@ -120,7 +121,7 @@ class AuthService extends GetxController {
         "cpf": cpf,
         "rating": "N/A",
         "status": "active",
-        "imageUrl": "N/A"
+        "coverUrl": ""
       });
       //Remove as 3 telas de registro de paciente que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);

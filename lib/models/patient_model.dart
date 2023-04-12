@@ -1,12 +1,12 @@
 class PatientModel {
-  late String _id = '';
-  late String _name = '';
-  late String _lastName = '';
-  late String _email = '';
-  late String _cpf = '';
-  late String _rating = '';
-  late String _status = '';
-  late String _imageUrl = '';
+  String _id = '';
+  String _name = '';
+  String _lastName = '';
+  String _email = '';
+  String _cpf = '';
+  String _rating = '';
+  String _status = '';
+  String _coverUrl = '';
 
   PatientModel._();
 
@@ -44,8 +44,8 @@ class PatientModel {
     return _status;
   }
 
-  String getImage() {
-    return _imageUrl;
+  String getCoverUrl() {
+    return _coverUrl;
   }
 
   Future fromJson(Map<String, dynamic> json) async {
@@ -56,7 +56,7 @@ class PatientModel {
     _cpf = json['cpf'];
     _rating = json['rating'];
     _status = json['status'];
-    _imageUrl = json['imageUrl'];
+    _coverUrl = json['coverUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -68,7 +68,7 @@ class PatientModel {
     data['cpf'] = _cpf;
     data['rating'] = _rating;
     data['status'] = _status;
-    data['imageUrl'] = _imageUrl;
+    data['coverUrl'] = _coverUrl;
     return data;
   }
 }

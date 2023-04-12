@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/pages/consulta_details_page/consulta_details_page.dart';
+import 'package:syncrolife/pages/appointment_details_page/appointment_details_page.dart';
 
-class AgendaPage extends StatefulWidget {
-  const AgendaPage({super.key});
+class SchedulePage extends StatefulWidget {
+  const SchedulePage({super.key});
 
   @override
-  State<AgendaPage> createState() => _AgendaPageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _AgendaPageState extends State<AgendaPage> {
+class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,7 @@ class _AgendaPageState extends State<AgendaPage> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ConsultaDetailsPage())),
+                            builder: (context) => AppointmentDetailsPage())),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
