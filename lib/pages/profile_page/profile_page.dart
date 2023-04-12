@@ -57,26 +57,36 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: size.width - 20,
                         ),
                         InkWell(
-                            onTap: () {
+                          onTap: () {
+                            setState(() {
                               _.selectImage();
-                            },
-                            child: Container(
-                                alignment: Alignment.center,
-                                height: (size.width - 20) / 1.5,
-                                width: size.width - 20,
-                                decoration: BoxDecoration(
-                                    color: charlestonGreen,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: (_.pathCroped.value == '')
-                                    ? Text(
-                                        '+',
-                                        style: TextStyle(
-                                            fontSize: 50, color: Colors.white),
-                                      )
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.file(
-                                            File(_.pathCroped.value))))),
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: (size.width - 20) / 1.5,
+                            width: size.width - 20,
+                            decoration: BoxDecoration(
+                                color: charlestonGreen,
+                                borderRadius: BorderRadius.circular(30)),
+                            child: (_.auth.isDoctor.value
+                                    ? _.auth.doctor.coverUrl.value == ''
+                                    : _.auth.patient.coverUrl.value == '')
+                                ? Text(
+                                    '+',
+                                    style: TextStyle(
+                                        fontSize: 50, color: Colors.white),
+                                  )
+                                : ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Image.network(
+                                      _.auth.isDoctor.value
+                                          ? _.auth.doctor.coverUrl.value
+                                          : _.auth.patient.coverUrl.value,
+                                    ),
+                                  ),
+                          ),
+                        ),
                         Positioned(
                           top: 15,
                           right: 15,
@@ -87,7 +97,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   decoration: BoxDecoration(
                                       color: cornflowerBlue,
                                       borderRadius: BorderRadius.circular(100)),
-                                  child: Icon(Icons.menu)),
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Colors.white,
+                                  )),
                               onTap: () {
                                 _.auth.logout();
                               }),

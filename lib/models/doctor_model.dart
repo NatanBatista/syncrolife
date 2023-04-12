@@ -1,109 +1,103 @@
-class DoctorModel {
-  late String _id = '';
-  late String _name = '';
-  late String _lastName = '';
-  late String _email = '';
-  late String _phone = '';
-  late String _cpf = '';
-  late String _rating = '';
-  late String _appointments = '';
-  late String _crm = '';
-  late String _speciality = '';
-  late String _status = '';
-  late String _imageUrl = '';
-  late String _coverUrl = '';
+import 'package:get/get.dart';
 
-  DoctorModel._();
+class DoctorModel extends GetxController {
+  late RxString id = ''.obs;
+  late RxString name = ''.obs;
+  late RxString lastName = ''.obs;
+  late RxString email = ''.obs;
+  late RxString phone = ''.obs;
+  late RxString cpf = ''.obs;
+  late RxString rating = ''.obs;
+  late RxString appointments = ''.obs;
+  late RxString crm = ''.obs;
+  late RxString speciality = ''.obs;
+  late RxString status = ''.obs;
+  late RxString imageUrl = ''.obs;
+  late RxString coverUrl = ''.obs;
 
-  static final _instance = DoctorModel._();
+  // String getId() {
+  //   return _id.value;
+  // }
 
-  static get() {
-    return _instance;
-  }
+  // String getName() {
+  //   return _name.value;
+  // }
 
-  String getId() {
-    return _id;
-  }
+  // String getLastName() {
+  //   return _lastName.value;
+  // }
 
-  String getName() {
-    return _name;
-  }
+  // String getEmail() {
+  //   return _email.value;
+  // }
 
-  String getLastName() {
-    return _lastName;
-  }
+  // String getCpf() {
+  //   return _cpf.value;
+  // }
 
-  String getEmail() {
-    return _email;
-  }
+  // String getRating() {
+  //   return _rating.value;
+  // }
 
-  String getCpf() {
-    return _cpf;
-  }
+  // String getAppointments() {
+  //   return _appointments.value;
+  // }
 
-  String getRating() {
-    return _rating;
-  }
+  // String getStatus() {
+  //   return _status.value;
+  // }
 
-  String getAppointments() {
-    return _appointments;
-  }
+  // String getPhone() {
+  //   return _phone.value;
+  // }
 
-  String getStatus() {
-    return _status;
-  }
+  // String getCrm() {
+  //   return _crm.value;
+  // }
 
-  String getPhone() {
-    return _phone;
-  }
+  // String getSpeciality() {
+  //   return _speciality.value;
+  // }
 
-  String getCrm() {
-    return _crm;
-  }
+  // String getImageUrl() {
+  //   return _imageUrl.value;
+  // }
 
-  String getSpeciality() {
-    return _speciality;
-  }
-
-  String getImageUrl() {
-    return _imageUrl;
-  }
-
-  String getCoverUrl() {
-    return _coverUrl;
-  }
+  // String getCoverUrl() {
+  //   return _coverUrl.value;
+  // }
 
   Future fromJson(Map<String, dynamic> json) async {
-    _id = json['id'];
-    _name = json['name'];
-    _lastName = json['lastName'];
-    _email = json['email'];
-    _phone = json['phoneNumber'];
-    _cpf = json['cpf'];
-    _rating = json['rating'];
-    _appointments = json['appointments'];
-    _crm = json['crm'];
-    _speciality = json['speciality'];
-    _status = json['status'];
-    _imageUrl = json['imageUrl'];
-    //_coverUrl = json['coverUrl'];
+    id.value = json['id'];
+    name.value = json['name'];
+    lastName.value = json['lastName'];
+    email.value = json['email'];
+    phone.value = json['phoneNumber'];
+    cpf.value = json['cpf'];
+    rating.value = json['rating'];
+    appointments.value = json['appointments'];
+    crm.value = json['crm'];
+    speciality.value = json['speciality'];
+    status.value = json['status'];
+    imageUrl.value = json['imageUrl'];
+    coverUrl.value = json['coverUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = _id;
-    data['name'] = _name;
-    data['last-name'] = _lastName;
-    data['email'] = _email;
-    data['phone'] = _phone;
-    data['cpf'] = _cpf;
-    data['rating'] = _rating;
-    data['rating'] = _appointments;
-    data['crm'] = _crm;
-    data['speciality'] = _speciality;
-    data['status'] = _status;
-    data['imageUrl'] = _imageUrl;
-    data['coverUrl'] = _coverUrl;
+    data['id'] = id.value;
+    data['name'] = name.value;
+    data['last-name'] = lastName.value;
+    data['email'] = email.value;
+    data['phone'] = phone.value;
+    data['cpf'] = cpf.value;
+    data['rating'] = rating.value;
+    data['rating'] = appointments.value;
+    data['crm'] = crm.value;
+    data['speciality'] = speciality.value;
+    data['status'] = status.value;
+    data['imageUrl'] = imageUrl.value;
+    data['coverUrl'] = coverUrl.value;
     return data;
   }
 }

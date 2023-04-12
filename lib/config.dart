@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncrolife/services/auth_service.dart';
 import 'firebase_options.dart';
+import 'models/doctor_model.dart';
+import 'models/patient_model.dart';
 
 initConfigurations() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,4 +14,6 @@ initConfigurations() async {
       Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
 
   Get.lazyPut<AuthService>(() => AuthService());
+  Get.lazyPut(() => DoctorModel());
+  Get.lazyPut(() => PatientModel());
 }

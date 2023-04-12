@@ -26,7 +26,6 @@ class _LayoutState extends State<LayoutPatient> {
 
   @override
   Widget build(BuildContext context) {
-    var patient = PatientModel.get();
     var auth = AuthService.to;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -47,8 +46,8 @@ class _LayoutState extends State<LayoutPatient> {
         FeedPage(),
         SchedulePage(),
         ProfilePage(
-          name: auth.patient.getName(),
-          rating: auth.patient.getRating(),
+          name: auth.patient.name.value,
+          rating: auth.patient.rating.value,
         ),
       ]),
     );

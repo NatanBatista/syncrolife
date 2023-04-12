@@ -3,32 +3,43 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:syncrolife/services/db_firestore_service.dart';
+import 'package:syncrolife/services/storage_service.dart';
 import 'package:syncrolife/styles.dart';
 
 import '../services/auth_service.dart';
 
 class ProfilePageController extends GetxController {
+  final db = DBFirestore.get();
+  final storage = StorageService.get();
   final auth = AuthService.to;
-  Rx<XFile> image = XFile('').obs;
-  RxString pathCroped = ''.obs;
+  var pathCroped = '';
 
   selectImage() async {
     final ImagePicker picker = ImagePicker();
 
     try {
-      if (image.value.path == "") {
-        print('É null');
-      }
-      print("Inicio" + image.value.path);
       XFile? file = await picker.pickImage(source: ImageSource.gallery);
       if (file != null) {
-        image.value = file;
-        pathCroped.value = await clipImage(image.value.path);
-      }
+        pathCroped = await clipImage(file.path);
 
-      print("Fim" + image.value.path);
+        await storage
+            .ref('covers/${auth.auth.currentUser?.uid}')
+            .putFile(File(pathCroped));
+        Reference ref =
+            storage.ref().child('covers/${auth.auth.currentUser?.uid}');
+        String linkDownload = await ref.getDownloadURL();
+
+        db
+            .collection('users')
+            .doc(auth.auth.currentUser!.uid)
+            .update({'coverUrl': linkDownload});
+
+        auth.readUser();
+      }
     } catch (e) {}
   }
 

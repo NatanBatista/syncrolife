@@ -26,7 +26,6 @@ class _LayoutState extends State<LayoutDoctor> {
 
   @override
   Widget build(BuildContext context) {
-    var doctor = DoctorModel.get();
     var auth = AuthService.to;
 
     return Scaffold(
@@ -48,11 +47,11 @@ class _LayoutState extends State<LayoutDoctor> {
         QueryPage(),
         SchedulePage(),
         ProfilePage(
-          name: auth.doctor.getName(),
-          speciality: auth.doctor.getSpeciality(),
-          rating: auth.doctor.getRating(),
-          appointments: auth.doctor.getAppointments(),
-          crm: auth.doctor.getCrm(),
+          name: auth.doctor.name.value,
+          speciality: auth.doctor.speciality.value,
+          rating: auth.doctor.rating.value,
+          appointments: auth.doctor.appointments.value,
+          crm: auth.doctor.crm.value,
         ),
       ]),
     );

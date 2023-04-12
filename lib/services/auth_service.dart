@@ -11,8 +11,8 @@ class AuthService extends GetxController {
   late Rx<User?> _firebaseUser;
   var userIsAuthenticated = false.obs;
   var isDoctor = false.obs;
-  DoctorModel doctor = DoctorModel.get();
-  PatientModel patient = PatientModel.get();
+  var doctor = Get.find<DoctorModel>();
+  var patient = Get.find<PatientModel>();
 
   static AuthService get to => Get.find<AuthService>();
 
@@ -33,7 +33,7 @@ class AuthService extends GetxController {
         await doctor.fromJson(snapshot.data()!);
       } else {
         await patient.fromJson(snapshot.data()!);
-        print(patient.getName());
+        print(patient.name.value);
         print('depois');
       }
       print('existe');
