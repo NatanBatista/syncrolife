@@ -15,6 +15,9 @@ class CustomFormWidget extends StatelessWidget {
   final TextInputType type1;
   final TextInputType type2;
   final TextInputType type3;
+  void Function(String)? onChanged1;
+  void Function(String)? onChanged2;
+  void Function(String)? onChanged3;
   final String? Function(String?)? validate1;
   final String? Function(String?)? validate2;
   final String? Function(String?)? validate3;
@@ -24,7 +27,7 @@ class CustomFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final VoidCallback onPressed;
 
-  const CustomFormWidget({
+  CustomFormWidget({
     Key? key,
     required this.label1,
     required this.label2,
@@ -37,6 +40,9 @@ class CustomFormWidget extends StatelessWidget {
     this.type1 = TextInputType.text,
     this.type2 = TextInputType.text,
     this.type3 = TextInputType.text,
+    this.onChanged1,
+    this.onChanged2,
+    this.onChanged3,
     required this.validate1,
     required this.validate2,
     required this.validate3,
@@ -82,6 +88,7 @@ class CustomFormWidget extends StatelessWidget {
                     fillColor: fillColor,
                     obsText: obsText1,
                     keyboardtype: type1,
+                    onChanged: onChanged1,
                     validate: validate1,
                     controller: controller1,
                   ),
@@ -93,6 +100,7 @@ class CustomFormWidget extends StatelessWidget {
                     fillColor: fillColor,
                     obsText: obsText2,
                     keyboardtype: type2,
+                    onChanged: onChanged2,
                     validate: validate2,
                     controller: controller2,
                   ),
@@ -104,6 +112,7 @@ class CustomFormWidget extends StatelessWidget {
                     fillColor: fillColor,
                     obsText: obsText3,
                     keyboardtype: type3,
+                    onChanged: onChanged3,
                     validate: validate3,
                     controller: controller3,
                   ),
