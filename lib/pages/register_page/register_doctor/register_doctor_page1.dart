@@ -41,6 +41,16 @@ class RegisterDoctorPage1 extends StatelessWidget {
               },
               label3: 'CPF',
               type3: TextInputType.number,
+              onChanged3: (value) {
+                final formattedValue = ValidationService.cpfFormatter(value);
+                if (formattedValue != value) {
+                  controller.cpfController.value = TextEditingValue(
+                    text: formattedValue,
+                    selection:
+                        TextSelection.collapsed(offset: formattedValue.length),
+                  );
+                }
+              },
               validate3: (value) {
                 if (value == null || value.isEmpty) {
                   return 'CPF obrigatório';
