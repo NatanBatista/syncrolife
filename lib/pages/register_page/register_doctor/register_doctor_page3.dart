@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncrolife/services/validation_service.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/register_page/widgets/custom_form_widget.dart';
 
@@ -29,9 +30,21 @@ class RegisterDoctorPage3 extends StatelessWidget {
             controller1: controller.crmController,
             label2: 'Celular',
             type2: TextInputType.number,
+            onChanged2: (value) {
+              final formattedValue = ValidationService.telefoneFormatter(value);
+              if (formattedValue != value) {
+                controller.phoneNumberController.value = TextEditingValue(
+                  text: formattedValue,
+                  selection:
+                      TextSelection.collapsed(offset: formattedValue.length),
+                );
+              }
+            },
             validate2: (value) {
               if (value == null || value.isEmpty) {
                 return 'Número obrigatório';
+              } else if (value.length < 15) {
+                return 'Número inválido';
               }
             },
             controller2: controller.phoneNumberController,
