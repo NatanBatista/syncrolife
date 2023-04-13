@@ -18,7 +18,7 @@ class _SchedulePageState extends State<SchedulePage> {
           SizedBox(
             height: MediaQuery.of(context).padding.top + 24,
           ),
-          Text(
+          const Text(
             'Consultas agendadas',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
@@ -26,10 +26,10 @@ class _SchedulePageState extends State<SchedulePage> {
             child: ListView.separated(
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: Text('Hugo Oliveira'),
+                    leading: const Text('Hugo Oliveira'),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text('15:30'),
                         Text('05/10/2023'),
                       ],
@@ -37,7 +37,8 @@ class _SchedulePageState extends State<SchedulePage> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AppointmentDetailsPage())),
+                            builder: (context) =>
+                                const AppointmentDetailsPage())),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {

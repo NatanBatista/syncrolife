@@ -16,19 +16,23 @@ class ProfilePageController extends GetxController {
   final db = DBFirestore.get();
   final storage = StorageService.get();
   final auth = AuthService.to;
-  var pathCroped = '';
+  var pathCoverCroped = '';
+  var pathMainCroped = '';
 
-  selectImage() async {
+  selectCoverImage() async {
     final ImagePicker picker = ImagePicker();
 
     try {
       XFile? file = await picker.pickImage(source: ImageSource.gallery);
       if (file != null) {
-        pathCroped = await clipImage(file.path);
+        pathCoverCroped = await clipImage(
+          file.path,
+          const CropAspectRatio(ratioX: 1080, ratioY: 720),
+        );
 
         await storage
             .ref('covers/${auth.auth.currentUser?.uid}')
-            .putFile(File(pathCroped));
+            .putFile(File(pathCoverCroped));
         Reference ref =
             storage.ref().child('covers/${auth.auth.currentUser?.uid}');
         String linkDownload = await ref.getDownloadURL();
@@ -40,15 +44,45 @@ class ProfilePageController extends GetxController {
 
         auth.readUser();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
-  Future<String> clipImage(String path) async {
+  selectMainImage() async {
+    final ImagePicker picker = ImagePicker();
+
+    try {
+      XFile? file = await picker.pickImage(source: ImageSource.gallery);
+      if (file != null) {
+        pathMainCroped = await clipImage(
+          file.path,
+          const CropAspectRatio(ratioX: 130, ratioY: 180),
+        );
+
+        await storage
+            .ref('images/${auth.auth.currentUser?.uid}')
+            .putFile(File(pathMainCroped));
+        Reference ref =
+            storage.ref().child('images/${auth.auth.currentUser?.uid}');
+        String linkDownload = await ref.getDownloadURL();
+
+        db
+            .collection('users')
+            .doc(auth.auth.currentUser!.uid)
+            .update({'imageUrl': linkDownload});
+
+        auth.readUser();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<String> clipImage(String path, CropAspectRatio aspectRatio) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
-      aspectRatioPresets: [
-        CropAspectRatioPreset.ratio3x2,
-      ],
+      aspectRatio: aspectRatio,
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'Recortar',
@@ -58,7 +92,6 @@ class ProfilePageController extends GetxController {
             // fundo
             dimmedLayerColor: Colors.grey[700],
             toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
             hideBottomControls: true,
             lockAspectRatio: true),
       ],
