@@ -18,8 +18,10 @@ class _QueryPageState extends State<QueryPage> {
     // Método que constrói a página
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 40,
+          left: 15,
+          right: 15,
         ),
         child: SingleChildScrollView(
           child: Column(
