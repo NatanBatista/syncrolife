@@ -67,7 +67,7 @@ class DoctorModel extends GetxController {
   //   return _coverUrl.value;
   // }
 
-  Future fromJson(Map<String, dynamic> json) async {
+  Future fromJson(json) async {
     id.value = json['id'];
     name.value = json['name'];
     lastName.value = json['lastName'];
