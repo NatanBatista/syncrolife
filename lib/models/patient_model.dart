@@ -1,74 +1,68 @@
-class PatientModel {
-  late String _id = '';
-  late String _name = '';
-  late String _lastName = '';
-  late String _email = '';
-  late String _cpf = '';
-  late String _rating = '';
-  late String _status = '';
-  late String _imageUrl = '';
+import 'package:get/get.dart';
 
-  PatientModel._();
+class PatientModel extends GetxController {
+  RxString id = ''.obs;
+  RxString name = ''.obs;
+  RxString lastName = ''.obs;
+  RxString email = ''.obs;
+  RxString cpf = ''.obs;
+  RxString rating = ''.obs;
+  RxString status = ''.obs;
+  RxString coverUrl = ''.obs;
 
-  static final _instance = PatientModel._();
+  // String getId() {
+  //   return _id;
+  // }
 
-  static get() {
-    return _instance;
-  }
+  // String getName() {
+  //   return _name;
+  // }
 
-  String getId() {
-    return _id;
-  }
+  // String getLastName() {
+  //   return _lastName;
+  // }
 
-  String getName() {
-    return _name;
-  }
+  // String getEmail() {
+  //   return _email;
+  // }
 
-  String getLastName() {
-    return _lastName;
-  }
+  // String getCpf() {
+  //   return _cpf;
+  // }
 
-  String getEmail() {
-    return _email;
-  }
+  // String getRating() {
+  //   return _rating;
+  // }
 
-  String getCpf() {
-    return _cpf;
-  }
+  // String getStatus() {
+  //   return _status;
+  // }
 
-  String getRating() {
-    return _rating;
-  }
-
-  String getStatus() {
-    return _status;
-  }
-
-  String getImage() {
-    return _imageUrl;
-  }
+  // String getCoverUrl() {
+  //   return _coverUrl;
+  // }
 
   Future fromJson(Map<String, dynamic> json) async {
-    _id = json['id'];
-    _name = json['name'];
-    _lastName = json['lastName'];
-    _email = json['email'];
-    _cpf = json['cpf'];
-    _rating = json['rating'];
-    _status = json['status'];
-    _imageUrl = json['imageUrl'];
+    id.value = json['id'];
+    name.value = json['name'];
+    lastName.value = json['lastName'];
+    email.value = json['email'];
+    cpf.value = json['cpf'];
+    rating.value = json['rating'];
+    status.value = json['status'];
+    coverUrl.value = json['coverUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = _id;
-    data['name'] = _name;
-    data['lastName'] = _lastName;
-    data['email'] = _email;
-    data['cpf'] = _cpf;
-    data['rating'] = _rating;
-    data['status'] = _status;
-    data['imageUrl'] = _imageUrl;
+    data['id'] = id.value;
+    data['name'] = name.value;
+    data['lastName'] = lastName.value;
+    data['email'] = email.value;
+    data['cpf'] = cpf.value;
+    data['rating'] = rating.value;
+    data['status'] = status.value;
+    data['coverUrl'] = coverUrl.value;
     return data;
   }
 }

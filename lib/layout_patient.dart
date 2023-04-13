@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncrolife/models/patient_model.dart';
-import 'package:syncrolife/pages/agenda_page/agenda_page.dart';
+import 'package:syncrolife/pages/schedule_page/schedule_page.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
-import 'package:syncrolife/pages/perfil_page/perfil_page.dart';
+import 'package:syncrolife/pages/profile_page/profile_page.dart';
 
 import 'services/auth_service.dart';
 
@@ -26,7 +26,6 @@ class _LayoutState extends State<LayoutPatient> {
 
   @override
   Widget build(BuildContext context) {
-    var patient = PatientModel.get();
     var auth = AuthService.to;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -45,10 +44,10 @@ class _LayoutState extends State<LayoutPatient> {
           ]),
       body: PageView(controller: _pageController, children: [
         FeedPage(),
-        AgendaPage(),
-        PerfilPage(
-          name: auth.patient.getName(),
-          rating: auth.patient.getRating(),
+        SchedulePage(),
+        ProfilePage(
+          name: auth.patient.name.value,
+          rating: auth.patient.rating.value,
         ),
       ]),
     );

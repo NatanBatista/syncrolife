@@ -36,14 +36,12 @@ class QueryRequest extends StatelessWidget {
             minWidth: 362,
           ),
           padding: const EdgeInsets.only(left: 15, right: 15),
-          margin: const EdgeInsets.only(left: 15, right: 15),
           decoration: BoxDecoration(
               color: lavenderBlush, borderRadius: BorderRadius.circular(20)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 100,
+              Expanded(
                 child: Text(nome),
               ), // Exibição do nome do médico
               const SizedBox(width: 10),
@@ -59,7 +57,7 @@ class QueryRequest extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FloatingActionButton(
-                    backgroundColor: Color.fromARGB(255, 0, 146, 75),
+                    backgroundColor: const Color.fromARGB(255, 0, 146, 75),
                     onPressed: () {
                       // Ação a ser executada ao pressionar o botão de confirmação
                     },

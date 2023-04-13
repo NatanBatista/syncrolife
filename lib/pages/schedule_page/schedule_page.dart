@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/pages/consulta_details_page/consulta_details_page.dart';
+import 'package:syncrolife/pages/appointment_details_page/appointment_details_page.dart';
 
-class AgendaPage extends StatefulWidget {
-  const AgendaPage({super.key});
+class SchedulePage extends StatefulWidget {
+  const SchedulePage({super.key});
 
   @override
-  State<AgendaPage> createState() => _AgendaPageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _AgendaPageState extends State<AgendaPage> {
+class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +18,7 @@ class _AgendaPageState extends State<AgendaPage> {
           SizedBox(
             height: MediaQuery.of(context).padding.top + 24,
           ),
-          Text(
+          const Text(
             'Consultas agendadas',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
@@ -26,10 +26,10 @@ class _AgendaPageState extends State<AgendaPage> {
             child: ListView.separated(
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    leading: Text('Hugo Oliveira'),
+                    leading: const Text('Hugo Oliveira'),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text('15:30'),
                         Text('05/10/2023'),
                       ],
@@ -37,7 +37,8 @@ class _AgendaPageState extends State<AgendaPage> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ConsultaDetailsPage())),
+                            builder: (context) =>
+                                const AppointmentDetailsPage())),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {

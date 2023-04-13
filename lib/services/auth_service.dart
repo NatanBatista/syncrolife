@@ -11,8 +11,8 @@ class AuthService extends GetxController {
   late Rx<User?> _firebaseUser;
   var userIsAuthenticated = false.obs;
   var isDoctor = false.obs;
-  DoctorModel doctor = DoctorModel.get();
-  PatientModel patient = PatientModel.get();
+  var doctor = Get.find<DoctorModel>();
+  var patient = Get.find<PatientModel>();
 
   static AuthService get to => Get.find<AuthService>();
 
@@ -33,7 +33,7 @@ class AuthService extends GetxController {
         await doctor.fromJson(snapshot.data()!);
       } else {
         await patient.fromJson(snapshot.data()!);
-        print(patient.getName());
+        print(patient.name.value);
         print('depois');
       }
       print('existe');
@@ -92,9 +92,10 @@ class AuthService extends GetxController {
         "phoneNumber": phoneNumber,
         "speciality": speciality,
         "rating": "N/A",
-        "appointments": "N/A",
+        "appointments": "0",
         "status": "active",
-        "imageUrl": "N/A"
+        "imageUrl": "",
+        "coverUrl": ""
       });
       //Remove as 4 telas de registro de médico que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
@@ -120,7 +121,7 @@ class AuthService extends GetxController {
         "cpf": cpf,
         "rating": "N/A",
         "status": "active",
-        "imageUrl": "N/A"
+        "coverUrl": ""
       });
       //Remove as 3 telas de registro de paciente que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
