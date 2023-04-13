@@ -76,6 +76,21 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                       ),
                       Positioned(
                         top: 15,
+                        left: 15,
+                        child: InkWell(
+                          child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color: cornflowerBlue,
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: BackButton(
+                                color: Colors.white,
+                              )),
+                        ),
+                      ),
+                      Positioned(
+                        top: 15,
                         right: 15,
                         child: InkWell(
                             child: Container(
@@ -113,25 +128,23 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              _.auth.isDoctor.value
-                                  ? Column(
-                                      children: [
-                                        Text(
-                                          widget.speciality,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          'CRM ${widget.crm}',
-                                          style: const TextStyle(fontSize: 14),
-                                        ),
-                                      ],
-                                    )
-                                  : const SizedBox(),
+                              Column(
+                                children: [
+                                  Text(
+                                    widget.speciality,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'CRM ${widget.crm}',
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 8,
                               ),

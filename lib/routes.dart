@@ -4,6 +4,7 @@ import 'package:syncrolife/layout_patient.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/initial_page/initial_page.dart';
 import 'package:syncrolife/pages/login_page/login_page.dart';
+import 'package:syncrolife/pages/profile_page/visitor_profile_page.dart';
 import 'package:syncrolife/pages/query_dashboard_page/query_dashboard_page.dart';
 import 'package:syncrolife/pages/recovery_page/recovery_code_page.dart';
 import 'package:syncrolife/pages/recovery_page/recovery_page.dart';
