@@ -33,10 +33,12 @@ class DoctorsListWidget extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
 //Imagem do médico
-                  child: Image.network(
-                    doctors[index].imageUrl.value,
-                    fit: BoxFit.cover,
-                  ),
+                  child: doctors[index].imageUrl.value == ''
+                      ? SizedBox()
+                      : Image.network(
+                          doctors[index].imageUrl.value,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
