@@ -1,52 +1,68 @@
-class PatientModel {
-  String? name;
-  String? lastName;
-  String? email;
-  String? phone;
-  String? cpf;
-  String? password;
-  String? date;
-  int? rating;
-  String? historic;
-  String? status;
+import 'package:get/get.dart';
 
-  PatientModel(
-      {this.name,
-      this.lastName,
-      this.email,
-      this.phone,
-      this.cpf,
-      this.password,
-      this.date,
-      this.rating,
-      this.historic,
-      this.status});
+class PatientModel extends GetxController {
+  RxString id = ''.obs;
+  RxString name = ''.obs;
+  RxString lastName = ''.obs;
+  RxString email = ''.obs;
+  RxString cpf = ''.obs;
+  RxString rating = ''.obs;
+  RxString status = ''.obs;
+  RxString coverUrl = ''.obs;
 
-  PatientModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    lastName = json['last-name'];
-    email = json['email'];
-    phone = json['phone'];
-    cpf = json['cpf'];
-    password = json['password'];
-    date = json['date'];
-    rating = json['rating'];
-    historic = json['historic'];
-    status = json['status'];
+  // String getId() {
+  //   return _id;
+  // }
+
+  // String getName() {
+  //   return _name;
+  // }
+
+  // String getLastName() {
+  //   return _lastName;
+  // }
+
+  // String getEmail() {
+  //   return _email;
+  // }
+
+  // String getCpf() {
+  //   return _cpf;
+  // }
+
+  // String getRating() {
+  //   return _rating;
+  // }
+
+  // String getStatus() {
+  //   return _status;
+  // }
+
+  // String getCoverUrl() {
+  //   return _coverUrl;
+  // }
+
+  Future fromJson(Map<String, dynamic> json) async {
+    id.value = json['id'];
+    name.value = json['name'];
+    lastName.value = json['lastName'];
+    email.value = json['email'];
+    cpf.value = json['cpf'];
+    rating.value = json['rating'];
+    status.value = json['status'];
+    coverUrl.value = json['coverUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['last-name'] = this.lastName;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['cpf'] = this.cpf;
-    data['password'] = this.password;
-    data['date'] = this.date;
-    data['rating'] = this.rating;
-    data['historic'] = this.historic;
-    data['status'] = this.status;
+    data['id'] = id.value;
+    data['name'] = name.value;
+    data['lastName'] = lastName.value;
+    data['email'] = email.value;
+    data['cpf'] = cpf.value;
+    data['rating'] = rating.value;
+    data['status'] = status.value;
+    data['coverUrl'] = coverUrl.value;
     return data;
   }
 }

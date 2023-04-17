@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 
-class ConsultaDetailsPage extends StatefulWidget {
-  const ConsultaDetailsPage({super.key});
+class AppointmentDetailsPage extends StatefulWidget {
+  const AppointmentDetailsPage({super.key});
 
   @override
-  State<ConsultaDetailsPage> createState() => _ConsultaDetailsPageState();
+  State<AppointmentDetailsPage> createState() =>
+      _AppointmentDetailsPagePageState();
 }
 
-class _ConsultaDetailsPageState extends State<ConsultaDetailsPage> {
+class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

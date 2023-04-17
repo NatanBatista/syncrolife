@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:syncrolife/pages/feed_page/widgets/categories_widget.dart';
 import 'package:syncrolife/pages/feed_page/widgets/doctors_list_widget.dart';
 
@@ -53,7 +51,7 @@ class _FeedPageState extends State<FeedPage> {
               children: [subTitulos("Populares"), Expanded(child: Container())],
             ),
           ),
-          DoctorsListWidget([]),
+          DoctorsListWidget(doctors: [],),
           Padding(
             padding: const EdgeInsets.only(left: 40, top: 30, bottom: 15),
             child: Row(
@@ -88,7 +86,7 @@ class _FeedPageState extends State<FeedPage> {
               children: [subTitulos("Populares"), Expanded(child: Container())],
             ),
           ),
-          DoctorsListWidget([]),
+          DoctorsListWidget(doctors: [],),
           SizedBox(
             height: 30,
           )

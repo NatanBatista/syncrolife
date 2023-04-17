@@ -3,7 +3,7 @@ import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/custom_text_field.dart';
 
-class CustomFormPage extends StatelessWidget {
+class CustomFormWidget extends StatelessWidget {
   final String label1; //Label do campo 1
   final String label2;
   final String label3;
@@ -15,9 +15,9 @@ class CustomFormPage extends StatelessWidget {
   final TextEditingController? controller1;
   final TextEditingController? controller2;
   final TextEditingController? controller3;
-  final String rota;
+  final VoidCallback onPressed;
 
-  const CustomFormPage({
+  const CustomFormWidget({
     Key? key,
     required this.label1,
     required this.label2,
@@ -27,7 +27,7 @@ class CustomFormPage extends StatelessWidget {
     this.obsText2 = false,
     this.obsText3 = false,
     required this.fillColor,
-    required this.rota,
+    required this.onPressed,
     this.controller1,
     this.controller2,
     this.controller3,
@@ -93,9 +93,7 @@ class CustomFormPage extends StatelessWidget {
                   buttonText: textButton, // Texto do botão
                   buttonColor: cornflowerBlue, // Background Color
                   textColor: Colors.white,
-                  onPressed: () {
-                    Navigator.pushNamed(context, rota);
-                  },
+                  onPressed: onPressed,
                   icone: const Icon(Icons.navigate_next),
                 ),
               ],

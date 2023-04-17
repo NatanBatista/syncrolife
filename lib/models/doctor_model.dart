@@ -1,60 +1,103 @@
-class DoctorModel {
-  String? name;
-  String? lastName;
-  String? email;
-  String? phone;
-  String? cpf;
-  String? password;
-  String? date;
-  int? rating;
-  int? crm;
-  String? state;
-  String? speciality;
-  String? status;
+import 'package:get/get.dart';
 
-  DoctorModel(
-      {this.name,
-      this.lastName,
-      this.email,
-      this.phone,
-      this.cpf,
-      this.password,
-      this.date,
-      this.rating,
-      this.crm,
-      this.state,
-      this.speciality,
-      this.status});
+class DoctorModel extends GetxController {
+  late RxString id = ''.obs;
+  late RxString name = ''.obs;
+  late RxString lastName = ''.obs;
+  late RxString email = ''.obs;
+  late RxString phone = ''.obs;
+  late RxString cpf = ''.obs;
+  late RxString rating = ''.obs;
+  late RxString appointments = ''.obs;
+  late RxString crm = ''.obs;
+  late RxString speciality = ''.obs;
+  late RxString status = ''.obs;
+  late RxString imageUrl = ''.obs;
+  late RxString coverUrl = ''.obs;
 
-  DoctorModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    lastName = json['last-name'];
-    email = json['email'];
-    phone = json['phone'];
-    cpf = json['cpf'];
-    password = json['password'];
-    date = json['date'];
-    rating = json['rating'];
-    crm = json['crm'];
-    state = json['state'];
-    speciality = json['speciality'];
-    status = json['status'];
+  // String getId() {
+  //   return _id.value;
+  // }
+
+  // String getName() {
+  //   return _name.value;
+  // }
+
+  // String getLastName() {
+  //   return _lastName.value;
+  // }
+
+  // String getEmail() {
+  //   return _email.value;
+  // }
+
+  // String getCpf() {
+  //   return _cpf.value;
+  // }
+
+  // String getRating() {
+  //   return _rating.value;
+  // }
+
+  // String getAppointments() {
+  //   return _appointments.value;
+  // }
+
+  // String getStatus() {
+  //   return _status.value;
+  // }
+
+  // String getPhone() {
+  //   return _phone.value;
+  // }
+
+  // String getCrm() {
+  //   return _crm.value;
+  // }
+
+  // String getSpeciality() {
+  //   return _speciality.value;
+  // }
+
+  // String getImageUrl() {
+  //   return _imageUrl.value;
+  // }
+
+  // String getCoverUrl() {
+  //   return _coverUrl.value;
+  // }
+
+  Future fromJson(json) async {
+    id.value = json['id'];
+    name.value = json['name'];
+    lastName.value = json['lastName'];
+    email.value = json['email'];
+    phone.value = json['phoneNumber'];
+    cpf.value = json['cpf'];
+    rating.value = json['rating'];
+    appointments.value = json['appointments'];
+    crm.value = json['crm'];
+    speciality.value = json['speciality'];
+    status.value = json['status'];
+    imageUrl.value = json['imageUrl'];
+    coverUrl.value = json['coverUrl'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['last-name'] = this.lastName;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['cpf'] = this.cpf;
-    data['password'] = this.password;
-    data['date'] = this.date;
-    data['rating'] = this.rating;
-    data['crm'] = this.crm;
-    data['state'] = this.state;
-    data['speciality'] = this.speciality;
-    data['status'] = this.status;
+    data['id'] = id.value;
+    data['name'] = name.value;
+    data['last-name'] = lastName.value;
+    data['email'] = email.value;
+    data['phone'] = phone.value;
+    data['cpf'] = cpf.value;
+    data['rating'] = rating.value;
+    data['rating'] = appointments.value;
+    data['crm'] = crm.value;
+    data['speciality'] = speciality.value;
+    data['status'] = status.value;
+    data['imageUrl'] = imageUrl.value;
+    data['coverUrl'] = coverUrl.value;
     return data;
   }
 }

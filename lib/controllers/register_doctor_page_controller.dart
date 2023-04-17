@@ -6,6 +6,7 @@ import '../services/auth_service.dart';
 class RegisterDoctorPageController extends GetxController {
   var auth = AuthService.to;
   RxBool isLoading = false.obs;
+
   //Tela 1
   TextEditingController nameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -21,9 +22,10 @@ class RegisterDoctorPageController extends GetxController {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController specialtyController = TextEditingController();
 
+  //Chama o método de registerDoctor que está no AuthService
   void register(BuildContext context) async {
     isLoading.value = true;
-    await auth.register(
+    await auth.registerDoctor(
         emailController.text,
         passwordController.text,
         nameController.text,
