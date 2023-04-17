@@ -13,16 +13,45 @@ class MakeAppointment extends StatefulWidget {
 class _MakeAppointmentState extends State<MakeAppointment> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(children: [
-          Text("Marcar consulta com"),
-          DoctorProfile(),
-          const DateAppointment(),
-          const Payment(),
-          // Bloco de paddding
-
-        ],
+      body: SizedBox(
+        width: size.width,
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).padding.top + 20,
+            ),
+            Text("Marcar consulta com"),
+            Row(
+              children: [
+                SizedBox(
+                  width: 90,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'assets/images/medico.png',
+                      // fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Column(
+                  children: [
+                    Text('Nome'),
+                    Text('Especialidade'),
+                    Text('CRM'),
+                  ],
+                )
+              ],
+            ),
+            Row(
+              children: [Text('Data'), Text('Hora')],
+            ),
+            Text('payment'),
+            // Bloco de paddding
+          ],
+        ),
       ),
     );
   }
