@@ -4,7 +4,6 @@ import 'package:syncrolife/pages/make_appointment/make_appointment.dart';
 import 'package:syncrolife/routes.dart';
 import 'package:syncrolife/widgets/checkauth.dart';
 
-
 void main() async {
   await initConfigurations();
   runApp(const MyApp());
