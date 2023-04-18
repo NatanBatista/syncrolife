@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/services/validation_service.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/custom_text_field.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class RecoveryPage extends StatelessWidget {
   const RecoveryPage({super.key});
@@ -25,25 +28,40 @@ class RecoveryPage extends StatelessWidget {
       body: Center(
           child: Container(
               padding: const EdgeInsets.all(55),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CustomTextField(
-                      label: "Email", fillColor: lavenderBlush),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomButtonIcon(
-                    // ElevatedButton customizado
-                    buttonText: "Proximo", // Texto do botão
-                    buttonColor: cornflowerBlue, // Background Color
-                    textColor: lavenderBlush,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/recoverycode');
-                    },
-                    icone: const Icon(Icons.navigate_next),
-                  ),
-                ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextField(
+                      label: "Email",
+                      fillColor: lavenderBlush,
+                      keyboardtype: TextInputType.emailAddress,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'E-mail obrigatório';
+                        } else if (!(ValidationService.isValidEmail(value))) {
+                          return 'Formato de e-mail inválido';
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomButtonIcon(
+                      // ElevatedButton customizado
+                      buttonText: "Proximo", // Texto do botão
+                      buttonColor: cornflowerBlue, // Background Color
+                      textColor: lavenderBlush,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushNamed(context, '/recoverycode');
+                        }
+                      },
+                      icone: const Icon(Icons.navigate_next),
+                    ),
+                  ],
+                ),
               ))),
     );
   }

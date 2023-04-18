@@ -12,12 +12,22 @@ class CustomFormWidget extends StatelessWidget {
   final bool obsText2;
   final bool obsText3;
   final Color fillColor;
+  final TextInputType type1;
+  final TextInputType type2;
+  final TextInputType type3;
+  void Function(String)? onChanged1;
+  void Function(String)? onChanged2;
+  void Function(String)? onChanged3;
+  final String? Function(String?)? validate1;
+  final String? Function(String?)? validate2;
+  final String? Function(String?)? validate3;
   final TextEditingController? controller1;
   final TextEditingController? controller2;
   final TextEditingController? controller3;
+  final GlobalKey<FormState> formKey;
   final VoidCallback onPressed;
 
-  const CustomFormWidget({
+  CustomFormWidget({
     Key? key,
     required this.label1,
     required this.label2,
@@ -27,10 +37,20 @@ class CustomFormWidget extends StatelessWidget {
     this.obsText2 = false,
     this.obsText3 = false,
     required this.fillColor,
+    this.type1 = TextInputType.text,
+    this.type2 = TextInputType.text,
+    this.type3 = TextInputType.text,
+    this.onChanged1,
+    this.onChanged2,
+    this.onChanged3,
+    required this.validate1,
+    required this.validate2,
+    required this.validate3,
     required this.onPressed,
     this.controller1,
     this.controller2,
     this.controller3,
+    required this.formKey,
   }) : super(key: key);
 
   @override
@@ -56,47 +76,59 @@ class CustomFormWidget extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            padding: const EdgeInsets.all(55),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //Widgets de campo de textos personalizados
-                CustomTextField(
-                  label: label1,
-                  fillColor: fillColor,
-                  obsText: obsText1,
-                  controller: controller1,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextField(
-                  label: label2,
-                  fillColor: fillColor,
-                  obsText: obsText2,
-                  controller: controller2,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomTextField(
-                  label: label3,
-                  fillColor: fillColor,
-                  obsText: obsText3,
-                  controller: controller3,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                CustomButtonIcon(
-                  // ElevatedButton customizado
-                  buttonText: textButton, // Texto do botão
-                  buttonColor: cornflowerBlue, // Background Color
-                  textColor: Colors.white,
-                  onPressed: onPressed,
-                  icone: const Icon(Icons.navigate_next),
-                ),
-              ],
+            padding: const EdgeInsets.only(top: 55, left: 55, right: 55),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //Widgets de campo de textos personalizados
+                  CustomTextField(
+                    label: label1,
+                    fillColor: fillColor,
+                    obsText: obsText1,
+                    keyboardtype: type1,
+                    onChanged: onChanged1,
+                    validate: validate1,
+                    controller: controller1,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextField(
+                    label: label2,
+                    fillColor: fillColor,
+                    obsText: obsText2,
+                    keyboardtype: type2,
+                    onChanged: onChanged2,
+                    validate: validate2,
+                    controller: controller2,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomTextField(
+                    label: label3,
+                    fillColor: fillColor,
+                    obsText: obsText3,
+                    keyboardtype: type3,
+                    onChanged: onChanged3,
+                    validate: validate3,
+                    controller: controller3,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CustomButtonIcon(
+                    // ElevatedButton customizado
+                    buttonText: textButton, // Texto do botão
+                    buttonColor: cornflowerBlue, // Background Color
+                    textColor: Colors.white,
+                    onPressed: onPressed,
+                    icone: const Icon(Icons.navigate_next),
+                  ),
+                ],
+              ),
             ),
           ),
         ));
