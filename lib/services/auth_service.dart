@@ -95,7 +95,9 @@ class AuthService extends GetxController {
         "appointments": "0",
         "status": "active",
         "imageUrl": "",
-        "coverUrl": ""
+        "coverUrl": "",
+        "appointmentValue": "100",
+        "date": DateTime.now()
       });
       //Remove as 4 telas de registro de médico que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);

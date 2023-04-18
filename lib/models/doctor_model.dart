@@ -14,6 +14,8 @@ class DoctorModel extends GetxController {
   late RxString status = ''.obs;
   late RxString imageUrl = ''.obs;
   late RxString coverUrl = ''.obs;
+  late RxString appointmentValue = ''.obs;
+  late RxString date = ''.obs;
 
   // String getId() {
   //   return _id.value;
@@ -81,6 +83,8 @@ class DoctorModel extends GetxController {
     status.value = json['status'];
     imageUrl.value = json['imageUrl'];
     coverUrl.value = json['coverUrl'];
+    appointmentValue.value = json['appointmentValue'];
+    date.value = json['date'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -98,6 +102,8 @@ class DoctorModel extends GetxController {
     data['status'] = status.value;
     data['imageUrl'] = imageUrl.value;
     data['coverUrl'] = coverUrl.value;
+    data['appointmentValue'] = appointmentValue.value;
+    data['date'] = date.value;
     return data;
   }
 }

@@ -1,6 +1,7 @@
 class AppointmentModel {
   String _id = '';
   String _date = '';
+  String _creationDate = '';
   String _status = '';
   String _idDoctor = '';
   String _idPatient = '';
@@ -11,6 +12,10 @@ class AppointmentModel {
 
   String getDate() {
     return _date;
+  }
+
+  String getCreationDate() {
+    return _creationDate;
   }
 
   String getStatus() {
@@ -28,6 +33,7 @@ class AppointmentModel {
   Future fromJson(Map<String, dynamic> json) async {
     _id = json['id'];
     _date = json['date'];
+    _creationDate = json['creationDate'];
     _status = json['status'];
     _idDoctor = json['idDoctor'];
     _idPatient = json['idPatient'];

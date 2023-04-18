@@ -26,13 +26,16 @@ class DoctorsListWidget extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => VisitorProfilePage(
-                    name: doctors[index].name.value,
-                    lastName: doctors[index].lastName.value,
-                    crm: doctors[index].crm.value,
-                    speciality: doctors[index].speciality.value,
-                    rating: doctors[index].rating.value,
-                    appointments: doctors[index].appointments.value,
-                    image: doctors[index].coverUrl.value),
+                  id: doctors[index].id.value,
+                  name: doctors[index].name.value,
+                  lastName: doctors[index].lastName.value,
+                  crm: doctors[index].crm.value,
+                  speciality: doctors[index].speciality.value,
+                  rating: doctors[index].rating.value,
+                  appointments: doctors[index].appointments.value,
+                  coverImage: doctors[index].coverUrl.value,
+                  image: doctors[index].imageUrl.value,
+                ),
               ),
             );
           },

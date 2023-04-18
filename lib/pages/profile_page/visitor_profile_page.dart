@@ -6,29 +6,34 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:syncrolife/controllers/profile_page_controller.dart';
-import 'package:syncrolife/pages/profile_page/widgets/drawer_widget.dart';
 
+import 'package:syncrolife/controllers/profile_page_controller.dart';
+import 'package:syncrolife/pages/make_appointment_page/make_appointment_page.dart';
+import 'package:syncrolife/pages/profile_page/widgets/drawer_widget.dart';
 import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
 class VisitorProfilePage extends StatefulWidget {
+  String id;
   String name;
   String lastName;
   String crm;
   String speciality;
   String rating;
   String appointments;
+  String coverImage;
   String image;
 
   VisitorProfilePage({
     Key? key,
+    required this.id,
     required this.name,
     required this.lastName,
     required this.crm,
     required this.speciality,
     required this.rating,
     required this.appointments,
+    required this.coverImage,
     required this.image,
   }) : super(key: key);
 
@@ -66,11 +71,11 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                       decoration: BoxDecoration(
                           color: charlestonGreen,
                           borderRadius: BorderRadius.circular(30)),
-                      child: widget.image == ''
+                      child: widget.coverImage == ''
                           ? const SizedBox()
                           : ClipRRect(
                               borderRadius: BorderRadius.circular(30),
-                              child: Image.network(widget.image),
+                              child: Image.network(widget.coverImage),
                             ),
                     ),
                     Positioned(
@@ -170,6 +175,18 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MakeAppointmentPage(
+                                      idDoctor: widget.id,
+                                      crm: widget.crm,
+                                      name: widget.name,
+                                      speciality: widget.speciality,
+                                      image: widget.image,
+                                    )));
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         height: 60,

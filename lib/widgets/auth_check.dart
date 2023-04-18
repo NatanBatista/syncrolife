@@ -6,12 +6,12 @@ import '../layout_patient.dart';
 import '../pages/initial_page/initial_page.dart';
 import '../services/auth_service.dart';
 
-class CheckAuth extends StatefulWidget {
+class AuthCheck extends StatefulWidget {
   @override
-  State<CheckAuth> createState() => _CheckAuthState();
+  State<AuthCheck> createState() => _AuthCheckState();
 }
 
-class _CheckAuthState extends State<CheckAuth> {
+class _AuthCheckState extends State<AuthCheck> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => AuthService.to.userIsAuthenticated.value
