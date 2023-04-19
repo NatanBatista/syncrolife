@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syncrolife/pages/make_appointment/widgets/date_appointment.dart';
-
 import '../../styles.dart';
 import '../../widgets/elevated_button_icon_widget.dart';
 
@@ -14,7 +12,7 @@ class MakeAppointment extends StatefulWidget {
 class _MakeAppointmentState extends State<MakeAppointment> {
 
   DateTime date = DateTime.now();
-
+  TimeOfDay time = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -108,7 +106,22 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                         fontWeight: FontWeight.bold
                         ),
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.mp_sharp))
+                      SizedBox( height: 8,),
+                      ElevatedButton(
+                        child: Text('${time.hour} : ${time.minute}'),
+                        style: ElevatedButton.styleFrom(
+                              primary: Color.fromRGBO(122, 135, 251, 1)),
+                        onPressed: () async {
+                          TimeOfDay? newTime = await showTimePicker(
+                            context: context,
+                            initialTime: time);
+                          // if 'CANCEL' => null
+                          if(newTime == null) return;
+                    
+                          // If 'OK' => DateTime
+                          setState( () => time = newTime);
+                  }, 
+                  )
                     ],
                   )],
                 ),
