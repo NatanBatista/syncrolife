@@ -41,7 +41,7 @@ class RegisterDoctorPage2 extends StatelessWidget {
                 return 'Senha obrigatória';
               } else if (value.length < 8) {
                 // Senha deve conter 8 ou mais carácteres
-                return 'Sua senha deve ser maior que 8 carácteres';
+                return 'Sua senha deve ser no mínimo 8 caracteres';
               }
             },
             label3: 'Repetir Senha',
@@ -49,7 +49,7 @@ class RegisterDoctorPage2 extends StatelessWidget {
               if (value == null || value.isEmpty) {
                 return 'Senha obrigatório';
               } else if (value.length < 8) {
-                return 'Sua senha deve ser maior que 8 carácteres';
+                return 'Sua senha deve ser no mínimo 8 caracteres';
               }
             },
             controller3: controller.repeatPasswordController,

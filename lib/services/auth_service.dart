@@ -18,8 +18,8 @@ class AuthService extends GetxController {
 
   Future readUser() async {
     FirebaseFirestore db = await DBFirestore.get();
-    final docCustomer = db.collection("users").doc(auth.currentUser?.uid);
-    final snapshot = await docCustomer.get();
+    final docUser = db.collection("users").doc(auth.currentUser?.uid);
+    final snapshot = await docUser.get();
 
     if (snapshot.exists) {
       final verification = await snapshot.data()!['isDoctor'];

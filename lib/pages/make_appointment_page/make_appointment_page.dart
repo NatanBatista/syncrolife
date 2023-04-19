@@ -1,13 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:syncrolife/controllers/make_appointment_page_controller.dart';
-
-import 'package:syncrolife/pages/make_appointment_page/widgets/date_appointment.dart';
-import 'package:syncrolife/pages/make_appointment_page/widgets/doctor_profile.dart';
-import 'package:syncrolife/pages/make_appointment_page/widgets/payment.dart';
-import 'package:table_calendar/table_calendar.dart';
-
+import '../../controllers/make_appointment_page_controller.dart';
 import '../../styles.dart';
 import '../../widgets/elevated_button_icon_widget.dart';
 
@@ -31,123 +24,210 @@ class MakeAppointmentPage extends StatefulWidget {
 }
 
 class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
+  DateTime date = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GetBuilder<MakeAppointmentPageController>(
       init: MakeAppointmentPageController(),
       builder: (_) => Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-                onPressed: () => (Navigator.pop(context)),
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                ))),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            color: Colors.black,
+          ),
+        ),
+        backgroundColor: Colors.white,
         body: SizedBox(
           width: size.width,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Marcar consulta com",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 30,
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text(
+                  "Marcar consulta com",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Container(
-                    width: 90,
-                    height: 124.62,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          //Imagem do médico
-                          child: widget.image == ''
-                              ? SizedBox()
-                              : Image.network(
-                                  widget.image,
-                                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 90,
+                      height: 124.62,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            //Imagem do médico
+                            child: widget.image == ''
+                                ? SizedBox()
+                                : Image.network(
+                                    widget.image,
+                                    fit: BoxFit.cover,
+                                  ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              width: 130,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.black54,
+                                  ],
                                 ),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            width: 130,
-                            height: 180,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.black54,
-                                ],
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                            ),
+                          ),
+                          Text(widget.speciality),
+                          Text(widget.crm),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text('Data',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                        SizedBox(
+                          height: 8,
                         ),
+                        ElevatedButton(
+                          child: Text(
+                              '${date.day} / ${date.month} / ${date.year}'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromRGBO(122, 135, 251, 1)),
+                          onPressed: () async {
+                            DateTime? newDate = await showDatePicker(
+                                context: context,
+                                initialDate: date,
+                                firstDate: DateTime(2015),
+                                lastDate: DateTime(2030));
+
+                            // if 'CANCEL' => null
+                            if (newDate == null) return;
+
+                            // If 'OK' => DateTime
+                            setState(() => date = newDate);
+                          },
+                        )
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(widget.name),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(widget.speciality),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(widget.crm),
-                    ],
-                  )
-                ],
+                    Column(
+                      children: [
+                        Text(
+                          'Hora',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        ElevatedButton(
+                          child: Text('${time.hour} : ${time.minute}'),
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromRGBO(122, 135, 251, 1)),
+                          onPressed: () async {
+                            TimeOfDay? newTime = await showTimePicker(
+                                context: context, initialTime: time);
+                            // if 'CANCEL' => null
+                            if (newTime == null) return;
+
+                            // If 'OK' => DateTime
+                            setState(() => time = newTime);
+                          },
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-              Row(
-                children: [Text('Data'), Text('Hora')],
+              Container(
+                color: Color.fromRGBO(240, 230, 239, 1),
+                height: 145,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                      child: Text(
+                        'Forma de Pagamento',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Cartão de Crédito',
+                          style: TextStyle(
+                              color: Color.fromRGBO(122, 135, 251, 1)),
+                        ),
+                        Text(
+                          'Editar',
+                          style: TextStyle(
+                              color: Color.fromRGBO(122, 135, 251, 1)),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-              // TableCalendar(
-              //     availableCalendarFormats: {
-              //       CalendarFormat.month: 'Mês',
-              //       CalendarFormat.week: 'Semana',
-              //       CalendarFormat.twoWeeks: '2 semanas'
-              //     },
-              //     focusedDay: DateTime.now(),
-              //     firstDay: DateTime.now(),
-              //     lastDay: DateTime.utc(DateTime.now().year + 1)),
-              const Expanded(child: SizedBox()),
+              Expanded(child: SizedBox()),
               CustomButtonIcon(
                 buttonText: "Agendar",
                 buttonColor: cornflowerBlue,
                 textColor: lavenderBlush,
                 onPressed: () {
-                  _.scheduleAppointment(widget.idDoctor, '29/06/2023');
+                  _.scheduleAppointment(widget.idDoctor, date, time);
                 },
                 icone: const Icon(Icons.assignment_add),
               ),
-              const SizedBox(
-                height: 60,
-              ),
+              SizedBox(
+                height: 40,
+              )
             ],
           ),
         ),
