@@ -6,8 +6,7 @@ import '../services/auth_service.dart';
 
 class MakeAppointmentPageController extends GetxController {
   //Cria a consulta e salva no banco de dados do paciente e do médico
-  Future<void> scheduleAppointment(
-      String idDoctor, String idPatient, String date) async {
+  Future<void> scheduleAppointment(String idDoctor, String date) async {
     final db = await DBFirestore.get();
     var auth = Get.find<AuthService>();
     //A consulta terá 5 status -> sent (enviada) | accepted (aceita) | rejected (rejeitada) | completed (concluída) | canceled (cancelada)
@@ -15,19 +14,31 @@ class MakeAppointmentPageController extends GetxController {
     try {
       String fileId = Uuid().v4();
 
+      db.collection("appointments").doc(fileId).set({
+        'id': fileId,
+        'idDoctor': idDoctor,
+        'idPatient': auth.auth.currentUser!.uid,
+        'date': DateTime.utc(2023, 06, 16),
+        'creationDate': DateTime.now(),
+        'status': 'sent'
+      });
+
       db
           .collection("users")
           .doc(idDoctor)
           .collection("appointments")
           .doc(fileId)
-          .set({
-        'id': fileId,
-        'idDoctor': idDoctor,
-        'idPatient': idPatient,
-        'date': date,
-        'creationDate': DateTime.now(),
-        'status': 'sent'
-      });
-    } catch (e) {}
+          .set({'id': fileId});
+
+      db
+          .collection("users")
+          .doc(auth.auth.currentUser!.uid)
+          .collection("appointments")
+          .doc(fileId)
+          .set({'id': fileId});
+    } catch (e) {
+      print('Deu problema aqui');
+      print(e);
+    }
   }
 }
