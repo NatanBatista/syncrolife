@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/config.dart';
+import 'package:syncrolife/pages/make_appointment/make_appointment.dart';
 import 'package:syncrolife/pages/make_appointment_page/make_appointment_page.dart';
 import 'package:syncrolife/pages/splash_page.dart';
 import 'package:syncrolife/routes.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor:
               const Color.fromARGB(255, 122, 135, 251)), // Cor primária
-      home: AuthCheck(),
+      home: MakeAppointment(),
       debugShowCheckedModeBanner: false,
       routes: routes,
     );
