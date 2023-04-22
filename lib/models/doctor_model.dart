@@ -17,58 +17,6 @@ class DoctorModel extends GetxController {
   late RxString appointmentValue = ''.obs;
   late RxString date = ''.obs;
 
-  // String getId() {
-  //   return _id.value;
-  // }
-
-  // String getName() {
-  //   return _name.value;
-  // }
-
-  // String getLastName() {
-  //   return _lastName.value;
-  // }
-
-  // String getEmail() {
-  //   return _email.value;
-  // }
-
-  // String getCpf() {
-  //   return _cpf.value;
-  // }
-
-  // String getRating() {
-  //   return _rating.value;
-  // }
-
-  // String getAppointments() {
-  //   return _appointments.value;
-  // }
-
-  // String getStatus() {
-  //   return _status.value;
-  // }
-
-  // String getPhone() {
-  //   return _phone.value;
-  // }
-
-  // String getCrm() {
-  //   return _crm.value;
-  // }
-
-  // String getSpeciality() {
-  //   return _speciality.value;
-  // }
-
-  // String getImageUrl() {
-  //   return _imageUrl.value;
-  // }
-
-  // String getCoverUrl() {
-  //   return _coverUrl.value;
-  // }
-
   Future fromJson(json) async {
     id.value = json['id'];
     name.value = json['name'];

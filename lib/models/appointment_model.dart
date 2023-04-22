@@ -7,35 +7,11 @@ class AppointmentModel extends GetxController {
   Rx<DateTime> creationDate = DateTime.now().obs;
   RxString status = ''.obs;
   RxString idDoctor = ''.obs;
+  RxString nameDoctor = ''.obs;
+  RxString lastNameDoctor = ''.obs;
   RxString idPatient = ''.obs;
-
-  String getId() {
-    return id.value;
-  }
-
-  DateTime getDate() {
-    return date.value;
-  }
-
-  String getTime() {
-    return time.value;
-  }
-
-  DateTime getCreationDate() {
-    return creationDate.value;
-  }
-
-  String getStatus() {
-    return status.value;
-  }
-
-  String getIdDoctor() {
-    return idDoctor.value;
-  }
-
-  String getIdPatient() {
-    return idPatient.value;
-  }
+  RxString namePatient = ''.obs;
+  RxString lastNamePatient = ''.obs;
 
   Future fromJson(json) async {
     id.value = json['id'];
@@ -44,6 +20,10 @@ class AppointmentModel extends GetxController {
     creationDate.value = json['creationDate'].toDate();
     status.value = json['status'];
     idDoctor.value = json['idDoctor'];
+    nameDoctor.value = json['nameDoctor'];
+    lastNameDoctor.value = json['lastNameDoctor'];
     idPatient.value = json['idPatient'];
+    namePatient.value = json['namePatient'];
+    lastNamePatient.value = json['lastNamePatient'];
   }
 }

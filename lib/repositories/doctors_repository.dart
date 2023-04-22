@@ -24,6 +24,8 @@ class DoctorsRepository {
         listDoctors.add(doctor);
       },
     );
+    print(listDoctors.length);
+
     return listDoctors;
   }
 

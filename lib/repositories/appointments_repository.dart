@@ -19,31 +19,24 @@ class AppointmentsRepository {
   Future<List<AppointmentModel>> getAppointmentsFromStatus(
       String status) async {
     List<AppointmentModel> listAppointments = [];
-    final docAppointmentsId = db
-        .collection('users')
-        .doc(auth.auth.currentUser!.uid)
-        .collection('appointments');
+    final docAppointmentsId = await db
+        .collection('appointments')
+        .where('idDoctor', isEqualTo: auth.auth.currentUser!.uid)
+        .where('status', isEqualTo: status);
 
     final snapshotId = await docAppointmentsId.get();
 
-    snapshotId.docs.forEach(
-      (idAppointment) async {
-        String id = idAppointment['id'];
+    await snapshotId.docs.forEach(
+      (element) async {
+        AppointmentModel appointmentModel = AppointmentModel();
+        appointmentModel.fromJson(element);
+        listAppointments.add(appointmentModel);
 
-        final docAppointmentsSent = db
-            .collection('appointments')
-            .where('id', isEqualTo: id)
-            .where('status', isEqualTo: status);
-
-        final snapshotSent = await docAppointmentsSent.get();
-
-        snapshotSent.docs.forEach((element) {
-          AppointmentModel appointmentModel = AppointmentModel();
-          appointmentModel.fromJson(element);
-          listAppointments.add(appointmentModel);
-        });
+        print(listAppointments.length);
       },
     );
+    print(listAppointments.length);
+
     return listAppointments;
   }
 }

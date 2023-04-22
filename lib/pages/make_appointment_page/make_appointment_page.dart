@@ -26,6 +26,7 @@ class MakeAppointmentPage extends StatefulWidget {
 class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
   DateTime date = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -221,7 +222,7 @@ class _MakeAppointmentPageState extends State<MakeAppointmentPage> {
                 buttonColor: cornflowerBlue,
                 textColor: lavenderBlush,
                 onPressed: () {
-                  _.scheduleAppointment(widget.idDoctor, date, time);
+                  _.showAlert(context, widget.idDoctor, date, time);
                 },
                 icone: const Icon(Icons.assignment_add),
               ),

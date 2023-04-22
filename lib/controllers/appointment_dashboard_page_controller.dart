@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
 import 'package:syncrolife/repositories/appointments_repository.dart';
 
+import '../services/db_firestore_service.dart';
+
 class AppointmentDashboardPageController extends GetxController {
   final appointmentsRep = AppointmentsRepository.get();
+  final db = DBFirestore.get();
+
   RxList sentAppointments = [].obs;
 
-  void setSentAppointments() async {
+  void setAppointments() async {
     sentAppointments.value =
         await appointmentsRep.getAppointmentsFromStatus('sent');
   }
@@ -14,24 +18,22 @@ class AppointmentDashboardPageController extends GetxController {
   Future<void> onInit() async {
     // TODO: implement onInit
     super.onInit();
-    sentAppointments.value =
-        await appointmentsRep.getAppointmentsFromStatus('sent');
+    setAppointments();
+  }
+
+  void buttonAccepted(String idAppointment) async {
+    db
+        .collection('appointments')
+        .doc(idAppointment)
+        .update({'status': 'accepted'});
+    setAppointments();
+  }
+
+  void buttonRejected(String idAppointment) async {
+    db
+        .collection('appointments')
+        .doc(idAppointment)
+        .update({'status': 'rejected'});
+    setAppointments();
   }
 }
-
-// import 'package:get/get.dart';
-// import 'package:syncrolife/repositories/appointments_repository.dart';
-
-// class AppointmentDashboardPageController extends GetxController {
-//   final appointmentsRep = AppointmentsRepository.get();
-//   RxList sentAppointments = [].obs;
-
-//   @override
-//   Future<void> onInit() async {
-//     // TODO: implement onInit
-//     super.onInit();
-//     await appointmentsRep.getAppointmentsFromStatus('sent').forEach((element) {sentAppointments.add(element);});
-
-//     Get.reloadAll();
-//   }
-// }
