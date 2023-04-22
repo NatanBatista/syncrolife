@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/pages/schedule_page/schedule_page.dart';
 import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/profile_page/profile_page.dart';
-import 'package:syncrolife/pages/query_dashboard_page/query_dashboard_page.dart';
+import 'package:syncrolife/pages/appointment_dashboard_page/appointment_dashboard_page.dart';
 
 import 'models/doctor_model.dart';
 import 'services/auth_service.dart';
@@ -44,15 +44,9 @@ class _LayoutState extends State<LayoutDoctor> {
                 icon: Icon(Icons.account_circle), label: 'Perfil'),
           ]),
       body: PageView(controller: _pageController, children: [
-        QueryPage(),
+        AppointmentDashboardPage(),
         SchedulePage(),
-        ProfilePage(
-          name: auth.doctor.name.value,
-          speciality: auth.doctor.speciality.value,
-          rating: auth.doctor.rating.value,
-          appointments: auth.doctor.appointments.value,
-          crm: auth.doctor.crm.value,
-        ),
+        ProfilePage(),
       ]),
     );
   }

@@ -1,41 +1,49 @@
-class AppointmentModel {
-  String _id = '';
-  String _date = '';
-  String _creationDate = '';
-  String _status = '';
-  String _idDoctor = '';
-  String _idPatient = '';
+import 'package:get/get.dart';
+
+class AppointmentModel extends GetxController {
+  RxString id = ''.obs;
+  Rx<DateTime> date = DateTime.now().obs;
+  RxString time = ''.obs;
+  Rx<DateTime> creationDate = DateTime.now().obs;
+  RxString status = ''.obs;
+  RxString idDoctor = ''.obs;
+  RxString idPatient = ''.obs;
 
   String getId() {
-    return _id;
+    return id.value;
   }
 
-  String getDate() {
-    return _date;
+  DateTime getDate() {
+    return date.value;
   }
 
-  String getCreationDate() {
-    return _creationDate;
+  String getTime() {
+    return time.value;
+  }
+
+  DateTime getCreationDate() {
+    return creationDate.value;
   }
 
   String getStatus() {
-    return _status;
+    return status.value;
   }
 
   String getIdDoctor() {
-    return _idDoctor;
+    return idDoctor.value;
   }
 
   String getIdPatient() {
-    return _idPatient;
+    return idPatient.value;
   }
 
-  Future fromJson(Map<String, dynamic> json) async {
-    _id = json['id'];
-    _date = json['date'];
-    _creationDate = json['creationDate'];
-    _status = json['status'];
-    _idDoctor = json['idDoctor'];
-    _idPatient = json['idPatient'];
+  Future fromJson(json) async {
+    id.value = json['id'];
+    date.value = json['date'].toDate();
+    time.value = json['time'];
+    creationDate.value = json['creationDate'].toDate();
+    status.value = json['status'];
+    idDoctor.value = json['idDoctor'];
+    idPatient.value = json['idPatient'];
   }
 }

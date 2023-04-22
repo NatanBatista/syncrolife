@@ -45,10 +45,7 @@ class _LayoutState extends State<LayoutPatient> {
       body: PageView(controller: _pageController, children: [
         FeedPage(),
         SchedulePage(),
-        ProfilePage(
-          name: auth.patient.name.value,
-          rating: auth.patient.rating.value,
-        ),
+        ProfilePage(),
       ]),
     );
   }

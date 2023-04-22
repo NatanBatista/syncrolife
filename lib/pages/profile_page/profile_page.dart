@@ -13,21 +13,8 @@ import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
 class ProfilePage extends StatefulWidget {
-  String? name;
-  String? lastName;
-  String? crm;
-  String? speciality;
-  String? rating;
-  String? appointments;
-
   ProfilePage({
     Key? key,
-    this.name,
-    this.lastName,
-    this.crm,
-    this.speciality,
-    this.rating,
-    this.appointments,
   }) : super(key: key);
 
   @override
@@ -120,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                widget.name!,
+                                _.auth.doctor.name.value,
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -131,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ? Column(
                                       children: [
                                         Text(
-                                          widget.speciality!,
+                                          _.auth.doctor.speciality.value,
                                           style: const TextStyle(
                                             fontSize: 14,
                                           ),
@@ -140,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           height: 8,
                                         ),
                                         Text(
-                                          'CRM ${widget.crm}',
+                                          'CRM ${_.auth.doctor.crm.value}',
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                       ],
@@ -157,10 +144,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                     Icons.star,
                                     color: Colors.amber,
                                   ),
-                                  Text(
-                                    widget.rating!,
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
+                                  _.auth.isDoctor.value
+                                      ? Text(
+                                          _.auth.doctor.rating.value,
+                                          style: const TextStyle(fontSize: 14),
+                                        )
+                                      : Text(
+                                          _.auth.patient.rating.value,
+                                          style: const TextStyle(fontSize: 14),
+                                        ),
                                   _.auth.isDoctor.value
                                       ? Row(
                                           children: [
@@ -172,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               color: greenSheen,
                                             ),
                                             Text(
-                                              widget.appointments!,
+                                              _.auth.doctor.appointments.value,
                                               style:
                                                   const TextStyle(fontSize: 14),
                                             ),
