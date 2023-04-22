@@ -17,12 +17,6 @@ class AppointmentRequestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate(int index) {
-      String dataFormatada =
-          DateFormat('dd/MM/yyyy').format(appoint[index].date.value);
-      return dataFormatada;
-    }
-
     return GetBuilder<AppointmentDashboardPageController>(
       init: AppointmentDashboardPageController(),
       builder: (_) => SizedBox(
@@ -48,13 +42,16 @@ class AppointmentRequestWidget extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                          "Segunda-feira"), // Exibição do dia da semana da consulta
+                      Text(_.formattedWeekday(appoint[index]
+                          .date
+                          .value
+                          .weekday)), // Exibição do dia da semana da consulta
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
-                          formattedDate(index)), // Exibição da data da consulta
+                      Text(_.formattedDate(appoint[index]
+                          .date
+                          .value)), // Exibição da data da consulta
                       SizedBox(
                         height: 5,
                       ),
@@ -63,7 +60,7 @@ class AppointmentRequestWidget extends StatelessWidget {
                           .value), // Exibição da hora da consulta
                     ],
                   ),
-                  const SizedBox(width: 30),
+                  const SizedBox(width: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
