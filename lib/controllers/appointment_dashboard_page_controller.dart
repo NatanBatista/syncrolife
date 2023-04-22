@@ -9,17 +9,59 @@ class AppointmentDashboardPageController extends GetxController {
   final db = DBFirestore.get();
 
   RxList sentAppointments = [].obs;
+  RxList acceptedAppointments = [].obs;
+  RxList rejectedAppointments = [].obs;
+  RxList completedAppointments = [].obs;
+  RxList canceledAppointments = [].obs;
 
-  void setAppointments() async {
+  //A consulta terá 5 status -> sent (enviada) | accepted (aceita) | rejected (rejeitada) | completed (concluída) | canceled (cancelada)
+  //Se o paciente não entrar ela contará como "completed", mas se o médico não entrar ela contará como "canceled"
+  void setSentAppointments() async {
     sentAppointments.value =
         await appointmentsRep.getAppointmentsFromStatus('sent');
+  }
+
+  void setAcceptedAppointments() async {
+    acceptedAppointments.value =
+        await appointmentsRep.getAppointmentsFromStatus('accepted');
+  }
+
+  void setRejectedAppointments() async {
+    rejectedAppointments.value =
+        await appointmentsRep.getAppointmentsFromStatus('rejected');
+  }
+
+  void setCompletedAppointments() async {
+    completedAppointments.value =
+        await appointmentsRep.getAppointmentsFromStatus('completed');
+  }
+
+  void setCanceledAppointments() async {
+    canceledAppointments.value =
+        await appointmentsRep.getAppointmentsFromStatus('canceled');
+  }
+
+  double totalBilled() {
+    double total = 0;
+    completedAppointments.forEach((element) {
+      total = total + element.value.value;
+    });
+    return total;
   }
 
   @override
   Future<void> onInit() async {
     // TODO: implement onInit
     super.onInit();
-    setAppointments();
+    sentAppointments.value = await appointmentsRep.getSentAppointments();
+    acceptedAppointments.value =
+        await appointmentsRep.getAcceptedAppointments();
+    rejectedAppointments.value =
+        await appointmentsRep.getRejectedAppointments();
+    completedAppointments.value =
+        await appointmentsRep.getCompletedAppointments();
+    canceledAppointments.value =
+        await appointmentsRep.getCanceledAppointments();
   }
 
   String formattedDate(DateTime date) {
@@ -60,7 +102,7 @@ class AppointmentDashboardPageController extends GetxController {
         .collection('appointments')
         .doc(idAppointment)
         .update({'status': 'accepted'});
-    setAppointments();
+    setSentAppointments();
   }
 
   void buttonRejected(String idAppointment) async {
@@ -68,6 +110,6 @@ class AppointmentDashboardPageController extends GetxController {
         .collection('appointments')
         .doc(idAppointment)
         .update({'status': 'rejected'});
-    setAppointments();
+    setSentAppointments();
   }
 }

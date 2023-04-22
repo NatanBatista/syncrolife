@@ -22,7 +22,7 @@ class AppointmentsWidget extends StatelessWidget {
       // Estilização do container
       decoration: BoxDecoration(
           color: lavenderBlush, borderRadius: BorderRadius.circular(20)),
-      height: 109,
+      height: 110,
       width: MediaQuery.of(context).size.width / 2 - 20,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -31,12 +31,49 @@ class AppointmentsRepository {
         AppointmentModel appointmentModel = AppointmentModel();
         appointmentModel.fromJson(element);
         listAppointments.add(appointmentModel);
-
-        print(listAppointments.length);
       },
     );
     print(listAppointments.length);
 
     return listAppointments;
+  }
+
+  Future<List<AppointmentModel>> getAppointmentsSchedule() async {
+    List<AppointmentModel> listAppointments = [];
+    final docAppointmentsId = await db
+        .collection('appointments')
+        .where('idDoctor', isEqualTo: auth.auth.currentUser!.uid)
+        .where('status', isNotEqualTo: 'sent');
+
+    final snapshotId = await docAppointmentsId.get();
+
+    await snapshotId.docs.forEach(
+      (element) async {
+        AppointmentModel appointmentModel = AppointmentModel();
+        appointmentModel.fromJson(element);
+        listAppointments.add(appointmentModel);
+      },
+    );
+    return listAppointments;
+  }
+
+  Future<List<AppointmentModel>> getSentAppointments() async {
+    return await getAppointmentsFromStatus('sent');
+  }
+
+  Future<List<AppointmentModel>> getAcceptedAppointments() async {
+    return await getAppointmentsFromStatus('accepted');
+  }
+
+  Future<List<AppointmentModel>> getRejectedAppointments() async {
+    return await getAppointmentsFromStatus('rejected');
+  }
+
+  Future<List<AppointmentModel>> getCompletedAppointments() async {
+    return await getAppointmentsFromStatus('completed');
+  }
+
+  Future<List<AppointmentModel>> getCanceledAppointments() async {
+    return await getAppointmentsFromStatus('canceled');
   }
 }

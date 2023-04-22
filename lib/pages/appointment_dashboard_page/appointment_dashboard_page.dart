@@ -42,7 +42,9 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
                 // Consultas Realizadas e Pendentes
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  AppointmentsWidget(label: "Realizadas", label1: "3"),
+                  AppointmentsWidget(
+                      label: "Realizadas",
+                      label1: '${_.completedAppointments.value.length}'),
                   // Widget que exibe a quantidade de consultas realizadas
                   const SizedBox(
                     width: 10,
@@ -50,7 +52,7 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
 
                   AppointmentsWidget(
                       label: "Pendentes",
-                      label1: "${_.sentAppointments.value.length}"),
+                      label1: "${_.acceptedAppointments.value.length}"),
                   // Widget que exibe a quantidade de consultas pendentes
                 ],
               ),
@@ -58,9 +60,9 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
                 // Espaço entre "Consultas Realizadas e Pendentes" e o painel de faturamento
                 height: 15,
               ),
-              const BillingDashboard(
+              BillingDashboard(
                 // Painel de faturamento
-                valor: 170.266,
+                valor: _.totalBilled(),
               ),
               const SizedBox(
                 height: 20,
