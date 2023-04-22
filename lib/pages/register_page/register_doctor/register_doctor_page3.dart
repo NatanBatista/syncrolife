@@ -11,6 +11,8 @@ final _formKey = GlobalKey<FormState>();
 class RegisterDoctorPage3 extends StatelessWidget {
   RegisterDoctorPage3({super.key});
   final controller = Get.put(RegisterDoctorPageController());
+  List<String> specialties = ['Ginecologista', 'Clinico Geral', 'Ortopedista'];
+  String? selectedItem = 'Clinico Geral';
 
   @override
   Widget build(BuildContext context) {
