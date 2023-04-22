@@ -17,26 +17,30 @@ class _SchedulePageState extends State<SchedulePage> {
     return GetBuilder<SchedulePageController>(
       init: SchedulePageController(),
       builder: (_) => Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).padding.top + 24,
-            ),
-            const Text(
-              'Consultas agendadas',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              child: ListView.separated(
+        body: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).padding.top + 24,
+              ),
+              const Text(
+                'Consultas agendadas',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: _.appointments.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      leading: const Text('Hugo Oliveira'),
+                      leading:
+                          Text('${_.appointments[index].namePatient.value}'),
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('15:30'),
-                          Text('05/10/2023'),
+                        children: [
+                          Text('${_.appointments[index].time.value}'),
+                          Text(
+                              '${_.formattedDate(_.appointments[index].date.value)}'),
                         ],
                       ),
                       onTap: () => Navigator.push(
@@ -52,9 +56,10 @@ class _SchedulePageState extends State<SchedulePage> {
                       height: 1.5,
                     );
                   },
-                  itemCount: 50),
-            ),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
