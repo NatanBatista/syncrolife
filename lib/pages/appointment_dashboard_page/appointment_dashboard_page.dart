@@ -28,9 +28,12 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
               SizedBox(
                 height: MediaQuery.of(context).padding.top,
               ),
-              const Text(
-                "Painel de consultas", // Título da página
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: const Text(
+                  "Painel de consultas", // Título da página
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
                 height: 15,
@@ -60,7 +63,7 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
                 valor: 170.266,
               ),
               const SizedBox(
-                height: 65,
+                height: 20,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,6 +75,9 @@ class _AppointmentDashboardPageState extends State<AppointmentDashboardPage> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   AppointmentRequestWidget(appoint: _.sentAppointments.value)
                 ],
