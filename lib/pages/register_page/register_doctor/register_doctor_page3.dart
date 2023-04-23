@@ -50,7 +50,7 @@ class RegisterDoctorPage3 extends StatelessWidget {
               }
             },
             controller2: controller.phoneNumberController,
-            label3: 'Especialidade',
+            label3: '',
             validate3: (value) {
               if (value == null || value.isEmpty) {
                 return 'Especialidade obrigatório';

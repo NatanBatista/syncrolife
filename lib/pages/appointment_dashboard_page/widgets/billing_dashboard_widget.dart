@@ -22,7 +22,7 @@ class _BillingDashboardState extends State<BillingDashboard> {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(
-        minHeight: 209,
+        minHeight: 110,
         maxWidth: 500,
       ),
       margin: const EdgeInsets.all(15),

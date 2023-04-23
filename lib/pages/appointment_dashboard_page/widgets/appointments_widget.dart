@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:syncrolife/styles.dart';
 
 // Classe Queries que extende de StatelessWidget
-class Queries extends StatelessWidget {
+class AppointmentsWidget extends StatelessWidget {
 // Declarando as variáveis de instância da classe
   final String label;
   final String label1;
 
 // Construtor da classe Queries
-  Queries({
+  AppointmentsWidget({
     Key? key,
     required this.label,
     required this.label1,
@@ -18,13 +18,15 @@ class Queries extends StatelessWidget {
 // Método build que retorna o Widget que será renderizado na tela
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        // Estilização do container
-        decoration: BoxDecoration(
-            color: lavenderBlush, borderRadius: BorderRadius.circular(20)),
-        height: 109,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return Container(
+      // Estilização do container
+      decoration: BoxDecoration(
+          color: lavenderBlush, borderRadius: BorderRadius.circular(20)),
+      height: 110,
+      width: MediaQuery.of(context).size.width / 2 - 20,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           // Renderização do primeiro texto
           Text(
             label,
@@ -37,7 +39,7 @@ class Queries extends StatelessWidget {
           Text(label1,
               style:
                   const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        ]),
+        ],
       ),
     );
   }

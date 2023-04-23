@@ -10,38 +10,6 @@ class PatientModel extends GetxController {
   RxString status = ''.obs;
   RxString coverUrl = ''.obs;
 
-  // String getId() {
-  //   return _id;
-  // }
-
-  // String getName() {
-  //   return _name;
-  // }
-
-  // String getLastName() {
-  //   return _lastName;
-  // }
-
-  // String getEmail() {
-  //   return _email;
-  // }
-
-  // String getCpf() {
-  //   return _cpf;
-  // }
-
-  // String getRating() {
-  //   return _rating;
-  // }
-
-  // String getStatus() {
-  //   return _status;
-  // }
-
-  // String getCoverUrl() {
-  //   return _coverUrl;
-  // }
-
   Future fromJson(Map<String, dynamic> json) async {
     id.value = json['id'];
     name.value = json['name'];

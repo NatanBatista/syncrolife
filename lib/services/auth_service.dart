@@ -34,7 +34,6 @@ class AuthService extends GetxController {
       } else {
         await patient.fromJson(snapshot.data()!);
         print(patient.name.value);
-        print('depois');
       }
       print('existe');
     } else

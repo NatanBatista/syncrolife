@@ -6,6 +6,18 @@ import 'package:uuid/uuid.dart';
 import '../services/auth_service.dart';
 
 class MakeAppointmentPageController extends GetxController {
+  // Future<String> getFieldDoctor(String id, String field) async {
+  //   final db = DBFirestore.get();
+
+  //   String data;
+
+  //   final docPatient = db.collection('users').doc(id);
+  //   final snapshot = docPatient.get();
+  //   data = await snapshot.data()['name'];
+
+  //   return data;
+  // }
+
   //Cria a consulta e salva no banco de dados do paciente e do médico
   Future<void> scheduleAppointment(
       String idDoctor, DateTime date, TimeOfDay time) async {
@@ -21,7 +33,11 @@ class MakeAppointmentPageController extends GetxController {
       db.collection("appointments").doc(fileId).set({
         'id': fileId,
         'idDoctor': idDoctor,
+        'nameDoctor': await snapshot.data()!['name'],
+        'lastNameDoctor': await snapshot.data()!['lastName'],
         'idPatient': auth.auth.currentUser!.uid,
+        'namePatient': auth.patient.name.value,
+        'lastNamePatient': auth.patient.lastName.value,
         'value': await snapshot.data()!['appointmentValue'],
         'date': date,
         'time': '${time.hour}:${time.minute}',
@@ -46,5 +62,34 @@ class MakeAppointmentPageController extends GetxController {
       print('Deu problema aqui');
       print(e);
     }
+  }
+
+  void showAlert(
+      BuildContext context, String idDoctor, DateTime date, TimeOfDay time) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          double valueAppointment = 100.0;
+          return AlertDialog(
+            title: Text('Você tem certeza que quer agendar esta consulta?'),
+            content: Text('O valor da consulta é ${valueAppointment} reais.'),
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancelar'),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  scheduleAppointment(idDoctor, date, time);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: Text('Confirmar'),
+              ),
+            ],
+          );
+        });
   }
 }
