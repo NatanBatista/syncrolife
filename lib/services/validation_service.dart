@@ -82,18 +82,33 @@ class ValidationService {
   }
 
   static String crmFormatter(String crm) {
-    String formattedCRM = crm.replaceAll(RegExp(r'[^a-zA-Z0-9]'),
-        ''); // remove tudo que não for letra nem número
+    String formattedCRM = crm.replaceAll(
+        RegExp('^0+|[^a-zA-Z0-9]+'), ''); // remove simbolos e zeros a esquerdas
     formattedCRM = formattedCRM.toUpperCase();
-    if (formattedCRM.length > 11) {
-      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8, 9)}/${formattedCRM.substring(9, 11)}';
-    } else if (formattedCRM.length > 9) {
-      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8, 9)}/${formattedCRM.substring(9)}';
-    } else if (formattedCRM.length > 8) {
-      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8)}';
+    switch (formattedCRM.length) {
+      case 1:
+        return '00000000-0/0${formattedCRM.substring(1)}';
+      case 2:
+        return '00000000-0/${formattedCRM.substring(0, 2)}';
+      case 3:
+        return '00000000-${formattedCRM.substring(0, 1)}/${formattedCRM.substring(1, 3)}';
+      case 4:
+        return '0000000${formattedCRM.substring(0, 1)}-${formattedCRM.substring(1, 2)}/${formattedCRM.substring(2, 4)}';
+      case 5:
+        return '000000${formattedCRM.substring(0, 2)}-${formattedCRM.substring(2, 3)}/${formattedCRM.substring(3, 5)}';
+      case 6:
+        return '00000${formattedCRM.substring(0, 3)}-${formattedCRM.substring(3, 4)}/${formattedCRM.substring(4, 6)}';
+      case 7:
+        return '0000${formattedCRM.substring(0, 4)}-${formattedCRM.substring(4, 5)}/${formattedCRM.substring(5, 7)}';
+      case 8:
+        return '000${formattedCRM.substring(0, 5)}-${formattedCRM.substring(5, 6)}/${formattedCRM.substring(6, 8)}';
+      case 9:
+        return '00${formattedCRM.substring(0, 6)}-${formattedCRM.substring(6, 7)}/${formattedCRM.substring(7, 9)}';
+      case 10:
+        return '0${formattedCRM.substring(0, 7)}-${formattedCRM.substring(7, 8)}/${formattedCRM.substring(8, 10)}';
+      default:
+        return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8, 9)}/${formattedCRM.substring(9, 11)}';
     }
-
-    return formattedCRM;
   }
 
   static isValidCrm(String crm) {
