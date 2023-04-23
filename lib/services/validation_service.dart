@@ -81,6 +81,74 @@ class ValidationService {
     }
   }
 
+  static String crmFormatter(String crm) {
+    String formattedCRM = crm.replaceAll(RegExp(r'[^a-zA-Z0-9]'),
+        ''); // remove tudo que não for letra nem número
+    formattedCRM = formattedCRM.toUpperCase();
+    if (formattedCRM.length > 11) {
+      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8, 9)}/${formattedCRM.substring(9, 11)}';
+    } else if (formattedCRM.length > 9) {
+      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8, 9)}/${formattedCRM.substring(9)}';
+    } else if (formattedCRM.length > 8) {
+      return '${formattedCRM.substring(0, 8)}-${formattedCRM.substring(8)}';
+    }
+
+    return formattedCRM;
+  }
+
+  static isValidCrm(String crm) {
+    List<String> ufList = [
+      'AC',
+      'AL',
+      'AP',
+      'AM',
+      'BA',
+      'CE',
+      'DF',
+      'ES',
+      'GO',
+      'MA',
+      'MT',
+      'MS',
+      'MG',
+      'PA',
+      'PB',
+      'PR',
+      'PE',
+      'PI',
+      'RJ',
+      'RN',
+      'RS',
+      'RO',
+      'RR',
+      'SC',
+      'SP',
+      'SE',
+      'TO'
+    ];
+
+    String formattedCRM = crm.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
+    if (formattedCRM.length > 10) {
+      String uf = formattedCRM.substring(9, 11);
+      try {
+        // Converte os 9 primeiros digitos em num
+        int num =
+            int.parse(formattedCRM.substring(0, 9)); // Se falhar, CRM inválido
+        if (num != 0 && ufList.contains(uf)) {
+          //Testa se os 9 primeiros digitos sao diferentes de 0
+          // e se os dois ultimos (UF) estão contitos na lista ufList
+          return true; // Se tudo isso acontecer, retorna true
+        } else {
+          return false;
+        }
+      } catch (e) {
+        return false; //Se o try falhar, retorna false
+      }
+    } else {
+      return false;
+    }
+  }
+
   static String telefoneFormatter(String value) {
     String numbers = _getNumbersOnly(value);
     if (numbers.length > 11) {
