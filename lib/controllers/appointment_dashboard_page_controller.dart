@@ -64,11 +64,6 @@ class AppointmentDashboardPageController extends GetxController {
         await appointmentsRep.getCanceledAppointments();
   }
 
-  String formattedDate(DateTime date) {
-    String dataFormatada = DateFormat('dd/MM/yyyy').format(date);
-    return dataFormatada;
-  }
-
   String formattedWeekday(int dayNumber) {
     String dayText = '';
     switch (dayNumber) {

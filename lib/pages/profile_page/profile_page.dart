@@ -107,7 +107,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                _.auth.doctor.name.value,
+                                _.auth.isDoctor.value
+                                    ? _.auth.doctor.name.value
+                                    : _.auth.patient.name.value,
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),

@@ -49,7 +49,7 @@ class AppointmentRequestWidget extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(_.formattedDate(appoint[index]
+                      Text(formattedDate(appoint[index]
                           .date
                           .value)), // Exibição da data da consulta
                       SizedBox(
