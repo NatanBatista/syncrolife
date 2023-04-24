@@ -86,8 +86,10 @@ class ValidationService {
         RegExp('^0+|[^a-zA-Z0-9]+'), ''); // remove simbolos e zeros a esquerdas
     formattedCRM = formattedCRM.toUpperCase();
     switch (formattedCRM.length) {
+      case 0:
+        return '00000000-0/00';
       case 1:
-        return '00000000-0/0${formattedCRM.substring(1)}';
+        return '00000000-0/0${formattedCRM.substring(0)}';
       case 2:
         return '00000000-0/${formattedCRM.substring(0, 2)}';
       case 3:
