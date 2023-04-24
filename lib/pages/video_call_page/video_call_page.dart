@@ -73,6 +73,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
       joinChannelSuccess: (channel, uid, elapsed) {
         setState(() {
           final info = 'Join Channel: $channel, uid $uid';
+          _infoStrings.add(info);
         });
       },
       leaveChannel: (stats) {
@@ -85,6 +86,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
         setState(() {
           final info = 'User Joined: $uid';
           _infoStrings.add(info);
+          _users.add(uid);
         });
       },
       userOffline: (uid, elapsed) {
@@ -181,9 +183,6 @@ class _VideoCallPageState extends State<VideoCallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(color: Colors.black),
-      ),
       backgroundColor: Colors.black,
       body: Center(
         child: Stack(
