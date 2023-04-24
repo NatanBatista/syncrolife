@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:syncrolife/models/doctor_model.dart';
@@ -62,7 +63,21 @@ class AuthService extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       Navigator.pop(context);
-    } catch (e) {}
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        if (e.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('O usuário ou a senha estão incorretos')),
+          );
+        } else if (e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('O usuário ou a senha estão incorretos')),
+          );
+        }
+      }
+    }
   }
 
   Future<void> registerDoctor(
