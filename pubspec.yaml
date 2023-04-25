@@ -41,6 +41,8 @@ dependencies:
   table_calendar: ^3.0.8
   agora_rtc_engine: ^5.2.0
   permission_handler: ^10.2.0
+  agora_token_service: ^0.1.2
+
 
 dev_dependencies:
   flutter_test:

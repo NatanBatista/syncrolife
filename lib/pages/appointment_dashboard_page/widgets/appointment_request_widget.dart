@@ -66,7 +66,7 @@ class AppointmentRequestWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          _.buttonRejected(appoint[index].id.value);
+                          _.buttonAccepted(appoint[index].id.value);
                         },
                         child: Container(
                           height: 45,

@@ -93,18 +93,12 @@ class AppointmentDashboardPageController extends GetxController {
   }
 
   void buttonAccepted(String idAppointment) async {
-    db
-        .collection('appointments')
-        .doc(idAppointment)
-        .update({'status': 'accepted'});
+    appointmentsRep.updateStatusAppointment(idAppointment, 'accepted');
     setSentAppointments();
   }
 
   void buttonRejected(String idAppointment) async {
-    db
-        .collection('appointments')
-        .doc(idAppointment)
-        .update({'status': 'rejected'});
+    appointmentsRep.updateStatusAppointment(idAppointment, 'rejected');
     setSentAppointments();
   }
 }

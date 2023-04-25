@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncrolife/services/auth_service.dart';
 import 'controllers/appointment_dashboard_page_controller.dart';
+import 'controllers/appointment_details_page_controller.dart';
 import 'firebase_options.dart';
 import 'models/doctor_model.dart';
 import 'models/patient_model.dart';
@@ -18,4 +19,5 @@ initConfigurations() async {
   Get.lazyPut(() => DoctorModel());
   Get.lazyPut(() => PatientModel());
   Get.lazyPut(() => AppointmentDashboardPageController());
+  Get.lazyPut(() => AppointmentDetailsPageController());
 }

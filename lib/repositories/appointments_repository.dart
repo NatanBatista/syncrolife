@@ -16,6 +16,17 @@ class AppointmentsRepository {
   final db = DBFirestore.get();
   final auth = Get.find<AuthService>();
 
+  void updateStatusAppointment(String id, String status) {
+    db.collection('appointments').doc(id).update({'status': status});
+  }
+
+  void updateNameAndTokenCall(String id, String name, String token) {
+    db.collection('appointments').doc(id).update({
+      'nameCall': name,
+      'tokenCall': token,
+    });
+  }
+
   Future<AppointmentModel> getAppointmentFromId(String id) async {
     final docAppointmentId = await db.collection('appointments').doc(id);
 

@@ -8,5 +8,5 @@ class AgoraService {
 
   final appId = 'fa96fc20a3b84c06b27c9d2b881c3e94';
   final token =
-      '007eJxTYHiy/+U85tr9sdNLf2s/P9Hm+phrxowFl52EGRKFLvMJ3cxUYEhLtDRLSzYySDROsjBJNjBLMjJPtkwxSrKwMEw2TrU0abnkmtIQyMjQ9G03IyMDBIL4vAzFlXnJRfk5mWmpiQUFDAwA7nckmw==';
+      '007eJxTYGDiY/NkdKv5+eX1Jx7j6TPmS7xIv27AxP/M48He3I7onwIKDGmJlmZpyUYGicZJFibJBmZJRubJlilGSRYWhsnGqZYmazrdUhoCGRlOf8lhYmSAQBCfnaEktbgk1dCIgQEAYnsgFA==';
 }

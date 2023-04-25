@@ -26,40 +26,13 @@ class AppointmentDetailsPage extends StatefulWidget {
 }
 
 class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
-  AppointmentModel appoint = AppointmentModel();
-  DoctorModel doctor = DoctorModel();
-  PatientModel patient = PatientModel();
-
-  void setAppoint() async {
-    final appointmentsRep = AppointmentsRepository.get();
-    appoint = await appointmentsRep.getAppointmentFromId(widget.id);
-    setUser();
-  }
-
-  void setUser() async {
-    print('Id paciente: ' + appoint.idPatient.value);
-    print('Id médico: ' + appoint.idDoctor.value);
-
-    final db = DBFirestore.get();
-
-    if (widget.isDoctor) {
-      final docUser = await db.collection('users').doc(appoint.idPatient.value);
-
-      final snapshot = await docUser.get();
-      patient.fromJson(snapshot.data());
-    } else {
-      final docUser = await db.collection('users').doc(appoint.idDoctor.value);
-
-      final snapshot = await docUser.get();
-      doctor.fromJson(snapshot.data());
-    }
-  }
+  var controller = Get.find<AppointmentDetailsPageController>();
 
   @override
   void initState() {
     super.initState();
 
-    setAppoint();
+    controller.setAppoint(widget.id, widget.isDoctor);
   }
 
   @override
@@ -95,9 +68,9 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                           width: 86,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(13),
-                            child: doctor.imageUrl.value == ''
+                            child: _.doctor.value.imageUrl.value == ''
                                 ? SizedBox()
-                                : Image.network(doctor.imageUrl.value),
+                                : Image.network(_.doctor.value.imageUrl.value),
                           ),
                         ),
                       const SizedBox(
@@ -108,9 +81,9 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  patient.name.value +
+                                  _.patient.value.name.value +
                                       " " +
-                                      patient.lastName.value,
+                                      _.patient.value.lastName.value,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -119,7 +92,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   height: 8,
                                 ),
                                 Text(
-                                  'CPF: ${patient.cpf.value}',
+                                  'CPF: ${_.patient.value.cpf.value}',
                                   style: TextStyle(fontSize: 14),
                                 ),
                                 const SizedBox(
@@ -132,7 +105,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                       color: Colors.amber,
                                     ),
                                     Text(
-                                      patient.rating.value,
+                                      _.patient.value.rating.value,
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ],
@@ -143,7 +116,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  doctor.name.value,
+                                  _.doctor.value.name.value,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
@@ -152,7 +125,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   height: 8,
                                 ),
                                 Text(
-                                  doctor.speciality.value,
+                                  _.doctor.value.speciality.value,
                                   style: TextStyle(
                                     fontSize: 14,
                                   ),
@@ -161,7 +134,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   height: 8,
                                 ),
                                 Text(
-                                  'CRM ${doctor.crm.value}',
+                                  'CRM ${_.doctor.value.crm.value}',
                                   style: TextStyle(fontSize: 14),
                                 ),
                                 const SizedBox(
@@ -174,7 +147,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                       color: Colors.amber,
                                     ),
                                     Text(
-                                      doctor.rating.value,
+                                      _.doctor.value.rating.value,
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ],
@@ -187,12 +160,12 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                 const SizedBox(
                   height: 40,
                 ),
-                statusAppointmentWidget(appoint.status.value, context,
-                    appoint.time.value, appoint.date.value),
+                statusAppointmentWidget(_.appoint.value.status.value, context,
+                    _.appoint.value.time.value, _.appoint.value.date.value),
                 const SizedBox(
                   height: 30,
                 ),
-                appoint.status.value == 'completed'
+                _.appoint.value.status.value == 'completed'
                     ? SizedBox(
                         height: 60,
                         width: 270,
@@ -207,9 +180,37 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                               style: TextStyle(fontSize: 18),
                             )))
                     : SizedBox(),
-                appoint.status.value == 'accepted'
+                _.appoint.value.status.value == 'accepted'
                     ? Column(
                         children: [
+                          widget.isDoctor
+                              ? Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 60,
+                                      width: 270,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: greenSheen,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20))),
+                                        onPressed: () {
+                                          _.showAlertAppointmentComplete(
+                                              context);
+                                        },
+                                        child: Text(
+                                          'Concluir consulta',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                  ],
+                                )
+                              : SizedBox(),
                           SizedBox(
                             height: 60,
                             width: 270,
@@ -218,7 +219,9 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   backgroundColor: lightRed,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20))),
-                              onPressed: () {},
+                              onPressed: () {
+                                _.showAlertAppointmentCancel(context);
+                              },
                               child: Text(
                                 'Cancelar',
                                 style: TextStyle(fontSize: 18),
@@ -236,8 +239,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   backgroundColor: Colors.green,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20))),
-                              onPressed: () =>
-                                  _.onJoinCall(context, 'syncrolifeapp'),
+                              onPressed: () => _.onJoinCall(context, 'teste12'),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

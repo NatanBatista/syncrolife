@@ -34,7 +34,7 @@ Widget iconStatusWidget(String status) {
           color: lightRed, borderRadius: BorderRadius.circular(60)),
       child: Text(
         'X',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
   }
