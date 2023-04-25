@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncrolife/pages/appointment_details_page/appointment_details_page.dart';
+import 'package:syncrolife/pages/schedule_page/widgets/icon_status_widget.dart';
 
 import '../../controllers/schedule_page_controller.dart';
+import '../../styles.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
@@ -32,22 +34,51 @@ class _SchedulePageState extends State<SchedulePage> {
                 child: ListView.separated(
                   itemCount: _.appointments.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading:
-                          Text('${_.appointments[index].namePatient.value}'),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('${_.appointments[index].time.value}'),
-                          Text(
-                              '${_.formattedDate(_.appointments[index].date.value)}'),
-                        ],
+                    return InkWell(
+                      child: SizedBox(
+                        height: 70,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(children: [
+                            iconStatusWidget(
+                                _.appointments[index].status.value),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            _.auth.isDoctor.value
+                                ? Text(
+                                    '${_.appointments[index].namePatient.value} ${_.appointments[index].lastNamePatient.value}',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  )
+                                : Text(
+                                    '${_.appointments[index].nameDoctor.value} ${_.appointments[index].lastNameDoctor.value}',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                            Expanded(child: SizedBox()),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('${_.appointments[index].time.value}'),
+                                Text(
+                                    '${formattedDate(_.appointments[index].date.value)}'),
+                              ],
+                            ),
+                          ]),
+                        ),
                       ),
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const AppointmentDetailsPage())),
+                      onTap: () {
+                        String id = _.appointments[index].id.value;
+                        bool isDoctor = _.auth.isDoctor.value;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => AppointmentDetailsPage(
+                                    id: id, isDoctor: isDoctor)));
+                      },
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -56,6 +87,68 @@ class _SchedulePageState extends State<SchedulePage> {
                       height: 1.5,
                     );
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                          color: cornflowerBlue,
+                          borderRadius: BorderRadius.circular(60)),
+                      child: Icon(
+                        Icons.access_time,
+                        color: Colors.white,
+                        size: 13,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    const Text('Aceita'),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                          color: greenSheen,
+                          borderRadius: BorderRadius.circular(60)),
+                      child: Icon(
+                        Icons.check_outlined,
+                        color: Colors.white,
+                        size: 13,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Text('Concluída'),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                          color: lightRed,
+                          borderRadius: BorderRadius.circular(60)),
+                      child: Text(
+                        'X',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    Text('Cancelada'),
+                  ],
                 ),
               ),
             ],

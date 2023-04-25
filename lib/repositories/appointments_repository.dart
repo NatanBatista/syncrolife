@@ -16,6 +16,29 @@ class AppointmentsRepository {
   final db = DBFirestore.get();
   final auth = Get.find<AuthService>();
 
+  void updateStatusAppointment(String id, String status) {
+    db.collection('appointments').doc(id).update({'status': status});
+  }
+
+  void updateNameAndTokenCall(String id, String name, String token) {
+    db.collection('appointments').doc(id).update({
+      'nameCall': name,
+      'tokenCall': token,
+    });
+  }
+
+  Future<AppointmentModel> getAppointmentFromId(String id) async {
+    final docAppointmentId = await db.collection('appointments').doc(id);
+
+    final snapshotId = await docAppointmentId.get();
+
+    AppointmentModel appoint = AppointmentModel();
+
+    appoint.fromJson(snapshotId.data()!);
+
+    return appoint;
+  }
+
   Future<List<AppointmentModel>> getAppointmentsFromStatus(
       String status) async {
     List<AppointmentModel> listAppointments = [];
@@ -33,17 +56,17 @@ class AppointmentsRepository {
         listAppointments.add(appointmentModel);
       },
     );
-    print(listAppointments.length);
 
     return listAppointments;
   }
 
-  Future<List<AppointmentModel>> getAppointmentsSchedule() async {
+  Future<List<AppointmentModel>> getAppointmentsSchedule(
+      String whatUser) async {
     List<AppointmentModel> listAppointments = [];
     final docAppointmentsId = await db
         .collection('appointments')
-        .where('idDoctor', isEqualTo: auth.auth.currentUser!.uid)
-        .where('status', isNotEqualTo: 'sent');
+        .where(whatUser, isEqualTo: auth.auth.currentUser!.uid)
+        .where('status', whereIn: ['accepted', 'completed', 'canceled']);
 
     final snapshotId = await docAppointmentsId.get();
 

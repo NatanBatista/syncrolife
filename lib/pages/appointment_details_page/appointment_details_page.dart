@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:syncrolife/pages/appointment_details_page/widgets/status_appointment_widget.dart';
+
 import 'package:syncrolife/styles.dart';
 
+import '../../controllers/appointment_details_page_controller.dart';
+import '../../models/appointment_model.dart';
+import '../../models/doctor_model.dart';
+import '../../models/patient_model.dart';
+import '../../repositories/appointments_repository.dart';
+import '../../services/db_firestore_service.dart';
+
 class AppointmentDetailsPage extends StatefulWidget {
-  const AppointmentDetailsPage({super.key});
+  late String id;
+  late bool isDoctor;
+  AppointmentDetailsPage({
+    Key? key,
+    required this.id,
+    required this.isDoctor,
+  }) : super(key: key);
 
   @override
   State<AppointmentDetailsPage> createState() =>
@@ -10,148 +26,241 @@ class AppointmentDetailsPage extends StatefulWidget {
 }
 
 class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
+  var controller = Get.find<AppointmentDetailsPageController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.setAppoint(widget.id, widget.isDoctor);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: charlestonGreen,
+    return GetBuilder<AppointmentDetailsPageController>(
+      init: AppointmentDetailsPageController(),
+      builder: (_) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: const BackButton(
+            color: charlestonGreen,
+          ),
         ),
-      ),
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 30),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 120,
-                    width: 86,
-                    child: Stack(children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(13),
-                        child: Image.asset('assets/images/medico.png'),
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(13),
-                        child: Container(
-                          height: 120,
-                          width: 100,
+        body: Obx(
+          () => SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Row(
+                    children: [
+                      if (widget.isDoctor)
+                        SizedBox()
+                      else
+                        Container(
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black54,
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(13)),
+                          height: 120,
+                          width: 86,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(13),
+                            child: _.doctor.value.imageUrl.value == ''
+                                ? SizedBox()
+                                : Image.network(_.doctor.value.imageUrl.value),
+                          ),
+                        ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      widget.isDoctor
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _.patient.value.name.value +
+                                      " " +
+                                      _.patient.value.lastName.value,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'CPF: ${_.patient.value.cpf.value}',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    Text(
+                                      _.patient.value.rating.value,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                               ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _.doctor.value.name.value,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  _.doctor.value.speciality.value,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'CRM ${_.doctor.value.crm.value}',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    Text(
+                                      _.doctor.value.rating.value,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                statusAppointmentWidget(_.appoint.value.status.value, context,
+                    _.appoint.value.time.value, _.appoint.value.date.value),
+                const SizedBox(
+                  height: 30,
+                ),
+                _.appoint.value.status.value == 'completed'
+                    ? SizedBox(
+                        height: 60,
+                        width: 270,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: greenSheen,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                            onPressed: () {},
+                            child: Text(
+                              'Gerar relatório',
+                              style: TextStyle(fontSize: 18),
+                            )))
+                    : SizedBox(),
+                _.appoint.value.status.value == 'accepted'
+                    ? Column(
+                        children: [
+                          widget.isDoctor
+                              ? Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 60,
+                                      width: 270,
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: greenSheen,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20))),
+                                        onPressed: () {
+                                          _.showAlertAppointmentComplete(
+                                              context);
+                                        },
+                                        child: Text(
+                                          'Concluir consulta',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                  ],
+                                )
+                              : SizedBox(),
+                          SizedBox(
+                            height: 60,
+                            width: 270,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: lightRed,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                              onPressed: () {
+                                _.showAlertAppointmentCancel(context);
+                              },
+                              child: Text(
+                                'Cancelar',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ]),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hugo Oliveira',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Psiquiatra',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'CRM 2694/SE',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                          SizedBox(
+                            height: 15,
                           ),
-                          Text(
-                            '4,9',
-                            style: TextStyle(fontSize: 14),
+                          SizedBox(
+                            height: 60,
+                            width: 270,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20))),
+                              onPressed: () => _.onJoinCall(context, 'teste12'),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.video_call),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Entrar na chamada',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
+                      )
+                    : const SizedBox()
+              ],
             ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              height: 70,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.grey.shade300),
-              child: Row(
-                children: [
-                  Text(
-                    'Consulta concluída',
-                    style: TextStyle(color: greenSheen, fontSize: 20),
-                  ),
-                  Expanded(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        '15:30',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        '05/10/2023',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ))
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-                height: 60,
-                width: 270,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: greenSheen,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                    onPressed: () {},
-                    child: Text(
-                      'Gerar relatório',
-                      style: TextStyle(fontSize: 18),
-                    )))
-          ],
+          ),
         ),
       ),
     );

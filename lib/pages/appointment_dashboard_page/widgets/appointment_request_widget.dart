@@ -49,7 +49,7 @@ class AppointmentRequestWidget extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(_.formattedDate(appoint[index]
+                      Text(formattedDate(appoint[index]
                           .date
                           .value)), // Exibição da data da consulta
                       SizedBox(
@@ -66,7 +66,7 @@ class AppointmentRequestWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          _.buttonRejected(appoint[index].id.value);
+                          _.buttonAccepted(appoint[index].id.value);
                         },
                         child: Container(
                           height: 45,

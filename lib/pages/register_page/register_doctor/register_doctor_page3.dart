@@ -23,13 +23,29 @@ class RegisterDoctorPage3 extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: CustomFormWidget(
             formKey: _formKey,
+            controller1: controller.crmController,
             label1: 'CRM',
+            onChanged1: (value) {
+              //Formatando o campo CRM ao mesmo tempo que digita
+              final formattedValue = ValidationService.crmFormatter(value);
+              if (formattedValue != value) {
+                controller.crmController.value = TextEditingValue(
+                  text: formattedValue,
+                  selection:
+                      TextSelection.collapsed(offset: formattedValue.length),
+                );
+              }
+            },
             validate1: (value) {
               if (value == null || value.isEmpty) {
                 return 'CRM obrigatório';
+              } else if (value.length < 11) {
+                return 'Complete com zeros a esquerda.';
+              } else if (!(ValidationService.isValidCrm(value))) {
+                //Validando campo
+                return 'CRM inválido';
               }
             },
-            controller1: controller.crmController,
             label2: 'Celular',
             type2: TextInputType.number,
             onChanged2: (value) {

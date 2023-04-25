@@ -4,19 +4,21 @@ import '../models/appointment_model.dart';
 import '../repositories/appointments_repository.dart';
 import 'package:intl/intl.dart';
 
+import '../services/auth_service.dart';
+
 class SchedulePageController extends GetxController {
   final appointmentsRep = AppointmentsRepository.get();
+  final auth = Get.find<AuthService>();
   RxList appointments = [].obs;
-
-  String formattedDate(DateTime date) {
-    String dataFormatada = DateFormat('dd/MM/yyyy').format(date);
-    return dataFormatada;
-  }
 
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    appointments.value = await appointmentsRep.getAppointmentsSchedule();
+    auth.isDoctor.value
+        ? appointments.value =
+            await appointmentsRep.getAppointmentsSchedule('idDoctor')
+        : appointments.value =
+            await appointmentsRep.getAppointmentsSchedule('idPatient');
   }
 }

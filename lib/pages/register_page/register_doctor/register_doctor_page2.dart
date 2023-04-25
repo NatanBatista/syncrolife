@@ -50,6 +50,8 @@ class RegisterDoctorPage2 extends StatelessWidget {
                 return 'Senha obrigatório';
               } else if (value.length < 8) {
                 return 'Sua senha deve ser no mínimo 8 caracteres';
+              } else if (value != controller.passwordController.text) {
+                return 'As senhas não coincidem';
               }
             },
             controller3: controller.repeatPasswordController,

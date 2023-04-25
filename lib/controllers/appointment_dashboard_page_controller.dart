@@ -64,11 +64,6 @@ class AppointmentDashboardPageController extends GetxController {
         await appointmentsRep.getCanceledAppointments();
   }
 
-  String formattedDate(DateTime date) {
-    String dataFormatada = DateFormat('dd/MM/yyyy').format(date);
-    return dataFormatada;
-  }
-
   String formattedWeekday(int dayNumber) {
     String dayText = '';
     switch (dayNumber) {
@@ -98,18 +93,12 @@ class AppointmentDashboardPageController extends GetxController {
   }
 
   void buttonAccepted(String idAppointment) async {
-    db
-        .collection('appointments')
-        .doc(idAppointment)
-        .update({'status': 'accepted'});
+    appointmentsRep.updateStatusAppointment(idAppointment, 'accepted');
     setSentAppointments();
   }
 
   void buttonRejected(String idAppointment) async {
-    db
-        .collection('appointments')
-        .doc(idAppointment)
-        .update({'status': 'rejected'});
+    appointmentsRep.updateStatusAppointment(idAppointment, 'rejected');
     setSentAppointments();
   }
 }

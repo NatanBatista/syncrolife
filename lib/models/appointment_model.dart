@@ -13,6 +13,8 @@ class AppointmentModel extends GetxController {
   RxString namePatient = ''.obs;
   RxString lastNamePatient = ''.obs;
   RxDouble value = 0.0.obs;
+  RxString nameCall = ''.obs;
+  RxString tokenCall = ''.obs;
 
   Future fromJson(json) async {
     id.value = json['id'];
@@ -27,5 +29,7 @@ class AppointmentModel extends GetxController {
     namePatient.value = json['namePatient'];
     lastNamePatient.value = json['lastNamePatient'];
     value.value = double.parse(json['value']);
+    nameCall.value = json['nameCall'];
+    tokenCall.value = json['tokenCall'];
   }
 }
