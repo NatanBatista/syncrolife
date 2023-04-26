@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as rtc_local_view;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as rtc_remote_view;
@@ -8,10 +9,12 @@ import 'package:syncrolife/styles.dart';
 
 class VideoCallPage extends StatefulWidget {
   final String? channelName;
+  final String? token;
 
   const VideoCallPage({
     Key? key,
-    this.channelName,
+    required this.channelName,
+    required this.token,
   }) : super(key: key);
 
   @override
@@ -59,7 +62,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
     configuration.dimensions = VideoDimensions(width: 1920, height: 1080);
     await _engine.setVideoEncoderConfiguration(configuration);
-    await _engine.joinChannel(agora.token, widget.channelName!, null, 0);
+    await _engine.joinChannel(widget.token!, widget.channelName!, null, 0);
   }
 
   void _addAgoraEventHandlers() {

@@ -12,11 +12,23 @@ class DoctorsRepository {
 
   final db = DBFirestore.get();
 
+  Future<DoctorModel> getDoctorFromId(String id) async {
+    final docDoctorId = await db.collection('users').doc(id);
+
+    final snapshotId = await docDoctorId.get();
+
+    DoctorModel doctor = DoctorModel();
+
+    doctor.fromJson(snapshotId.data()!);
+
+    return doctor;
+  }
+
   Future<List<DoctorModel>> getAllDoctors() async {
     List<DoctorModel> listDoctors = [];
-    final docDoctors =
+    final collectionDoctors =
         db.collection('users').where('isDoctor', isEqualTo: 'true');
-    final snapshot = await docDoctors.get();
+    final snapshot = await collectionDoctors.get();
     snapshot.docs.forEach(
       (element) {
         DoctorModel doctor = DoctorModel();

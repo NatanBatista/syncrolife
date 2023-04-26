@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncrolife/repositories/doctors_repository.dart';
 import 'package:syncrolife/services/db_firestore_service.dart';
 import 'package:uuid/uuid.dart';
 
+import '../models/doctor_model.dart';
 import '../services/auth_service.dart';
 
 class MakeAppointmentPageController extends GetxController {
@@ -66,15 +68,17 @@ class MakeAppointmentPageController extends GetxController {
     }
   }
 
-  void showAlert(
-      BuildContext context, String idDoctor, DateTime date, TimeOfDay time) {
+  void showAlert(BuildContext context, String idDoctor, DateTime date,
+      TimeOfDay time) async {
+    final doctorsRepository = DoctorsRepository.get();
+    DoctorModel doctor = await doctorsRepository.getDoctorFromId(idDoctor);
     showDialog(
         context: context,
         builder: (context) {
-          double valueAppointment = 100.0;
           return AlertDialog(
             title: Text('Você tem certeza que quer agendar esta consulta?'),
-            content: Text('O valor da consulta é ${valueAppointment} reais.'),
+            content: Text(
+                'O valor da consulta é ${doctor.appointmentValue.value} reais.'),
             actions: [
               MaterialButton(
                 onPressed: () {

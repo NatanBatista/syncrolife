@@ -31,7 +31,7 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
   @override
   void initState() {
     super.initState();
-
+    controller.isDoctor.value = widget.isDoctor;
     controller.setAppoint(widget.id, widget.isDoctor);
   }
 
@@ -239,7 +239,9 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                   backgroundColor: Colors.green,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20))),
-                              onPressed: () => _.onJoinCall(context, 'teste12'),
+                              onPressed: () => widget.isDoctor
+                                  ? _.buttonCallDoctor(context)
+                                  : _.buttonCallPatient(context),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

@@ -203,15 +203,18 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                     const SizedBox(
                       width: 15,
                     ),
-                    Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                          color: cornflowerBlue,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Icon(
-                        Icons.favorite,
-                        color: Colors.white,
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            color: cornflowerBlue,
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Icon(
+                          Icons.favorite,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

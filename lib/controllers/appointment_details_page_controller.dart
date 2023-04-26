@@ -23,7 +23,7 @@ class AppointmentDetailsPageController extends GetxController {
   Rx<PatientModel> patient = PatientModel().obs;
   RxBool isDoctor = false.obs;
 
-  void setAppoint(String id, bool isDoctor) async {
+  Future<void> setAppoint(String id, bool isDoctor) async {
     appoint.value = await appointmentsRep.getAppointmentFromId(id);
     setUser(isDoctor);
   }
@@ -53,10 +53,9 @@ class AppointmentDetailsPageController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    print("Token" + generateToken('1512356', 'canal1'));
   }
 
-  Future<void> onJoinCall(context, String channalName) async {
+  Future<void> onJoinCall(context, String channalName, String token) async {
     await _handleCameraAndMic(Permission.camera);
     await _handleCameraAndMic(Permission.microphone);
     Navigator.push(
@@ -64,6 +63,7 @@ class AppointmentDetailsPageController extends GetxController {
       MaterialPageRoute(
         builder: (context) => VideoCallPage(
           channelName: channalName,
+          token: token,
         ),
       ),
     );
@@ -76,7 +76,7 @@ class AppointmentDetailsPageController extends GetxController {
       channelName: channelName,
       uid: uid,
       role: RtcRole.publisher,
-      expireTimestamp: 4500,
+      expireTimestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) + 4500,
     );
     return token;
   }
@@ -86,13 +86,60 @@ class AppointmentDetailsPageController extends GetxController {
     log(status.toString());
   }
 
-  void buttonCallDoctor() {
+  void buttonCallDoctor(BuildContext context) async {
+    if (DateTime.now().difference(appoint.value.date.value).inSeconds <= 900) {
+      print('Dentro do tempo');
+      if (appoint.value.nameCall.value == '' &&
+          appoint.value.tokenCall.value == '') {
+        print('Criando chamada');
+
+        String name = Uuid().v4();
+        String token = generateToken(doctor.value.id.value, name);
+        appointmentsRep.updateNameAndTokenCall(
+            appoint.value.id.value, name, token);
+        await setAppoint(appoint.value.id.value, isDoctor.value);
+      }
+      onJoinCall(
+          context, appoint.value.nameCall.value, appoint.value.tokenCall.value);
+    } else {
+      print('Fora do tempo');
+
+      showAlertVideoCall(context);
+    }
+  }
+
+  void buttonCallPatient(BuildContext context) async {
+    await setAppoint(appoint.value.id.value, isDoctor.value);
     if (appoint.value.nameCall.value == '' &&
         appoint.value.tokenCall.value == '') {
-      String name = Uuid().v4();
-      String token = generateToken(doctor.value.id.value, name);
-      appointmentsRep.updateNameAndTokenCall(appoint.value.id, name, token);
-    }
+      showAlertVideoCall(context);
+    } else
+      onJoinCall(
+          context, appoint.value.nameCall.value, appoint.value.tokenCall.value);
+  }
+
+  void showAlertVideoCall(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: isDoctor.value
+                ? Text('Você não pode entrar na chamada de vídeo no momento!')
+                : Text('O médico ainda não entrou na chamada!'),
+            content: isDoctor.value
+                ? Text(
+                    'Apenas é possível entrar em 15 minutos ou menos antes da consulta.')
+                : Text('Aguarde e tente novamente.'),
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Voltar'),
+              ),
+            ],
+          );
+        });
   }
 
   void showAlertAppointmentCancel(BuildContext context) {
@@ -127,10 +174,11 @@ class AppointmentDetailsPageController extends GetxController {
               DateTime.now().difference(appoint.value.date.value).inSeconds >=
                       86400
                   ? MaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         appointmentsRep.updateStatusAppointment(
                             appoint.value.id.value, 'canceled');
-                        setAppoint(appoint.value.id.value, isDoctor.value);
+                        await setAppoint(
+                            appoint.value.id.value, isDoctor.value);
                         Navigator.pop(context);
                       },
                       child: Text('Confirmar'),
@@ -173,10 +221,11 @@ class AppointmentDetailsPageController extends GetxController {
               appoint.value.date.value.difference(DateTime.now()).inSeconds >=
                       900
                   ? MaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         appointmentsRep.updateStatusAppointment(
                             appoint.value.id.value, 'canceled');
-                        setAppoint(appoint.value.id.value, isDoctor.value);
+                        await setAppoint(
+                            appoint.value.id.value, isDoctor.value);
                         Navigator.pop(context);
                       },
                       child: Text('Confirmar'),
