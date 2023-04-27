@@ -13,6 +13,8 @@ import 'package:syncrolife/pages/profile_page/widgets/drawer_widget.dart';
 import 'package:syncrolife/services/auth_service.dart';
 import 'package:syncrolife/styles.dart';
 
+import '../../controllers/visitor_profile_page_controller.dart';
+
 class VisitorProfilePage extends StatefulWidget {
   String id;
   String name;
@@ -42,11 +44,12 @@ class VisitorProfilePage extends StatefulWidget {
 }
 
 class _VisitorProfilePageState extends State<VisitorProfilePage> {
+  final controller = Get.find<VisitorProfilePageController>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return GetBuilder<ProfilePageController>(
-      init: ProfilePageController(),
+    return GetBuilder<VisitorProfilePageController>(
+      init: VisitorProfilePageController(),
       builder: (_) => Scaffold(
         body: Builder(
           builder: (context) => SizedBox(
@@ -204,7 +207,9 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                       width: 15,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        _.buttonFavorite(widget.id);
+                      },
                       child: Container(
                         height: 60,
                         width: 60,
@@ -213,7 +218,11 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                             borderRadius: BorderRadius.circular(30)),
                         child: Icon(
                           Icons.favorite,
-                          color: Colors.white,
+                          color: (controller
+                                  .patientRepository.listFavorites.value
+                                  .contains(widget.id))
+                              ? Colors.red
+                              : Colors.white,
                         ),
                       ),
                     ),
