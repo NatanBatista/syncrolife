@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:syncrolife/pages/register_page/widgets/specialities_dropdownbutton.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/custom_text_field.dart';
 
 class CustomFormWidget extends StatelessWidget {
+  final bool isPage3;
   final String label1; //Label do campo 1
   final String label2;
   final String label3;
@@ -29,6 +31,7 @@ class CustomFormWidget extends StatelessWidget {
 
   CustomFormWidget({
     Key? key,
+    required this.isPage3,
     required this.label1,
     required this.label2,
     required this.label3,
@@ -107,7 +110,10 @@ class CustomFormWidget extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  CustomTextField(
+                  isPage3?
+                    SpecialitiesDropdown()
+                    :
+                    CustomTextField(
                     label: label3,
                     fillColor: fillColor,
                     obsText: obsText3,
@@ -115,7 +121,9 @@ class CustomFormWidget extends StatelessWidget {
                     onChanged: onChanged3,
                     validate: validate3,
                     controller: controller3,
-                  ),
+                    ),
+
+
                   const SizedBox(
                     height: 15,
                   ),

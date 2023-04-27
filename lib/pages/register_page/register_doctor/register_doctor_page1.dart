@@ -23,6 +23,7 @@ class RegisterDoctorPage1 extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: CustomFormWidget(
               formKey: _formKey,
+              isPage3: false,
               label1: 'Nome',
               controller1: controller.nameController,
               validate1: (value) {

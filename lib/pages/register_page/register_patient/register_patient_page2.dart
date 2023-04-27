@@ -20,6 +20,7 @@ class RegisterPatientPage2 extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: CustomFormWidget(
           formKey: _formKey,
+          isPage3: false,
           label1: 'Email',
           type1: TextInputType.emailAddress,
           validate1: (value) {
