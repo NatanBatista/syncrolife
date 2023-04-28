@@ -19,92 +19,89 @@ class _FeedPageState extends State<FeedPage> {
     return GetBuilder<FeedPageController>(
       init: FeedPageController(),
       builder: (_) => Scaffold(
-        body: Obx(
-          () => ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Encontre seu médico',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(60),
-                            color: charlestonGreen),
-                        width: 40,
-                        height: 40,
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
+        body: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Encontre seu médico',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(60),
+                          color: charlestonGreen),
+                      width: 40,
+                      height: 40,
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, top: 50, bottom: 15),
-                child: Row(
-                  children: [subTitulos("Todos"), Expanded(child: Container())],
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40, top: 50, bottom: 15),
+              child: Row(
+                children: [subTitulos("Todos"), Expanded(child: Container())],
               ),
-              DoctorsListWidget(
-                doctors: _.allDoctors.value,
+            ),
+            DoctorsListWidget(
+              doctors: _.allDoctors,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40, top: 30, bottom: 15),
+              child: Row(
+                children: [
+                  subTitulos("Especialidades"),
+                  Expanded(child: Container())
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, top: 30, bottom: 15),
-                child: Row(
-                  children: [
-                    subTitulos("Especialidades"),
-                    Expanded(child: Container())
-                  ],
-                ),
+            ),
+            SizedBox(
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SizedBox(
+                    width: 30,
+                  ),
+                  CategoriesWidget('Ortopedista',
+                      'assets/icons/ortopedista.png', [], greenSheen),
+                  CategoriesWidget('Psiquiatra', 'assets/icons/psiquiatra.png',
+                      [], charlestonGreen),
+                  CategoriesWidget('Ginecologista',
+                      'assets/icons/ginecologista.png', [], greenSheen),
+                  CategoriesWidget(
+                      'Geral', 'assets/icons/geral.png', [], charlestonGreen),
+                ],
               ),
-              SizedBox(
-                height: 100,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    SizedBox(
-                      width: 30,
-                    ),
-                    CategoriesWidget('Ortopedista',
-                        'assets/icons/ortopedista.png', [], greenSheen),
-                    CategoriesWidget('Psiquiatra',
-                        'assets/icons/psiquiatra.png', [], charlestonGreen),
-                    CategoriesWidget('Ginecologista',
-                        'assets/icons/ginecologista.png', [], greenSheen),
-                    CategoriesWidget(
-                        'Geral', 'assets/icons/geral.png', [], charlestonGreen),
-                  ],
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40, top: 30, bottom: 15),
+              child: Row(
+                children: [
+                  subTitulos("Favoritos"),
+                  Expanded(child: Container())
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40, top: 30, bottom: 15),
-                child: Row(
-                  children: [
-                    subTitulos("Populares"),
-                    Expanded(child: Container())
-                  ],
-                ),
-              ),
-              DoctorsListWidget(
-                doctors: _.allDoctors.value,
-              ),
-              SizedBox(
-                height: 30,
-              )
-            ],
-          ),
+            ),
+            DoctorsListWidget(
+              doctors: _.patientRepository.listFavoritesModel,
+            ),
+            SizedBox(
+              height: 30,
+            )
+          ],
         ),
       ),
     );

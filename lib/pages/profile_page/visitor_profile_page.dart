@@ -219,7 +219,7 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
                         child: Icon(
                           Icons.favorite,
                           color: (controller
-                                  .patientRepository.listFavorites.value
+                                  .patientRepository.listFavoritesId.value
                                   .contains(widget.id))
                               ? Colors.red
                               : Colors.white,

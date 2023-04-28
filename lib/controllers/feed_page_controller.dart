@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
 import '../repositories/doctors_repository.dart';
-import '../repositories/patient_repository.dart';
+import '../repositories/patients_repository.dart';
 
 class FeedPageController extends GetxController {
   final doctorsRep = DoctorsRepository.get();
   RxList allDoctors = [].obs;
-  PatientRepository patientRepository = Get.find<PatientRepository>();
+  PatientsRepository patientRepository = Get.find<PatientsRepository>();
 
   @override
   Future<void> onInit() async {
