@@ -20,6 +20,7 @@ class _FeedPageState extends State<FeedPage> {
     return GetBuilder<FeedPageController>(
       init: FeedPageController(),
       builder: (_) => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             SizedBox(

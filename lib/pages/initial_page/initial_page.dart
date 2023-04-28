@@ -9,6 +9,7 @@ class InitialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(children: [
         Stack(
           //Widget para colocar texto em cima da foto do médico

@@ -51,6 +51,7 @@ class _VisitorProfilePageState extends State<VisitorProfilePage> {
     return GetBuilder<VisitorProfilePageController>(
       init: VisitorProfilePageController(),
       builder: (_) => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Builder(
           builder: (context) => SizedBox(
             width: size.width,

@@ -8,9 +8,9 @@ class SearchPageController extends GetxController {
 
   onChanged(String value) {
     cachedDoctors.value = doctorsRepository.allDoctors.value
-        .where((element) => (element.name.value + ' ' + element.lastName.value)
+        .where((element) => (element.name.value + element.lastName.value)
             .toLowerCase()
-            .contains(value.toLowerCase()))
+            .contains(value.toLowerCase().replaceAll(" ", "")))
         .toList();
   }
 
