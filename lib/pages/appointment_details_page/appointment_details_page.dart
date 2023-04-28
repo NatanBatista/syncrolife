@@ -57,22 +57,22 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                   padding: const EdgeInsets.only(left: 30),
                   child: Row(
                     children: [
-                      if (widget.isDoctor)
-                        SizedBox()
-                      else
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(13)),
-                          height: 120,
-                          width: 86,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(13),
-                            child: _.doctor.value.imageUrl.value == ''
-                                ? SizedBox()
-                                : Image.network(_.doctor.value.imageUrl.value),
-                          ),
-                        ),
+                      widget.isDoctor
+                          ? SizedBox()
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(13)),
+                              height: 120,
+                              width: 86,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(13),
+                                child: _.doctor.value.imageUrl.value == ''
+                                    ? SizedBox()
+                                    : Image.network(
+                                        _.doctor.value.imageUrl.value),
+                              ),
+                            ),
                       const SizedBox(
                         width: 20,
                       ),

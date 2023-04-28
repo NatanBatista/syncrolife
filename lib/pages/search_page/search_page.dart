@@ -44,7 +44,63 @@ class SearchPage extends StatelessWidget {
                   label: Text('Ex.: "Márcio Silva"'),
                 ),
               ),
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: _controller.cachedDoctors.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      child: SizedBox(
+                        height: 70,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey,
+                                    borderRadius: BorderRadius.circular(13)),
+                                height: 60,
+                                width: 43,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(13),
+                                  child: _controller.cachedDoctors[index]
+                                              .imageUrl.value ==
+                                          ''
+                                      ? SizedBox()
+                                      : Image.network(_controller
+                                          .cachedDoctors[index].imageUrl.value),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                '${_controller.cachedDoctors[index].name} ${_controller.cachedDoctors[index].lastName}',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              Expanded(child: SizedBox()),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(''),
+                                  Text(''),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

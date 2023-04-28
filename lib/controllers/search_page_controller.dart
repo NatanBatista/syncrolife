@@ -4,16 +4,18 @@ import 'package:syncrolife/repositories/doctors_repository.dart';
 
 class SearchPageController extends GetxController {
   final doctorsRepository = Get.find<DoctorsRepository>();
-  List? _cachedDoctors;
+  RxList cachedDoctors = [].obs;
 
   onChanged(String value) {
-    _cachedDoctors!
-        .where((element) =>
-            element.toString().toLowerCase().contains(value.toLowerCase()))
+    cachedDoctors.value = doctorsRepository.allDoctors.value
+        .where((element) => (element.name.value + ' ' + element.lastName.value)
+            .toLowerCase()
+            .contains(value.toLowerCase()))
         .toList();
   }
 
-  fetch() {
-    _cachedDoctors = doctorsRepository.allDoctors.value;
+  @override
+  onInit() {
+    cachedDoctors.value = doctorsRepository.allDoctors.value;
   }
 }
