@@ -20,6 +20,7 @@ class RegisterPatientPage1 extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: CustomFormWidget(
             formKey: _formKey,
+            isPage3: false,
             label1: 'Nome',
             validate1: (value) {
               //Validação do campo Nome
