@@ -1,8 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:syncrolife/pages/register_page/widgets/specialities_dropdownbutton.dart';
 import 'package:syncrolife/styles.dart';
-import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/custom_text_field.dart';
+import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 
 class CustomFormWidget extends StatelessWidget {
   final bool isPage3;
@@ -26,6 +28,8 @@ class CustomFormWidget extends StatelessWidget {
   final TextEditingController? controller1;
   final TextEditingController? controller2;
   final TextEditingController? controller3;
+  final String specialityValue;
+
   final GlobalKey<FormState> formKey;
   final VoidCallback onPressed;
 
@@ -49,11 +53,12 @@ class CustomFormWidget extends StatelessWidget {
     required this.validate1,
     required this.validate2,
     required this.validate3,
-    required this.onPressed,
     this.controller1,
     this.controller2,
     this.controller3,
+    this.specialityValue = '',
     required this.formKey,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -110,19 +115,31 @@ class CustomFormWidget extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  isPage3?
-                    SpecialitiesDropdown()
-                    :
-                    CustomTextField(
-                    label: label3,
-                    fillColor: fillColor,
-                    obsText: obsText3,
-                    keyboardtype: type3,
-                    onChanged: onChanged3,
-                    validate: validate3,
-                    controller: controller3,
-                    ),
-
+                  isPage3
+                      ? Row(
+                          children: [
+                            Text(
+                              'Especialidade:',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            SpecialitiesDropdown(
+                              dropdownValue: specialityValue,
+                            ),
+                          ],
+                        )
+                      : CustomTextField(
+                          label: label3,
+                          fillColor: fillColor,
+                          obsText: obsText3,
+                          keyboardtype: type3,
+                          onChanged: onChanged3,
+                          validate: validate3,
+                          controller: controller3,
+                        ),
 
                   const SizedBox(
                     height: 15,

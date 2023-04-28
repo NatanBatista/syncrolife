@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-  late Rx<User?> _firebaseUser;
+  late Rx<User?> firebaseUser;
   var userIsAuthenticated = false.obs;
   var isDoctor = false.obs;
   var doctor = Get.find<DoctorModel>();
@@ -45,9 +45,9 @@ class AuthService extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    _firebaseUser = Rx<User?>(auth.currentUser);
-    _firebaseUser.bindStream(auth.authStateChanges());
-    ever(_firebaseUser, (User? user) async {
+    firebaseUser = Rx<User?>(auth.currentUser);
+    firebaseUser.bindStream(auth.authStateChanges());
+    ever(firebaseUser, (User? user) async {
       if (user != null) {
         await readUser();
 

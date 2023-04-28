@@ -8,18 +8,6 @@ import '../models/doctor_model.dart';
 import '../services/auth_service.dart';
 
 class MakeAppointmentPageController extends GetxController {
-  // Future<String> getFieldDoctor(String id, String field) async {
-  //   final db = DBFirestore.get();
-
-  //   String data;
-
-  //   final docPatient = db.collection('users').doc(id);
-  //   final snapshot = docPatient.get();
-  //   data = await snapshot.data()['name'];
-
-  //   return data;
-  // }
-
   //Cria a consulta e salva no banco de dados do paciente e do médico
   Future<void> scheduleAppointment(
       String idDoctor, DateTime date, TimeOfDay time) async {
@@ -70,7 +58,7 @@ class MakeAppointmentPageController extends GetxController {
 
   void showAlert(BuildContext context, String idDoctor, DateTime date,
       TimeOfDay time) async {
-    final doctorsRepository = DoctorsRepository.get();
+    final doctorsRepository = Get.find<DoctorsRepository>();
     DoctorModel doctor = await doctorsRepository.getDoctorFromId(idDoctor);
     showDialog(
         context: context,

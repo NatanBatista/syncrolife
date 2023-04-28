@@ -1,16 +1,16 @@
+import 'package:get/get.dart';
 import 'package:syncrolife/models/doctor_model.dart';
 import 'package:syncrolife/services/db_firestore_service.dart';
 
-class DoctorsRepository {
-  DoctorsRepository._();
-
-  static final _instance = DoctorsRepository._();
-
-  static get() {
-    return _instance;
-  }
-
+class DoctorsRepository extends GetxController {
   final db = DBFirestore.get();
+  RxList allDoctors = [].obs;
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    allDoctors.value = await getAllDoctors();
+  }
 
   Future<DoctorModel> getDoctorFromId(String id) async {
     final docDoctorId = await db.collection('users').doc(id);

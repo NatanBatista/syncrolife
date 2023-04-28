@@ -4,17 +4,19 @@ import 'package:syncrolife/services/auth_service.dart';
 import '../models/appointment_model.dart';
 import '../services/db_firestore_service.dart';
 
-class AppointmentsRepository {
-  AppointmentsRepository._();
-
-  static final _instance = AppointmentsRepository._();
-
-  static get() {
-    return _instance;
-  }
-
+class AppointmentsRepository extends GetxController {
+  RxList appointmentsSchedule = [].obs;
   final db = DBFirestore.get();
   final auth = Get.find<AuthService>();
+
+  @override
+  onInit() async {
+    super.onInit();
+    auth.isDoctor.value
+        ? appointmentsSchedule.value = await getAppointmentsSchedule('idDoctor')
+        : appointmentsSchedule.value =
+            await getAppointmentsSchedule('idPatient');
+  }
 
   void updateStatusAppointment(String id, String status) {
     db.collection('appointments').doc(id).update({'status': status});
@@ -65,7 +67,7 @@ class AppointmentsRepository {
     List<AppointmentModel> listAppointments = [];
     final docAppointmentsId = await db
         .collection('appointments')
-        .where(whatUser, isEqualTo: auth.auth.currentUser!.uid)
+        .where(whatUser, isEqualTo: auth.auth.currentUser?.uid)
         .where('status', whereIn: ['accepted', 'completed', 'canceled']);
 
     final snapshotId = await docAppointmentsId.get();

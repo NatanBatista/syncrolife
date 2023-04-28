@@ -17,7 +17,8 @@ import '../repositories/appointments_repository.dart';
 import '../services/db_firestore_service.dart';
 
 class AppointmentDetailsPageController extends GetxController {
-  final appointmentsRep = AppointmentsRepository.get();
+  final appointmentsRep = Get.find<AppointmentsRepository>();
+
   Rx<AppointmentModel> appoint = AppointmentModel().obs;
   Rx<DoctorModel> doctor = DoctorModel().obs;
   Rx<PatientModel> patient = PatientModel().obs;

@@ -8,13 +8,27 @@ import '../../../controllers/register_doctor_page_controller.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-class RegisterDoctorPage2 extends StatelessWidget {
-  const RegisterDoctorPage2({super.key});
+class RegisterDoctorPage2 extends StatefulWidget {
+  RegisterDoctorPage2({super.key});
+
+  @override
+  State<RegisterDoctorPage2> createState() => _RegisterDoctorPage2State();
+}
+
+class _RegisterDoctorPage2State extends State<RegisterDoctorPage2> {
+  final controller = Get.put(RegisterDoctorPageController());
+
+  List<String> specialtiesDropdown = [
+    'Ginecologista',
+    'Clinico Geral',
+    'Ortopedista',
+    'Psiquiatra'
+  ];
+
+  String? selectedItemDropdown;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegisterDoctorPageController());
-
     return ListView(
       children: [
         SizedBox(
@@ -22,43 +36,58 @@ class RegisterDoctorPage2 extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: CustomFormWidget(
             formKey: _formKey,
-            isPage3: false,
-            label1: 'Email',
-            controller1: controller.emailController,
-            type1: TextInputType.emailAddress,
+            isPage3: true,
+            controller1: controller.crmController,
+            label1: 'CRM',
+            onChanged1: (value) {
+              //Formatando o campo CRM ao mesmo tempo que digita
+              final formattedValue = ValidationService.crmFormatter(value);
+              if (formattedValue != value) {
+                controller.crmController.value = TextEditingValue(
+                  text: formattedValue,
+                  selection:
+                      TextSelection.collapsed(offset: formattedValue.length),
+                );
+              }
+            },
             validate1: (value) {
               if (value == null || value.isEmpty) {
-                return 'E-mail obrigatório';
-              } else if (!(ValidationService.isValidEmail(value))) {
-                //Testa se é um E-mail válido.
-                //Se o retorno for true, o E-mail é valido e não deve cair nesse if, por isso está negado ~isValidEmail
-                return 'Formato de e-mail inválido';
+                return 'CRM obrigatório';
+              } else if (value.length < 11) {
+                return 'Complete com zeros a esquerda.';
+              } else if (!(ValidationService.isValidCrm(value))) {
+                //Validando campo
+                return 'CRM inválido';
               }
             },
-            label2: 'Senha',
-            controller2: controller.passwordController,
+            label2: 'Celular',
+            type2: TextInputType.number,
+            onChanged2: (value) {
+              final formattedValue = ValidationService.telefoneFormatter(value);
+              if (formattedValue != value) {
+                controller.phoneNumberController.value = TextEditingValue(
+                  text: formattedValue,
+                  selection:
+                      TextSelection.collapsed(offset: formattedValue.length),
+                );
+              }
+            },
             validate2: (value) {
               if (value == null || value.isEmpty) {
-                return 'Senha obrigatória';
-              } else if (value.length < 8) {
-                // Senha deve conter 8 ou mais carácteres
-                return 'Sua senha deve ser no mínimo 8 caracteres';
+                return 'Número obrigatório';
+              } else if (value.length < 15) {
+                return 'Número inválido';
               }
             },
-            label3: 'Repetir Senha',
+            controller2: controller.phoneNumberController,
+            label3: '',
             validate3: (value) {
               if (value == null || value.isEmpty) {
-                return 'Senha obrigatório';
-              } else if (value.length < 8) {
-                return 'Sua senha deve ser no mínimo 8 caracteres';
-              } else if (value != controller.passwordController.text) {
-                return 'As senhas não coincidem';
+                return 'Especialidade obrigatório';
               }
             },
-            controller3: controller.repeatPasswordController,
+            specialityValue: controller.specialityValue,
             textButton: "Proximo",
-            obsText2: true,
-            obsText3: true,
             fillColor: lavenderBlush,
             onPressed: () {
               if (_formKey.currentState!.validate()) {
@@ -66,7 +95,7 @@ class RegisterDoctorPage2 extends StatelessWidget {
               }
             },
           ),
-        )
+        ),
       ],
     );
   }

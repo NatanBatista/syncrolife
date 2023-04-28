@@ -7,18 +7,13 @@ import 'package:intl/intl.dart';
 import '../services/auth_service.dart';
 
 class SchedulePageController extends GetxController {
-  final appointmentsRep = AppointmentsRepository.get();
   final auth = Get.find<AuthService>();
-  RxList appointments = [].obs;
+
+  final appointmentsRep = Get.find<AppointmentsRepository>();
 
   @override
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    auth.isDoctor.value
-        ? appointments.value =
-            await appointmentsRep.getAppointmentsSchedule('idDoctor')
-        : appointments.value =
-            await appointmentsRep.getAppointmentsSchedule('idPatient');
   }
 }

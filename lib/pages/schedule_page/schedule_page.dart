@@ -32,7 +32,7 @@ class _SchedulePageState extends State<SchedulePage> {
               ),
               Expanded(
                 child: ListView.separated(
-                  itemCount: _.appointments.length,
+                  itemCount: _.appointmentsRep.appointmentsSchedule.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       child: SizedBox(
@@ -40,20 +40,20 @@ class _SchedulePageState extends State<SchedulePage> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Row(children: [
-                            iconStatusWidget(
-                                _.appointments[index].status.value),
+                            iconStatusWidget(_.appointmentsRep
+                                .appointmentsSchedule[index].status.value),
                             SizedBox(
                               width: 20,
                             ),
                             _.auth.isDoctor.value
                                 ? Text(
-                                    '${_.appointments[index].namePatient.value} ${_.appointments[index].lastNamePatient.value}',
+                                    '${_.appointmentsRep.appointmentsSchedule[index].namePatient.value} ${_.appointmentsRep.appointmentsSchedule[index].lastNamePatient.value}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
                                   )
                                 : Text(
-                                    '${_.appointments[index].nameDoctor.value} ${_.appointments[index].lastNameDoctor.value}',
+                                    '${_.appointmentsRep.appointmentsSchedule[index].nameDoctor.value} ${_.appointmentsRep.appointmentsSchedule[index].lastNameDoctor.value}',
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),
@@ -62,16 +62,18 @@ class _SchedulePageState extends State<SchedulePage> {
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('${_.appointments[index].time.value}'),
                                 Text(
-                                    '${formattedDate(_.appointments[index].date.value)}'),
+                                    '${_.appointmentsRep.appointmentsSchedule[index].time.value}'),
+                                Text(
+                                    '${formattedDate(_.appointmentsRep.appointmentsSchedule[index].date.value)}'),
                               ],
                             ),
                           ]),
                         ),
                       ),
                       onTap: () {
-                        String id = _.appointments[index].id.value;
+                        String id = _.appointmentsRep
+                            .appointmentsSchedule[index].id.value;
                         bool isDoctor = _.auth.isDoctor.value;
                         Navigator.push(
                             context,

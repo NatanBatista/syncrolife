@@ -10,21 +10,27 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 3000))
-        .then((_) => Navigator.of(context).pushReplacementNamed('/initial'));
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        color: cornflowerBlue,
-        child: Center(child: Image.asset("assets/images/logo.png")),
-      ),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  height: 160,
+                  child: Image.asset("assets/images/SyncroLife.png")),
+              SizedBox(
+                height: 40,
+              ),
+              CircularProgressIndicator(
+                color: greenSheen,
+              )
+            ],
+          )),
     );
-    ;
   }
 }

@@ -6,7 +6,7 @@ import '../models/doctor_model.dart';
 import '../services/auth_service.dart';
 
 class PatientsRepository extends GetxController {
-  DoctorsRepository doctorsRepository = DoctorsRepository.get();
+  DoctorsRepository doctorsRepository = Get.find<DoctorsRepository>();
   AuthService auth = Get.find<AuthService>();
   final db = DBFirestore.get();
   RxList listFavoritesId = [].obs;

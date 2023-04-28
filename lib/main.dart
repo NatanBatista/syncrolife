@@ -10,6 +10,10 @@ import 'package:syncrolife/routes.dart';
 import 'package:syncrolife/widgets/auth_check.dart';
 
 void main() async {
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: SplashPage(),
+  ));
   await initConfigurations();
   runApp(const MyApp());
 }
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor:
               const Color.fromARGB(255, 122, 135, 251)), // Cor primária
-      home: RegisterDoctorPage3(),
+      home: AuthCheck(),
       debugShowCheckedModeBanner: false,
       routes: routes,
     );

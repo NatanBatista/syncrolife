@@ -5,7 +5,8 @@ import '../services/db_firestore_service.dart';
 import 'package:intl/intl.dart';
 
 class AppointmentDashboardPageController extends GetxController {
-  final appointmentsRep = AppointmentsRepository.get();
+  final appointmentsRep = Get.find<AppointmentsRepository>();
+
   final db = DBFirestore.get();
 
   RxList sentAppointments = [].obs;
