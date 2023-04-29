@@ -17,6 +17,6 @@ class _AuthCheckState extends State<AuthCheck> {
   Widget build(BuildContext context) {
     return Obx(() => AuthService.to.userIsAuthenticated.value
         ? (AuthService.to.isDoctor.value ? LayoutDoctor() : LayoutPatient())
-        : SplashInitialWidget());
+        : InitialPage());
   }
 }

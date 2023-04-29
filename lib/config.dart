@@ -10,6 +10,7 @@ import 'controllers/appointment_dashboard_page_controller.dart';
 import 'controllers/appointment_details_page_controller.dart';
 import 'controllers/feed_page_controller.dart';
 import 'controllers/search_page_controller.dart';
+import 'controllers/speciality_page_controller.dart';
 import 'controllers/visitor_profile_page_controller.dart';
 import 'firebase_options.dart';
 import 'models/doctor_model.dart';
@@ -32,10 +33,13 @@ initConfigurations() async {
   Get.lazyPut(() => FeedPageController());
   Get.lazyPut(() => DoctorsRepository());
   Get.lazyPut(() => SearchPageController());
+  Get.lazyPut(() => SpecialityPageController());
   Get.put(PatientsRepository());
   Get.put(AppointmentDetailsPageController());
   Get.put(AppointmentsRepository());
   Get.put(DoctorsRepository());
+  Get.put(SpecialityPageController());
+
   final authService = Get.find<AuthService>();
 
   authService.firebaseUser = Rx<User?>(authService.auth.currentUser);

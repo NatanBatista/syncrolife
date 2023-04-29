@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/pages/splash_page.dart';
 
 import '../pages/initial_page/initial_page.dart';
+import '../services/auth_service.dart';
 
 class SplashInitialWidget extends StatefulWidget {
   const SplashInitialWidget({super.key});
@@ -31,10 +33,14 @@ class _SplashInitialWidgetState extends State<SplashInitialWidget> {
       setState(() {
         _isLoading = false;
       });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => InitialPage()),
-      );
+      final auth = Get.find<AuthService>();
+
+      if (auth.userIsAuthenticated.value == false) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => InitialPage()),
+        );
+      }
     }
   }
 

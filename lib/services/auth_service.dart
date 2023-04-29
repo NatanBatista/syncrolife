@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AuthService extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   late Rx<User?> firebaseUser;
-  var userIsAuthenticated = false.obs;
+  RxBool userIsAuthenticated = false.obs;
   var isDoctor = false.obs;
   var doctor = Get.find<DoctorModel>();
   var patient = Get.find<PatientModel>();
@@ -111,7 +111,8 @@ class AuthService extends GetxController {
         "imageUrl": "",
         "coverUrl": "",
         "appointmentValue": "100",
-        "date": DateTime.now()
+        "date": DateTime.now(),
+        "ratingsCount": "0"
       });
       //Remove as 4 telas de registro de médico que estão abertas, para que seja mostrado o layout
       Navigator.pop(context);
