@@ -45,6 +45,7 @@ class AuthService extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    auth.setLanguageCode('pt');
     firebaseUser = Rx<User?>(auth.currentUser);
     firebaseUser.bindStream(auth.authStateChanges());
     ever(firebaseUser, (User? user) async {

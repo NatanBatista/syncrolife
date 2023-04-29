@@ -9,6 +9,7 @@ import 'package:syncrolife/services/auth_service.dart';
 import 'controllers/appointment_dashboard_page_controller.dart';
 import 'controllers/appointment_details_page_controller.dart';
 import 'controllers/feed_page_controller.dart';
+import 'controllers/recovery_page_controller.dart';
 import 'controllers/search_page_controller.dart';
 import 'controllers/speciality_page_controller.dart';
 import 'controllers/visitor_profile_page_controller.dart';
@@ -34,6 +35,7 @@ initConfigurations() async {
   Get.lazyPut(() => DoctorsRepository());
   Get.lazyPut(() => SearchPageController());
   Get.lazyPut(() => SpecialityPageController());
+  Get.lazyPut(() => RecoveryPageController());
   Get.put(PatientsRepository());
   Get.put(AppointmentDetailsPageController());
   Get.put(AppointmentsRepository());

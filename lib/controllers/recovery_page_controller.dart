@@ -10,10 +10,18 @@ import 'package:mailer/smtp_server/gmail.dart';
 
 class RecoveryPageController extends GetxController {
   TextEditingController emailController = TextEditingController();
-  TextEditingController codeController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController repeatPasswordController = TextEditingController();
   late String code;
+
+  final List<TextEditingController> controllersCode = List.generate(
+    6,
+    (index) => TextEditingController(),
+  );
+  final List<FocusNode> focusNodesCode = List.generate(
+    6,
+    (index) => FocusNode(),
+  );
 
   final _auth = Get.find<AuthService>();
 
@@ -35,29 +43,43 @@ class RecoveryPageController extends GetxController {
 
   void buttonEmail() async {
     if (await isEmailRegistered(emailController.text)) {
-      Get.off(const RecoveryCodePage());
+      await _auth.auth.sendPasswordResetEmail(email: emailController.text);
+      Get.snackbar(
+          'Sucesso!', 'Link de alteração da senha enviado para o seu e-mail.',
+          icon: Icon(
+            Icons.verified,
+            color: Colors.green,
+          ),
+          duration: Duration(seconds: 4));
+      // Get.off(const RecoveryCodePage());
 
-      sendCode();
+      // sendCode();
     } else {
       Get.snackbar(
-          'E-mail nao encontrado', 'Verifique o e-mail e tente novamente');
+          'E-mail não encontrado', 'Verifique o e-mail e tente novamente');
     }
   }
 
   void buttonCode() async {
-    if (codeController.text == code) {
+    String digitedCode = '';
+    controllersCode.forEach((element) {
+      digitedCode + element.text;
+    });
+    if (digitedCode == code) {
       Get.to(RecoveryPasswordPage());
     } else {
       Get.snackbar('Código incorreto', 'Verifique o código e tente novamente');
     }
   }
 
+  void buttonChangePassword() async {}
+
   void sendCode() async {
     //Gerando o código
     code = generateConfirmationCode();
 
     // Configuração do servidor SMTP do Gmail
-    final smtpServer = gmail('syncrolifeapp@gmail.com', 'Lu98na16ry27wa42.');
+    final smtpServer = gmail('syncrolifeapp@gmail.com', 'lmfessakfuizmkqs');
 
     // Criação da mensagem de e-mail
     final message = Message()
@@ -70,5 +92,11 @@ class RecoveryPageController extends GetxController {
     final sendReport = await send(message, smtpServer);
 
     print('E-mail enviado para $emailController.text: $sendReport');
+  }
+
+  void onTextChanged(String value, int index) {
+    if (value.isNotEmpty && index < 5) {
+      focusNodesCode[index + 1].requestFocus();
+    }
   }
 }

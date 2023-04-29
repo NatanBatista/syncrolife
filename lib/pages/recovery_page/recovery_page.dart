@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:syncrolife/services/validation_service.dart';
 import 'package:syncrolife/styles.dart';
 import 'package:syncrolife/widgets/elevated_button_icon_widget.dart';
 import 'package:syncrolife/widgets/custom_text_field.dart';
+
+import '../../controllers/recovery_page_controller.dart';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -11,6 +14,7 @@ class RecoveryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = Get.find<RecoveryPageController>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -34,6 +38,7 @@ class RecoveryPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomTextField(
+                      controller: _controller.emailController,
                       label: "Email",
                       fillColor: lavenderBlush,
                       keyboardtype: TextInputType.emailAddress,
@@ -50,12 +55,12 @@ class RecoveryPage extends StatelessWidget {
                     ),
                     CustomButtonIcon(
                       // ElevatedButton customizado
-                      buttonText: "Proximo", // Texto do botão
+                      buttonText: "Próximo", // Texto do botão
                       buttonColor: cornflowerBlue, // Background Color
                       textColor: lavenderBlush,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, '/recoverycode');
+                          _controller.buttonEmail();
                         }
                       },
                       icone: const Icon(Icons.navigate_next),
