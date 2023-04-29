@@ -34,7 +34,8 @@ class MakeAppointmentPageController extends GetxController {
         'creationDate': DateTime.now(),
         'status': 'sent',
         'nameCall': '',
-        'tokenCall': ''
+        'tokenCall': '',
+        'rated': 'false'
       });
 
       db

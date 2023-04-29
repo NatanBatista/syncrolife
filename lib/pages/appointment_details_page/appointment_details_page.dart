@@ -270,10 +270,17 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                             ],
                           )
                         : const SizedBox(),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    RatingStarsWidget(),
+                    _.appoint.value.status.value == 'completed'
+                        ? Column(
+                            children: [
+                              SizedBox(
+                                height: 40,
+                              ),
+                              RatingStarsWidget(
+                                  rated: _.appoint.value.rated.value),
+                            ],
+                          )
+                        : SizedBox()
                   ],
                 ),
               ),

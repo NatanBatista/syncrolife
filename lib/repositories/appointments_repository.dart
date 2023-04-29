@@ -12,10 +12,15 @@ class AppointmentsRepository extends GetxController {
   @override
   onInit() async {
     super.onInit();
-    auth.isDoctor.value
-        ? appointmentsSchedule.value = await getAppointmentsSchedule('idDoctor')
-        : appointmentsSchedule.value =
-            await getAppointmentsSchedule('idPatient');
+    appointmentsSchedule.value = await getAppointmentsSchedule(
+        auth.isDoctor.value ? 'idDoctor' : 'idPatient');
+  }
+
+  void updateRatingAppointment(String id, String newRating, String newCount) {
+    db.collection('appointments').doc(id).update({
+      'rating': newRating,
+      'ratingCount': newCount,
+    });
   }
 
   void updateStatusAppointment(String id, String status) {

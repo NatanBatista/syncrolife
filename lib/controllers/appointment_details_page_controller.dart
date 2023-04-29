@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:agora_token_service/agora_token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -87,25 +89,31 @@ class AppointmentDetailsPageController extends GetxController {
     log(status.toString());
   }
 
+  void createCall(BuildContext context) async {
+    print('Dentro do tempo');
+    if (appoint.value.nameCall.value == '' &&
+        appoint.value.tokenCall.value == '') {
+      print('Criando chamada');
+
+      String name = Uuid().v4();
+      String token = generateToken(doctor.value.id.value, name);
+      appointmentsRep.updateNameAndTokenCall(
+          appoint.value.id.value, name, token);
+      await setAppoint(appoint.value.id.value, isDoctor.value);
+    }
+    onJoinCall(
+        context, appoint.value.nameCall.value, appoint.value.tokenCall.value);
+  }
+
   void buttonCallDoctor(BuildContext context) async {
-    if (DateTime.now().difference(appoint.value.date.value).inSeconds <= 900) {
-      print('Dentro do tempo');
-      if (appoint.value.nameCall.value == '' &&
-          appoint.value.tokenCall.value == '') {
-        print('Criando chamada');
-
-        String name = Uuid().v4();
-        String token = generateToken(doctor.value.id.value, name);
-        appointmentsRep.updateNameAndTokenCall(
-            appoint.value.id.value, name, token);
-        await setAppoint(appoint.value.id.value, isDoctor.value);
-      }
-      onJoinCall(
-          context, appoint.value.nameCall.value, appoint.value.tokenCall.value);
+    if (DateTime.now().isAfter(appoint.value.date.value)) {
+      createCall(context);
     } else {
-      print('Fora do tempo');
-
-      showAlertVideoCall(context);
+      if (DateTime.now().difference(appoint.value.date.value).inSeconds <=
+          900) {
+        createCall(context);
+      } else
+        showAlertVideoCall(context);
     }
   }
 
@@ -117,6 +125,22 @@ class AppointmentDetailsPageController extends GetxController {
     } else
       onJoinCall(
           context, appoint.value.nameCall.value, appoint.value.tokenCall.value);
+  }
+
+  void buttonRated(double valueRating) async {
+    double newRating;
+    if (doctor.value.rating.value == 'N/A') {
+      newRating = valueRating;
+    } else {
+      newRating = (double.parse(doctor.value.rating.value) *
+                  double.parse(doctor.value.ratingsCount.value) +
+              valueRating) /
+          (double.parse(doctor.value.ratingsCount.value) + 1);
+    }
+    double newCount = double.parse(doctor.value.ratingsCount.value) + 1;
+    appointmentsRep.updateRatingAppointment(
+        appoint.value.id.value, newRating.toString(), newCount.toString());
+    appoint.value.rated.value = 'true';
   }
 
   void showAlertVideoCall(BuildContext context) {
@@ -148,15 +172,18 @@ class AppointmentDetailsPageController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title:
-                DateTime.now().difference(appoint.value.date.value).inSeconds >=
-                        86400
-                    ? Text('Você tem certeza que quer cancelar esta consulta?')
-                    : Text('Você não pode cancelar a consulta!'),
-            content: DateTime.now()
-                        .difference(appoint.value.date.value)
-                        .inSeconds >=
-                    86400
+            title: (DateTime.now()
+                            .difference(appoint.value.date.value)
+                            .inSeconds >=
+                        86400) &&
+                    DateTime.now().isBefore(appoint.value.date.value)
+                ? Text('Você tem certeza que quer cancelar esta consulta?')
+                : Text('Você não pode cancelar a consulta!'),
+            content: (DateTime.now()
+                            .difference(appoint.value.date.value)
+                            .inSeconds >=
+                        86400) &&
+                    DateTime.now().isBefore(appoint.value.date.value)
                 ? Text('Após apertar em confirmar não será possível reverter.')
                 : Text(
                     'A consulta só pode ser cancelada em até 24 horas antes da data e horário marcados.'),
@@ -165,15 +192,17 @@ class AppointmentDetailsPageController extends GetxController {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: DateTime.now()
-                            .difference(appoint.value.date.value)
-                            .inSeconds >=
-                        86400
+                child: (DateTime.now()
+                                .difference(appoint.value.date.value)
+                                .inSeconds >=
+                            86400) &&
+                        DateTime.now().isBefore(appoint.value.date.value)
                     ? Text('Cancelar')
                     : Text('Voltar'),
               ),
-              DateTime.now().difference(appoint.value.date.value).inSeconds >=
-                      86400
+              (DateTime.now().difference(appoint.value.date.value).inSeconds >=
+                          86400) &&
+                      DateTime.now().isBefore(appoint.value.date.value)
                   ? MaterialButton(
                       onPressed: () async {
                         appointmentsRep.updateStatusAppointment(
@@ -195,15 +224,18 @@ class AppointmentDetailsPageController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title:
-                appoint.value.date.value.difference(DateTime.now()).inSeconds >=
-                        900
-                    ? Text('Você tem certeza que quer concluir esta consulta?')
-                    : Text('Não é possível concluir a consulta'),
-            content: appoint.value.date.value
-                        .difference(DateTime.now())
-                        .inSeconds >=
-                    900
+            title: (appoint.value.date.value
+                            .difference(DateTime.now())
+                            .inSeconds >=
+                        900) &&
+                    DateTime.now().isAfter(appoint.value.date.value)
+                ? Text('Você tem certeza que quer concluir esta consulta?')
+                : Text('Não é possível concluir a consulta'),
+            content: (appoint.value.date.value
+                            .difference(DateTime.now())
+                            .inSeconds >=
+                        900) &&
+                    DateTime.now().isAfter(appoint.value.date.value)
                 ? Text('Após apertar em confirmar não será possível reverter.')
                 : Text(
                     'A consulta só pode ser concluída após 15 minutos do horário marcado.'),
@@ -212,15 +244,17 @@ class AppointmentDetailsPageController extends GetxController {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: appoint.value.date.value
-                            .difference(DateTime.now())
-                            .inSeconds >=
-                        900
+                child: (appoint.value.date.value
+                                .difference(DateTime.now())
+                                .inSeconds >=
+                            900) &&
+                        DateTime.now().isAfter(appoint.value.date.value)
                     ? Text('Cancelar')
                     : Text('Voltar'),
               ),
-              appoint.value.date.value.difference(DateTime.now()).inSeconds >=
-                      900
+              (appoint.value.date.value.difference(DateTime.now()).inSeconds >=
+                          900) &&
+                      DateTime.now().isAfter(appoint.value.date.value)
                   ? MaterialButton(
                       onPressed: () async {
                         appointmentsRep.updateStatusAppointment(
