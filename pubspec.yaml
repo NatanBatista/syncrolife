@@ -41,6 +41,7 @@ dependencies:
   agora_rtc_engine: ^5.2.0
   permission_handler: ^10.2.0
   agora_token_service: ^0.1.2
+  mailer: ^6.0.1
 
 
 dev_dependencies:

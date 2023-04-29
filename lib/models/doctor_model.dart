@@ -16,6 +16,7 @@ class DoctorModel extends GetxController {
   late RxString coverUrl = ''.obs;
   late RxString appointmentValue = ''.obs;
   late RxString date = ''.obs;
+  late RxString ratingsCount = ''.obs;
 
   Future fromJson(json) async {
     id.value = json['id'];
@@ -33,25 +34,6 @@ class DoctorModel extends GetxController {
     coverUrl.value = json['coverUrl'];
     appointmentValue.value = json['appointmentValue'];
     date.value = json['date'].toString();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = id.value;
-    data['name'] = name.value;
-    data['last-name'] = lastName.value;
-    data['email'] = email.value;
-    data['phone'] = phone.value;
-    data['cpf'] = cpf.value;
-    data['rating'] = rating.value;
-    data['rating'] = appointments.value;
-    data['crm'] = crm.value;
-    data['speciality'] = speciality.value;
-    data['status'] = status.value;
-    data['imageUrl'] = imageUrl.value;
-    data['coverUrl'] = coverUrl.value;
-    data['appointmentValue'] = appointmentValue.value;
-    data['date'] = date.value;
-    return data;
+    ratingsCount.value = json['ratingsCount'];
   }
 }
