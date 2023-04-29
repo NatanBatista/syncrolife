@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncrolife/layout_doctor.dart';
 import 'package:syncrolife/layout_patient.dart';
-import 'package:syncrolife/pages/feed_page/feed_page.dart';
 import 'package:syncrolife/pages/initial_page/initial_page.dart';
 import 'package:syncrolife/pages/login_page/login_page.dart';
-import 'package:syncrolife/pages/profile_page/visitor_profile_page.dart';
-import 'package:syncrolife/pages/appointment_dashboard_page/appointment_dashboard_page.dart';
-import 'package:syncrolife/pages/recovery_page/recovery_code_page.dart';
 import 'package:syncrolife/pages/recovery_page/recovery_page.dart';
-import 'package:syncrolife/pages/recovery_page/recovery_password_page.dart';
 import 'package:syncrolife/pages/register_page/register_doctor/register_doctor_page1.dart';
 import 'package:syncrolife/pages/register_page/register_doctor/register_doctor_page2.dart';
 import 'package:syncrolife/pages/register_page/register_doctor/register_doctor_page3.dart';
@@ -22,14 +17,12 @@ final Map<String, WidgetBuilder> routes = {
   '/initial': (_) => const InitialPage(),
   '/login': (_) => const LoginPage(),
   '/recovery': (_) => const RecoveryPage(),
-  '/recoverycode': (_) => const RecoveryCodePage(),
-  '/recoverypw': (_) => const RecoveryPasswordPage(),
   '/signup': (_) => const RegisterOptionsPage(),
   '/signupMed1': (_) => const RegisterDoctorPage1(),
   '/signupPaci1': (_) => RegisterPatientPage1(),
   '/signupMed2': (_) => RegisterDoctorPage2(),
   '/signupPaci2': (_) => RegisterPatientPage2(),
-  '/signup3Med': (_) => RegisterDoctorPage3(),
+  '/signup3Med': (_) => const RegisterDoctorPage3(),
   '/layoutPatient': (_) => const LayoutPatient(),
   '/layoutDoctor': (_) => const LayoutDoctor(),
 };

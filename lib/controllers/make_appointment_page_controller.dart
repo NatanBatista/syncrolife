@@ -16,7 +16,7 @@ class MakeAppointmentPageController extends GetxController {
     //A consulta terá 5 status -> sent (enviada) | accepted (aceita) | rejected (rejeitada) | completed (concluída) | canceled (cancelada)
     //Se o paciente não entrar ela contará como "completed", mas se o médico não entrar ela contará como "canceled"
     try {
-      String fileId = Uuid().v4();
+      String fileId = const Uuid().v4();
       final docUser = db.collection("users").doc(idDoctor);
       final snapshot = await docUser.get();
 
@@ -52,7 +52,6 @@ class MakeAppointmentPageController extends GetxController {
           .doc(fileId)
           .set({'id': fileId});
     } catch (e) {
-      print('Deu problema aqui');
       print(e);
     }
   }

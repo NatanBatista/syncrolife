@@ -42,12 +42,6 @@ dependencies:
   permission_handler: ^10.2.0
   agora_token_service: ^0.1.2
   mailer: ^6.0.1
-
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   google_fonts: ^4.0.3
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.5
@@ -55,6 +49,13 @@ dev_dependencies:
   path_provider: ^2.0.13
   firebase_storage: ^11.0.14
   uuid: ^3.0.7
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

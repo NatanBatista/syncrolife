@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncrolife/config.dart';
-import 'package:syncrolife/pages/recovery_page/recovery_code_page.dart';
+
 import 'package:syncrolife/pages/recovery_page/recovery_page.dart';
-import 'package:syncrolife/pages/recovery_page/recovery_password_page.dart';
 
 import 'package:syncrolife/pages/splash_page.dart';
 import 'package:syncrolife/routes.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor:
               const Color.fromARGB(255, 122, 135, 251)), // Cor primária
-      home: const RecoveryPage(),
+      home: AuthCheck(),
       debugShowCheckedModeBanner: false,
       routes: routes,
     );

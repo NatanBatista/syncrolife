@@ -1,16 +1,11 @@
-import 'dart:ffi';
-
 import 'package:agora_token_service/agora_token_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:developer';
-import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncrolife/pages/video_call_page/video_call_page.dart';
 import 'package:uuid/uuid.dart';
-import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
-import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 
 import '../models/appointment_model.dart';
 import '../models/doctor_model.dart';
@@ -32,9 +27,6 @@ class AppointmentDetailsPageController extends GetxController {
   }
 
   void setUser(bool isDoctor) async {
-    print('Id paciente: ' + appoint.value.idPatient.value);
-    print('Id médico: ' + appoint.value.idDoctor.value);
-
     final db = DBFirestore.get();
 
     if (isDoctor) {
@@ -90,11 +82,8 @@ class AppointmentDetailsPageController extends GetxController {
   }
 
   void createCall(BuildContext context) async {
-    print('Dentro do tempo');
     if (appoint.value.nameCall.value == '' &&
         appoint.value.tokenCall.value == '') {
-      print('Criando chamada');
-
       String name = Uuid().v4();
       String token = generateToken(doctor.value.id.value, name);
       appointmentsRep.updateNameAndTokenCall(
@@ -149,18 +138,19 @@ class AppointmentDetailsPageController extends GetxController {
         builder: (context) {
           return AlertDialog(
             title: isDoctor.value
-                ? Text('Você não pode entrar na chamada de vídeo no momento!')
-                : Text('O médico ainda não entrou na chamada!'),
+                ? const Text(
+                    'Você não pode entrar na chamada de vídeo no momento!')
+                : const Text('O médico ainda não entrou na chamada!'),
             content: isDoctor.value
-                ? Text(
+                ? const Text(
                     'Apenas é possível entrar em 15 minutos ou menos antes da consulta.')
-                : Text('Aguarde e tente novamente.'),
+                : const Text('Aguarde e tente novamente.'),
             actions: [
               MaterialButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('Voltar'),
+                child: const Text('Voltar'),
               ),
             ],
           );
@@ -177,15 +167,17 @@ class AppointmentDetailsPageController extends GetxController {
                             .inSeconds >=
                         86400) &&
                     DateTime.now().isBefore(appoint.value.date.value)
-                ? Text('Você tem certeza que quer cancelar esta consulta?')
-                : Text('Você não pode cancelar a consulta!'),
+                ? const Text(
+                    'Você tem certeza que quer cancelar esta consulta?')
+                : const Text('Você não pode cancelar a consulta!'),
             content: (DateTime.now()
                             .difference(appoint.value.date.value)
                             .inSeconds >=
                         86400) &&
                     DateTime.now().isBefore(appoint.value.date.value)
-                ? Text('Após apertar em confirmar não será possível reverter.')
-                : Text(
+                ? const Text(
+                    'Após apertar em confirmar não será possível reverter.')
+                : const Text(
                     'A consulta só pode ser cancelada em até 24 horas antes da data e horário marcados.'),
             actions: [
               MaterialButton(
@@ -197,8 +189,8 @@ class AppointmentDetailsPageController extends GetxController {
                                 .inSeconds >=
                             86400) &&
                         DateTime.now().isBefore(appoint.value.date.value)
-                    ? Text('Cancelar')
-                    : Text('Voltar'),
+                    ? const Text('Cancelar')
+                    : const Text('Voltar'),
               ),
               (DateTime.now().difference(appoint.value.date.value).inSeconds >=
                           86400) &&
@@ -211,9 +203,9 @@ class AppointmentDetailsPageController extends GetxController {
                             appoint.value.id.value, isDoctor.value);
                         Navigator.pop(context);
                       },
-                      child: Text('Confirmar'),
+                      child: const Text('Confirmar'),
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           );
         });
@@ -229,15 +221,17 @@ class AppointmentDetailsPageController extends GetxController {
                             .inSeconds >=
                         900) &&
                     DateTime.now().isAfter(appoint.value.date.value)
-                ? Text('Você tem certeza que quer concluir esta consulta?')
-                : Text('Não é possível concluir a consulta'),
+                ? const Text(
+                    'Você tem certeza que quer concluir esta consulta?')
+                : const Text('Não é possível concluir a consulta'),
             content: (appoint.value.date.value
                             .difference(DateTime.now())
                             .inSeconds >=
                         900) &&
                     DateTime.now().isAfter(appoint.value.date.value)
-                ? Text('Após apertar em confirmar não será possível reverter.')
-                : Text(
+                ? const Text(
+                    'Após apertar em confirmar não será possível reverter.')
+                : const Text(
                     'A consulta só pode ser concluída após 15 minutos do horário marcado.'),
             actions: [
               MaterialButton(
@@ -249,8 +243,8 @@ class AppointmentDetailsPageController extends GetxController {
                                 .inSeconds >=
                             900) &&
                         DateTime.now().isAfter(appoint.value.date.value)
-                    ? Text('Cancelar')
-                    : Text('Voltar'),
+                    ? const Text('Cancelar')
+                    : const Text('Voltar'),
               ),
               (appoint.value.date.value.difference(DateTime.now()).inSeconds >=
                           900) &&
@@ -263,9 +257,9 @@ class AppointmentDetailsPageController extends GetxController {
                             appoint.value.id.value, isDoctor.value);
                         Navigator.pop(context);
                       },
-                      child: Text('Confirmar'),
+                      child: const Text('Confirmar'),
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           );
         });

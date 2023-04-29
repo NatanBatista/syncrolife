@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:syncrolife/repositories/appointments_repository.dart';
 
 import '../services/db_firestore_service.dart';
-import 'package:intl/intl.dart';
 
 class AppointmentDashboardPageController extends GetxController {
   final appointmentsRep = Get.find<AppointmentsRepository>();
