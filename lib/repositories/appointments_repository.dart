@@ -16,10 +16,10 @@ class AppointmentsRepository extends GetxController {
         auth.isDoctor.value ? 'idDoctor' : 'idPatient');
   }
 
-  void updateRatingAppointment(String id, String newRating, String newCount) {
-    db.collection('appointments').doc(id).update({
-      'rating': newRating,
-      'ratingCount': newCount,
+  void updateRatingAppointment(String id, String rating) async {
+    await db.collection('appointments').doc(id).update({
+      'rating': rating,
+      'rated': 'true',
     });
   }
 

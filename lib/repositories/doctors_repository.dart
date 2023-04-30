@@ -9,7 +9,19 @@ class DoctorsRepository extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    updateAllDoctors();
+  }
+
+  void updateAllDoctors() async {
     allDoctors.value = await getAllDoctors();
+  }
+
+  void updateRatingDoctor(String id, String newRating, String newCount) async {
+    await db.collection('users').doc(id).update({
+      'rating': newRating,
+      'ratingsCount': newCount,
+    });
+    updateAllDoctors();
   }
 
   Future<DoctorModel> getDoctorFromId(String id) async {

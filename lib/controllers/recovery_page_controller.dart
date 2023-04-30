@@ -29,7 +29,7 @@ class RecoveryPageController extends GetxController {
             color: Colors.green,
           ),
           duration: const Duration(seconds: 4));
-      Get.off(const LoginPage());
+      Get.back();
     } else {
       Get.snackbar(
           'E-mail não encontrado', 'Verifique o e-mail e tente novamente');

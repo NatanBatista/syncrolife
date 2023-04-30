@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:syncrolife/pages/video_call_page/video_call_page.dart';
+import 'package:syncrolife/repositories/doctors_repository.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/appointment_model.dart';
@@ -15,6 +16,7 @@ import '../services/db_firestore_service.dart';
 
 class AppointmentDetailsPageController extends GetxController {
   final appointmentsRep = Get.find<AppointmentsRepository>();
+  final doctorsRep = Get.find<DoctorsRepository>();
 
   Rx<AppointmentModel> appoint = AppointmentModel().obs;
   Rx<DoctorModel> doctor = DoctorModel().obs;
@@ -128,7 +130,9 @@ class AppointmentDetailsPageController extends GetxController {
     }
     double newCount = double.parse(doctor.value.ratingsCount.value) + 1;
     appointmentsRep.updateRatingAppointment(
-        appoint.value.id.value, newRating.toString(), newCount.toString());
+        appoint.value.id.value, valueRating.toString());
+    doctorsRep.updateRatingDoctor(doctor.value.id.value,
+        newRating.toStringAsFixed(2), newCount.toString());
     appoint.value.rated.value = 'true';
   }
 

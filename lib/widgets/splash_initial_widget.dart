@@ -22,30 +22,21 @@ class _SplashInitialWidgetState extends State<SplashInitialWidget> {
     loadData();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   Future<void> loadData() async {
+    setState(() {
+      _isLoading = true;
+    });
     await Future.delayed(Duration(seconds: 2));
+
     if (mounted) {
       setState(() {
         _isLoading = false;
       });
-      final auth = Get.find<AuthService>();
-
-      if (auth.userIsAuthenticated.value == false) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => InitialPage()),
-        );
-      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? SplashPage() : Container();
+    return _isLoading ? SplashPage() : InitialPage();
   }
 }
