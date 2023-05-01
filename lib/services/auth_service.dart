@@ -137,7 +137,6 @@ class AuthService extends GetxController {
         "name": name,
         "lastName": lastName,
         "cpf": cpf,
-        "rating": "N/A",
         "status": "active",
         "coverUrl": ""
       });

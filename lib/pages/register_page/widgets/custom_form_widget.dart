@@ -126,9 +126,7 @@ class CustomFormWidget extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            SpecialitiesDropdown(
-                              dropdownValue: specialityValue,
-                            ),
+                            SpecialitiesDropdown(),
                           ],
                         )
                       : CustomTextField(

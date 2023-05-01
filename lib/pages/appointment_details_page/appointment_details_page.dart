@@ -107,10 +107,6 @@ class _AppointmentDetailsPagePageState extends State<AppointmentDetailsPage> {
                                           Icons.star,
                                           color: Colors.amber,
                                         ),
-                                        Text(
-                                          _.patient.value.rating.value,
-                                          style: TextStyle(fontSize: 14),
-                                        ),
                                       ],
                                     ),
                                   ],

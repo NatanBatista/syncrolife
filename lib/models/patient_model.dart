@@ -6,7 +6,6 @@ class PatientModel extends GetxController {
   RxString lastName = ''.obs;
   RxString email = ''.obs;
   RxString cpf = ''.obs;
-  RxString rating = ''.obs;
   RxString status = ''.obs;
   RxString coverUrl = ''.obs;
 
@@ -16,7 +15,6 @@ class PatientModel extends GetxController {
     lastName.value = json['lastName'];
     email.value = json['email'];
     cpf.value = json['cpf'];
-    rating.value = json['rating'];
     status.value = json['status'];
     coverUrl.value = json['coverUrl'];
   }
@@ -28,7 +26,6 @@ class PatientModel extends GetxController {
     data['lastName'] = lastName.value;
     data['email'] = email.value;
     data['cpf'] = cpf.value;
-    data['rating'] = rating.value;
     data['status'] = status.value;
     data['coverUrl'] = coverUrl.value;
     return data;

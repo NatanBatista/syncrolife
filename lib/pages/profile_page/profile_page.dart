@@ -142,19 +142,21 @@ class _ProfilePageState extends State<ProfilePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
                                   _.auth.isDoctor.value
-                                      ? Text(
-                                          _.auth.doctor.rating.value,
-                                          style: const TextStyle(fontSize: 14),
+                                      ? Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            Text(
+                                              _.auth.doctor.rating.value,
+                                              style:
+                                                  const TextStyle(fontSize: 14),
+                                            )
+                                          ],
                                         )
-                                      : Text(
-                                          _.auth.patient.rating.value,
-                                          style: const TextStyle(fontSize: 14),
-                                        ),
+                                      : SizedBox(),
                                   _.auth.isDoctor.value
                                       ? Row(
                                           children: [

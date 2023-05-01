@@ -86,7 +86,7 @@ class _RegisterDoctorPage2State extends State<RegisterDoctorPage2> {
                 return 'Especialidade obrigatório';
               }
             },
-            specialityValue: controller.specialityValue,
+            specialityValue: controller.specialityValue.value,
             textButton: "Proximo",
             fillColor: lavenderBlush,
             onPressed: () {

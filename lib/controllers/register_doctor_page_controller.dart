@@ -20,7 +20,7 @@ class RegisterDoctorPageController extends GetxController {
   //Tela 3
   TextEditingController crmController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  String specialityValue = '';
+  RxString specialityValue = ''.obs;
 
   //Chama o método de registerDoctor que está no AuthService
   void register(BuildContext context) async {
@@ -33,7 +33,7 @@ class RegisterDoctorPageController extends GetxController {
         cpfController.text,
         crmController.text,
         phoneNumberController.text,
-        specialityValue,
+        specialityValue.value,
         context);
     isLoading.value = false;
   }

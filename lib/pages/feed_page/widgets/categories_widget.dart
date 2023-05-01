@@ -4,8 +4,7 @@ import 'package:syncrolife/pages/speciality_page/speciality_page.dart';
 
 import '../../../styles.dart';
 
-Widget CategoriesWidget(
-    String speciality, String icon, List list, Color color) {
+Widget CategoriesWidget(String speciality, String icon, Color color) {
   return InkWell(
     onTap: () => Get.to(SpecialityPage(speciality: speciality)),
     child: Padding(

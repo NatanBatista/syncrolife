@@ -55,6 +55,8 @@ class RegisterDoctorPage3 extends StatelessWidget {
                 return 'As senhas não coincidem';
               }
             },
+            obsText2: true,
+            obsText3: true,
             controller3: controller.repeatPasswordController,
             textButton: "Confirmar",
             fillColor: lavenderBlush,
